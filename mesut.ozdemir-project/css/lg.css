@@ -1,0 +1,57 @@
+.nav__links {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav__ctas {
+  display: flex;
+  align-items: center;
+}
+
+.nav__hamburger {
+  display: none;
+}
+header {
+  flex-direction: row;
+}
+
+.hero{
+  flex-direction: row;
+}
+.hero__content {
+  align-items: flex-start;
+  max-width: 65%;
+ 
+}
+
+.hero__image{
+  width: 35%;
+    display: flex;
+    justify-content: end;
+}
+.hero__image > img {
+  width: 80%;
+}
+.hero__ctas {
+  flex-direction: row;
+  gap: 15px;
+  text-align: center;
+  align-items: center;
+}
+.hero__content > h1{
+  text-align: left;
+}
+.hero__content > p{
+  text-align: left;
+}
+.blog__boxes{
+  flex-direction: row;
+}
+.work__boxes{
+  flex-direction: row;
+}
+
+.work__box::after{
+  display: none;
+}

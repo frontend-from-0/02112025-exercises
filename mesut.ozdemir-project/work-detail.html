@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="./css/md.css"
+      media="(min-width:768px) and (max-width: 1023.98px)"
+    />
+    <link rel="stylesheet" href="./css/lg.css" media="(min-width:1024px)" />
+  </head>
+  <body>
+     <header class="navbar">
+  <div class="logo"> <a href="/"><img class="logo" src="./assets/logo-new.svg" alt="Logo" /></a></div>
+
+  <nav class="nav-links" id="navLinks">
+    
+       <a href="blog.html">Blog</a>
+        <a href="/works.html">Works</a>
+       <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+    <main>
+      <section class="work mb-25">
+        <div class="work__detail">
+          <article>
+            <h1>Designing Dashboards with usability in mind</h1>
+            <span class="work__year">2025</span> - <span class="work__category">Dashboard</span>
+            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+             <picture>
+            <source srcset="./assets/work_deatil2_mobile.webp" media="(max-width: 768px)" />
+            <source
+              srcset="./assets/work_deatil2_mobile.webp"
+              media="(max-width:767.98px)"
+            />
+            <img
+              src="./assets/work_deatil2_desktop.webp"
+              alt="Work Detail 2"
+              loading="lazy"
+              decoding="async"
+              width="789px"
+              height="821px"
+            />
+          </picture>
+          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+          <picture>
+            <source srcset="./assets/work_deatil1_mobile.webp" media="(max-width: 768px)" />
+            <source
+              srcset="./assets/work_deatil1_mobile.webp"
+              media="(max-width:767.98px)"
+            />
+            <img
+              src="./assets/work_deatil1_desktop.webp"
+              alt="Work Detail 1"
+              loading="lazy"
+              decoding="async"
+              width="789px"
+              height="821px"
+            />
+          </picture>
+          </article>
+        </div>
+
+      </section>
+      <section id="contact" class="contact mb-25">
+        <div class="contact__title">
+            Contact Me
+          </div>
+          <form action="" method="GET">
+        <div class="input-group">
+          <label for="full_name" class="full-width">Full name</label>
+          <input
+            type="text"
+            id="full_name"
+            name="fullName"
+            class="full-width"
+            required="required"
+          />
+        </div>
+        <div class="input-group">
+          <label for="mail_address" class="full-width">Mail Address</label>
+          <input
+            placeholder="name@company.com"
+            type="email"
+            id="mail_address"
+            name="mailAddress"
+            class="full-width"
+            required="required"
+          />
+        </div>
+
+      
+        <div class="input-group">
+          <label for="tel" required class="full-width">Mobile Phone Number</label>
+         
+          <input
+            type="tel"
+            id="tel"
+            name="mobilePhone"
+            class="full-width"
+            pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
+            placeholder="123 456 7890"
+            required="required"
+          />
+        </div>
+        <div class="input-group">
+          <label for="yourmessage" required class="full-width">Your Message</label>
+<textarea class="full-width" required="required" id="yourmessage" name="yourmessage" rows="4" cols="50"></textarea>
+      </div>
+</form>
+        <button type="submit" value="Send registration form">Send Your Message</button>
+      </form>
+      </section>
+    </main>
+    <footer>
+      <div class="social-icons gap-15">
+      <a href="#"><img src="./assets/facebook.svg" alt="Facebook" /></a>
+      <a href="#"><img src="./assets/instagram.svg" alt="Instagram" /></a>
+      <a href="#"><img src="./assets/liinkedin.svg" alt="LinkedIn" /></a>
+      <a href="#"><img src="./assets/twitter.svg" alt="Twitter" /></a>
+    </div>
+    <p>Copyright ©2026 All rights reserved.</p>
+    </footer>
+    <script type="text/javascript" src="./js/main.js" rel="preload"></script>
+  </body>
+</html>
