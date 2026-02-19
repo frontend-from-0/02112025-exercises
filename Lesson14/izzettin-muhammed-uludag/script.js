@@ -190,8 +190,9 @@ console.log(`Artirilmiş deger ${numberUp}`);
 
 // 25. Declare numberEx10=8. Increment it using the postfix ++ operator and log both the original variable and the incremented value.
 let numberEx10 = 8;
-let numberUp_25 = numberEx10++;
-console.log(`Orginal degisken = ${numberEx10} Artirilmiş degisken = ${numberUp_25}`);
+console.log(`Original value: ${numberEx10}`);
+console.log(`After increment (postfix ++): ${numberEx10++}`);
+console.log(`Value now: ${numberEx10}`);
 
 // 26. Declare numberEx11=-3. Increment it by 1 using prefix ++, then multiply the result by 2 and log the final value.
 let numberEx11 = -3;
