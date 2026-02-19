@@ -186,9 +186,32 @@ initialTemperature+=5
 console.log(initialTemperature);
 
 // 24. Declare numberEx9=6. Increment it using the prefix ++ operator and log both the variable and the incremented value.
+let numberEx9=6;
+console.log('Incremented value:', ++numberEx9); // ekrana yazılan 9
+console.log('Last value:', numberEx9);  // ekrana yazılan 9
+
 
 // 25. Declare numberEx10=8. Increment it using the postfix ++ operator and log both the original variable and the incremented value.
+let numberEx10=8;
+console.log('işlemdeki değer', numberEx10++); // ekrana yazılan 8
+console.log('değişkenin arttırılmış hali:', numberEx10)  // ekrana yazılan 9
 
 // 26. Declare numberEx11=-3. Increment it by 1 using prefix ++, then multiply the result by 2 and log the final value.
+let numberEx11=-3;
+numberEx11=++numberEx11;
+numberEx11=numberEx11 * 2;
+console.log (numberEx11);  //-4
+//veya
+let numberEx11=-3;
+let result= (++numberEx11) * 2;
+console.log (result);    //-4
 
 // 27. Declare a=2 and b=3. Increment a using the prefix ++ operator, then add b to the result and log it.
+let a=2;
+let b=3;
+
+++a;   // yeni a değeri 3 oldu.
+
+let result=a + b;  // 6
+console.log(result);
+
