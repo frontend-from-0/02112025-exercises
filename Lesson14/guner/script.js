@@ -76,24 +76,21 @@ console.log('Ex. 7', myGreeting, greeting);
 const num = 100;
 const str = num.toString();
 
-console.log(str);
-console.log(typeof str);
+console.log('Ex. 9', str, typeof str);
 
 // 10. Convert the string "50" to a number and log its type to confirm the conversion.
 
 const str2 = "50";
 const num2 = Number(str2);
-console.log(num2);
-console.log(typeof num2);
+console.log('Ex. 10', num2, typeof num2);
 
 // 11. Generate a random integer between 0 and 10 and log it.
 
-console.log(Math.floor(Math.random()*10));
+console.log('Ex. 11', Math.floor(Math.random() * 11))
 
 // 12. Round the number 3.7 down using Math.floor and 3.2 up using Math.ceil, log both.
 
-console.log(Math.floor(3.7));
-console.log(Math.ceil(3.2));
+console.log('Ex. 12:',`Floored 3.7 is ${Math.floor(3.7)}, Ceiled 3.2 is ${Math.ceil(3.2)}`);
 
 // 13. Declare a boolean variable isStudent = true. Log it.
 
@@ -102,10 +99,10 @@ console.log(isStudent);
 
 // 14. Initialize counter = 0, then increment it by 1 using counter++ and log it.
 
-let x1 = 0 ;
-const y1 = ++x1;
+let counter = 0;
+counter++;
 
-console.log(y1);
+console.log('Ex.14', counter);
 
 // 15. Initialize points = 10, add 5 to it using points += 5, then log points.
 
@@ -139,8 +136,8 @@ const divisor = 3;
 const divisionResult = dividend / divisor;
 const differenceResult = dividend - divisor;
 
-console.log(divisionResult);
-console.log( differenceResult);
+console.log('division result of 10 / 3:', divisionResult);
+console.log('difference result of 10 - 3:', differenceResult);
 
 
 // 19. Declare firstName and lastName. Create fullName by concatenating them with a space and log it.
@@ -179,31 +176,26 @@ console.log(counter);
 // 23. Declare initialTemperature=20. Increase it by 5 and log the result.
 
 let initialTemperature = 20;
-console.log(initialTemperature += 5);
+console.log('initial temperature is ',initialTemperature += 5);
 
 // 24. Declare numberEx9=6. Increment it using the prefix ++ operator and log both the variable and the incremented value.
 
 let numberEx9 = 6;
-let numberLast9 = ++numberEx9;
 
-console.log(numberEx9);
-console.log(numberLast9);
+console.log(`Ex. 24: ++numberEx9 is ${++numberEx9}, final value is ${numberEx9}`);
 
 // 25. Declare numberEx10=8. Increment it using the postfix ++ operator and log both the original variable and the incremented value.
 
 let numberEx10 = 8;
-let numberLast10 = numberEx10++;
-
-console.log(numberEx10);
-console.log(numberLast10);
+console.log('Ex. 25');
+console.log('Original value:', numberEx10++);
+console.log('Incremented value:', numberEx10);
 
 // 26. Declare numberEx11=-3. Increment it by 1 using prefix ++, then multiply the result by 2 and log the final value.
 
 let numberEx11 = -3;
-let incrementedValue = ++numberEx11;
-const finalValue = incrementedValue * 2;
 
-console.log(finalValue);
+console.log('Ex. 26:', ++numberEx11 * 2);
 
 // 27. Declare a=2 and b=3. Increment a using the prefix ++ operator, then add b to the result and log it.
 
