@@ -252,7 +252,6 @@ sliceLastN("JavaScript", 6);
 */
 function gradeChecker(score) {
   let grade;
-
   switch (true) {
     case (score >= 90):
       grade = "A";
