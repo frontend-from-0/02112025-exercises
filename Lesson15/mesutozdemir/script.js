@@ -226,7 +226,6 @@ function startsWithA(str) {
     console.log("Does not start with A");
   }
 }
-
 startsWithA("Arizona"); 
 startsWithA("Norway");
 /*
