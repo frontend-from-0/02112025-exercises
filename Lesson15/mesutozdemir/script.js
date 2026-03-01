@@ -41,7 +41,12 @@ logUppercaseName('john');
    - Log the normalized email to the console.
    - Example: "USER@Example.COM" -> "user@example.com"
 */
-
+function normalizeEmail(email) {
+  let normalized = email.toLowerCase();
+  console.log("Normalized Email:", normalized);
+  return normalized;
+}
+normalizeEmail("MESUT@Gmail.COM");
 console.log('Ex. 3 --------');
 
 /*
@@ -112,7 +117,19 @@ checkFileExtension('myfile.exel');
      - Logs "b is bigger" if b > a
      - Logs "Numbers are equal" if they are the same
 */
+function compareNumbers(a, b) {
+  if (a > b) {
+    console.log("a is bigger");
+  } else if (b > a) {
+    console.log("b is bigger");
+  } else {
+    console.log("Numbers are equal");
+  }
+}
 
+compareNumbers(10, 5);
+compareNumbers(3, 8);
+compareNumbers(4, 4);
 /*
 8. Palindrome Check
    - Define a function `isPalindrome(str)` that checks if `str` is the same
@@ -120,28 +137,73 @@ checkFileExtension('myfile.exel');
    - If it is, log: "<str> is a palindrome"
    - Otherwise, log: "<str> is not a palindrome"
 */
+function isPalindrome(str) {
+  let reversed = "";
 
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+
+  if (str === reversed) {
+    console.log(str + " is a palindrome");
+  } else {
+    console.log(str + " is not a palindrome");
+  }
+}
+isPalindrome("madam"); 
+isPalindrome("hello");
 /*
 9. String Truncation
    - Define a function `truncateString(text, maxLength)` that uses slice() to
      cut the string to `maxLength` characters, then appends "..." if it was too long.
    - Log the final truncated string.
 */
+function truncateString(text, maxLength) {
+  let result;
 
+  if (text.length > maxLength) {
+    result = text.slice(0, maxLength) + "...";
+  } else {
+    result = text;
+  }
+
+  console.log("Truncated String:", result);
+}
+truncateString("JavaScript is awesome", 10);
 /*
 10. Check Even or Odd (if-else)
    - Define a function `evenOrOdd(number)` that:
      - Logs "Even" if the number is even
      - Logs "Odd" if the number is odd
 */
-
+function evenOrOdd(number) {
+  if (number % 2 === 0) {
+    console.log("Even");
+  } else {
+    console.log("Odd");
+  }
+}
+evenOrOdd(8); 
+evenOrOdd(7);
 /*
 11. URL Protocol Checker
    - Define a function `checkProtocol(url)` that converts the URL to lowercase
      and checks if it starts with "https" using .startsWith().
    - Log "Secure connection" if true, otherwise "Unsecure connection".
 */
+function checkProtocol(url) {
+  let lowerUrl = url.toLowerCase();
 
+  if (lowerUrl.startsWith("https")) {
+    console.log("Secure connection");
+  } else {
+    console.log("Unsecure connection");
+  }
+}
+
+// Example usage:
+checkProtocol("HTTPS://www.google.com");
+checkProtocol("http://www.google.com");
 /*
 12. Switch: Day of the Week
    - Define a function `getDayOfWeek(num)` that uses a switch statement:
