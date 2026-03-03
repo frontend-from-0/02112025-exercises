@@ -7,7 +7,7 @@
 
 function sumArray(numbers) {
   let result = 0;
-  console.log('Finding sum of ', numbers, ' array');
+  console.log("Finding sum of ", numbers, " array");
 
   // if (numbers.length === 0) {
   //   console.log('Array is empty');
@@ -15,11 +15,11 @@ function sumArray(numbers) {
   // }
 
   for (let i = 0; i < numbers.length; i++) {
-    console.log('Current position', i, 'current element', numbers[i]);
+    console.log("Current position", i, "current element", numbers[i]);
     result = result + numbers[i];
   }
 
-  console.log('Final sum', result);
+  console.log("Final sum", result);
 }
 
 sumArray([3, 6, 9, 4]);
@@ -40,7 +40,7 @@ function findMax(numbers) {
       max = numbers[i];
     }
   }
-  console.log('The maximum number of array', numbers, 'is', max);
+  console.log("The maximum number of array", numbers, "is", max);
 }
 
 findMax([4, 9, 50, 10]);
@@ -62,7 +62,7 @@ function countOddEven(numbers) {
       oddCount++;
     }
   }
-  console.log('Odd:', oddCount, 'and Even:', eventCount);
+  console.log("Odd:", oddCount, "and Even:", eventCount);
 }
 countOddEven([1, 2, 3, 4]);
 
@@ -87,7 +87,7 @@ function sumRange(start, end) {
     }
   }
 
-  console.log('Final Sum:', sum);
+  console.log("Final Sum:", sum);
 }
 sumRange(5, 3);
 sumRange(1, 3);
@@ -105,7 +105,7 @@ function reverseArray(arr) {
     const currentValue = arr[i];
     reversed.push(currentValue);
   }
-  console.log('Final reversed array', reversed);
+  console.log("Final reversed array", reversed);
 }
 
 reverseArray([3, 7, 9, 1, 2]);
@@ -123,7 +123,7 @@ function filterNegative(numbers) {
       result.push(numbers[i]);
     }
   }
-  console.log('Initial array', numbers, 'Result', result);
+  console.log("Initial array", numbers, "Result", result);
 }
 filterNegative([3, -7, 9, -1, 2]);
 /*
@@ -136,34 +136,35 @@ filterNegative([3, -7, 9, -1, 2]);
 function doubleValues(numbers) {
   const result = [];
   for (const number of numbers) {
-    if (typeof number !== 'number'){
-      console.log("Array contains elements other than numbers, please provide correct input.");
+    if (typeof number !== "number") {
+      console.log(
+        "Array contains elements other than numbers, please provide correct input.",
+      );
       return;
     }
     result.push(number * 2);
   }
-  console.log('Result is', result);
+  console.log("Result is", result);
 }
 doubleValues([1, 4, 6]);
-doubleValues([1, 'asdas', 6]);
-
+doubleValues([1, "asdas", 6]);
 
 /*
 8. Print Each Character of a String (For-of)
    - Define a function `printCharacters(str)` that uses a for-of loop
      to log each character in the string on a separate line.
 */
-function printCharacters(str){
+function printCharacters(str) {
   console.log("printing characters of the string", str);
- for ( const char of str){
-  console.log(char);
- }
+  for (const char of str) {
+    console.log(char);
+  }
 }
 printCharacters("Lesson");
 
-['a', 's', 'e'][0]; // 'a'
+["a", "s", "e"][0]; // 'a'
 
-'ase'[0] // 'a'
+"ase"[0]; // 'a'
 
 /*
 9. Sum All Values in an Object
@@ -250,7 +251,7 @@ removeDuplicates([1, 2, 2, 3, 4, 4, 5]);
       using a for loop.
     - Log the result. 
     - Example: factorial(5) -> 120
-*/function factorial(n) {
+*/ function factorial(n) {
   if (n < 0) {
     console.log("Factorial is not defined for negative numbers");
     return;
@@ -274,19 +275,12 @@ factorial(5);
     - Log the reversed sentence.
 */
 function reverseWords(sentence) {
-  // Split the sentence into words
   let words = sentence.split(" ");
-
-  // Reverse the array of words
   let reversedWords = words.reverse();
-
-  // Join back into a string
   let reversedSentence = reversedWords.join(" ");
-
   console.log(reversedSentence);
   return reversedSentence;
 }
-
 reverseWords("Hello Sweden from Turkey");
 /*
 15. Filter Words Longer Than X
@@ -365,9 +359,8 @@ function countOccurrences(arr, word) {
   return count;
 }
 
-// 
- usage:
-countOccurrences(["apple", "kiwi", "apple", "cherry", "apple"], "apple");
+//
+usage: countOccurrences(["apple", "kiwi", "apple", "cherry", "apple"], "apple");
 
 /*
 19. Remove Falsy Values
@@ -377,7 +370,6 @@ countOccurrences(["apple", "kiwi", "apple", "cherry", "apple"], "apple");
 */
 function removeFalsyValues(arr) {
   let truthyArray = [];
-
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
       truthyArray.push(arr[i]);
@@ -422,13 +414,10 @@ function averageArray(numbers) {
     console.log("Array is empty");
     return;
   }
-
   let sum = 0;
-
   for (let i = 0; i < numbers.length; i++) {
     sum += numbers[i];
   }
-
   let average = sum / numbers.length;
   console.log(average);
   return average;
@@ -456,7 +445,11 @@ function flattenArray(twoDArray) {
   return flatArray;
 }
 
-flattenArray([[1, 2], [3, 4], [5, 6]]);
+flattenArray([
+  [1, 2],
+  [3, 4],
+  [5, 6],
+]);
 /*
 23. Find Words Containing a Letter
     - Define a function `findWordsWithLetter(words, letter)` that loops through
@@ -472,11 +465,9 @@ function findWordsWithLetter(words, letter) {
       filteredWords.push(words[i]);
     }
   }
-
   console.log(filteredWords);
   return filteredWords;
 }
-
 findWordsWithLetter(["pencil", "principle", "party", "date"], "p");
 /*
 24. Push and Pop Operations
@@ -523,23 +514,15 @@ manageQueue(["Alice", "Bob", "Charlie"], "David");
    - Logs the updated list.
 */
 function updateTodoList(todoList, startIndex, deleteCount, ...newTasks) {
-  // Log current tasks
   console.log("Current todo list:", todoList);
-
-  // Remove tasks starting at startIndex
   todoList.splice(startIndex, deleteCount);
-
-  // Add new tasks at the end
   todoList.push(...newTasks);
-
-  // Log updated list
   console.log("Updated todo list:", todoList);
 }
-
-// Example usage:
 updateTodoList(
-  ["Study JS", "Eat breakfast", "Walk dog"], 
-  1, 
-  1, 
-  "Go jogging", "Read book"
+  ["Study JS", "Eat breakfast", "Walk dog"],
+  1,
+  1,
+  "Go jogging",
+  "Read book",
 );
