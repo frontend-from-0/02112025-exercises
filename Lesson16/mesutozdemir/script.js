@@ -1,367 +1,545 @@
 /*
-1. Check Password Length
-   - Define a function `checkPassword(password)` that checks if `password` length
-     is at least 8 characters.
-   - If >= 8, log: "Password length is sufficient."
-   - Otherwise, log: "Password is too short."
-   - Call the function with different passwords and log the result.
+1. Sum Array Elements with a For Loop
+   - Define a function `sumArray(numbers)` that uses a for loop
+     to sum all elements in an array of numbers.
+   - Log the final sum.
 */
 
-console.log('Ex. 1 --------');
+function sumArray(numbers) {
+  let result = 0;
+  console.log('Finding sum of ', numbers, ' array');
 
-function checkPassword(password) {
-  if (password.length >= 8) {
-    console.log('Password length is sufficient.');
+  // if (numbers.length === 0) {
+  //   console.log('Array is empty');
+  //   return;
+  // }
+
+  for (let i = 0; i < numbers.length; i++) {
+    console.log('Current position', i, 'current element', numbers[i]);
+    result = result + numbers[i];
+  }
+
+  console.log('Final sum', result);
+}
+
+sumArray([3, 6, 9, 4]);
+// sumArray([]);
+// sumArray(['asda', 'asads']);
+
+/*
+2. Find Maximum Number in an Array
+   - Define a function `findMax(numbers)` that uses a for loop to iterate
+     through an array and find the largest value.
+   - Log the largest value.
+*/
+
+function findMax(numbers) {
+  let max = numbers[0];
+  for (let i = 1; i < numbers.length; i++) {
+    if (max < numbers[i]) {
+      max = numbers[i];
+    }
+  }
+  console.log('The maximum number of array', numbers, 'is', max);
+}
+
+findMax([4, 9, 50, 10]);
+findMax([4, 9, -50, 10]);
+
+/*
+3. Count Odd and Even Numbers
+   - Define a function `countOddEven(numbers)` that loops through an array
+     of numbers and counts how many are odd and how many are even.
+   - Log the counts in the format: "Odd: X, Even: Y"
+*/
+function countOddEven(numbers) {
+  let oddCount = 0;
+  let eventCount = 0;
+  for (i = 0; i < numbers.length; i++) {
+    if (numbers[i] % 2 === 0) {
+      eventCount++;
+    } else {
+      oddCount++;
+    }
+  }
+  console.log('Odd:', oddCount, 'and Even:', eventCount);
+}
+countOddEven([1, 2, 3, 4]);
+
+/*
+4. Sum of Numbers in a Range (While Loop)
+   - Define a function `sumRange(start, end)` that uses a while loop
+     to sum all integers from `start` to `end` (inclusive).
+   - Log the final sum.
+*/
+function sumRange(start, end) {
+  let sum = 0;
+  let current = start;
+  if (start <= end) {
+    while (current <= end) {
+      sum += current;
+      current++;
+    }
   } else {
-    console.log('Password is too short.');
+    while (current >= end) {
+      sum += current;
+      current--;
+    }
+  }
+
+  console.log('Final Sum:', sum);
+}
+sumRange(5, 3);
+sumRange(1, 3);
+
+/*
+5. Reverse an Array
+   - Define a function `reverseArray(arr)` that reverses the elements
+     of an array manually using a for loop (without using .reverse()).
+   - Log the reversed array.
+*/
+function reverseArray(arr) {
+  const reversed = [];
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const currentValue = arr[i];
+    reversed.push(currentValue);
+  }
+  console.log('Final reversed array', reversed);
+}
+
+reverseArray([3, 7, 9, 1, 2]);
+
+/*
+6. Filter Out Negative Numbers
+   - Define a function `filterNegative(numbers)` that loops through
+     an array of numbers and creates a new array without any negative values.
+   - Log the new array.
+*/
+function filterNegative(numbers) {
+  let result = [];
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] >= 0) {
+      result.push(numbers[i]);
+    }
+  }
+  console.log('Initial array', numbers, 'Result', result);
+}
+filterNegative([3, -7, 9, -1, 2]);
+/*
+7. Double the Values (For-of Loop)
+   - Define a function `doubleValues(numbers)` that uses a for-of loop
+     to multiply each number by 2, storing results in a new array.
+   - Log the new array.
+*/
+
+function doubleValues(numbers) {
+  const result = [];
+  for (const number of numbers) {
+    if (typeof number !== 'number'){
+      console.log("Array contains elements other than numbers, please provide correct input.");
+      return;
+    }
+    result.push(number * 2);
+  }
+  console.log('Result is', result);
+}
+doubleValues([1, 4, 6]);
+doubleValues([1, 'asdas', 6]);
+
+
+/*
+8. Print Each Character of a String (For-of)
+   - Define a function `printCharacters(str)` that uses a for-of loop
+     to log each character in the string on a separate line.
+*/
+function printCharacters(str){
+  console.log("printing characters of the string", str);
+ for ( const char of str){
+  console.log(char);
+ }
+}
+printCharacters("Lesson");
+
+['a', 's', 'e'][0]; // 'a'
+
+'ase'[0] // 'a'
+
+/*
+9. Sum All Values in an Object
+   - Define a function `sumObjectValues(obj)` that iterates over the
+     properties of an object (using a for-in loop) and sums all numeric values.
+   - Log the sum.
+   - Example: {a: 10, b: 20, c: 5} -> 35
+*/
+function sumObjectValues(obj) {
+  let sum = 0;
+
+  for (let key in obj) {
+    if (typeof obj[key] === "number") {
+      sum += obj[key];
+    }
+  }
+
+  console.log(sum);
+  return sum;
+}
+
+sumObjectValues({ a: 10, b: 20, c: 5 });
+/*
+10. Print Keys of an Object (For-in)
+    - Define a function `printObjectKeys(obj)` that uses a for-in loop
+      to log each key of the object.
+    - Example: { name: "Alice", age: 25 } -> logs "name", then "age"
+*/
+function printObjectKeys(obj) {
+  for (let key in obj) {
+    console.log(key);
+  }
+}
+printObjectKeys({ name: "Alice", age: 25 });
+
+/*
+11. Sum Array Using do-while Loop
+    - Define a function `sumWithDoWhile(numbers)` that uses a do-while loop
+      to sum all numbers in the array.
+    - Log the total.
+*/
+function sumWithDoWhile(numbers) {
+  let i = 0;
+  let total = 0;
+
+  if (numbers.length === 0) {
+    console.log(0);
+    return 0;
+  }
+
+  do {
+    total += numbers[i];
+    i++;
+  } while (i < numbers.length);
+
+  console.log(total);
+  return total;
+}
+sumWithDoWhile([10, 20, 30]);
+/*
+12. Remove Duplicates from an Array
+    - Define a function `removeDuplicates(arr)` that loops through the array
+      and creates a new array without duplicate elements.
+    - Hint: you could check if the item is already in the new array before pushing.
+    - Log the new array without duplicates.
+*/
+function removeDuplicates(arr) {
+  let uniqueArray = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!uniqueArray.includes(arr[i])) {
+      uniqueArray.push(arr[i]);
+    }
+  }
+
+  console.log(uniqueArray);
+  return uniqueArray;
+}
+
+removeDuplicates([1, 2, 2, 3, 4, 4, 5]);
+/*
+13. Calculate Factorial (For Loop)
+    - Define a function `factorial(n)` that calculates n! (n factorial)
+      using a for loop.
+    - Log the result. 
+    - Example: factorial(5) -> 120
+*/function factorial(n) {
+  if (n < 0) {
+    console.log("Factorial is not defined for negative numbers");
+    return;
+  }
+
+  let result = 1;
+  for (let i = 1; i <= n; i++) {
+    result *= i;
+  }
+
+  console.log(result);
+  return result;
+}
+
+factorial(5);
+/*
+14. String -> Array -> String
+    - Define a function `reverseWords(sentence)` that splits the sentence 
+      into an array of words, reverses the array order, then joins it back into
+      a string. Use loops or built-in methods as you like.
+    - Log the reversed sentence.
+*/
+function reverseWords(sentence) {
+  // Split the sentence into words
+  let words = sentence.split(" ");
+
+  // Reverse the array of words
+  let reversedWords = words.reverse();
+
+  // Join back into a string
+  let reversedSentence = reversedWords.join(" ");
+
+  console.log(reversedSentence);
+  return reversedSentence;
+}
+
+reverseWords("Hello Sweden from Turkey");
+/*
+15. Filter Words Longer Than X
+    - Define a function `filterLongWords(words, minLength)` that uses a for loop
+      to collect only the words that have a length >= minLength.
+    - Log the resulting array.
+*/
+function filterLongWords(words, minLength) {
+  let longWords = [];
+
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].length >= minLength) {
+      longWords.push(words[i]);
+    }
+  }
+
+  console.log(longWords);
+  return longWords;
+}
+
+filterLongWords(["red", "blue", "grey", "yellow"], 4);
+/*
+16. Log Array Elements with Their Indices
+    - Define a function `logElementsWithIndex(arr)` that loops through the array
+      and logs "Index: i, Value: arr[i]" for each element.
+*/
+function logElementsWithIndex(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(`Index: ${i}, Value: ${arr[i]}`);
   }
 }
 
-checkPassword('  password 112312   ');
-checkPassword('pas');
+logElementsWithIndex(["melon", "kiwi", "blueberry"]);
 
 /*
-2. Uppercase Name
-   - Define a function `uppercaseName(name)` that converts a given name to uppercase.
-   - Log the uppercase result to the console.
-   - Example: "John Doe" -> "JOHN DOE"
+17. Find the Smallest Number in an Array
+    - Define a function `findMin(numbers)` that loops through the array
+      to find and return the smallest number.
+    - Log the smallest number.
 */
-function logUppercaseName(name) {
-  const uppercaseName = name.toUpperCase();
-  console.log(uppercaseName);
-}
-
-console.log('Ex. 2 --------');
-logUppercaseName('name');
-logUppercaseName('john');
-
-/*
-3. Lowercase Email
-   - Define a function `normalizeEmail(email)` that returns a lowercased version of the email.
-   - Log the normalized email to the console.
-   - Example: "USER@Example.COM" -> "user@example.com"
-*/
-
-console.log('Ex. 3 --------');
-
-/*
-4. Extract Domain
-   - Define a function `getDomain(email)` that uses `slice` or `substring` to
-     extract everything after '@'.
-   - Log the domain to the console.
-   - Example: "user@example.com" -> "example.com"
-*/
-console.log('Ex. 4 --------');
-function getDomain(email) {
-  const emailArray = email.split('@');
-  // user@example.com -> ['user', 'example.com'];
-
-  console.log(emailArray[1]); // second element in the array
-}
-getDomain('mesut.ozdemir@gmail.com');
-
-/*
-5. Check Substring
-   - Define a function `containsWord(sentence, word)` that checks if the `sentence`
-     includes `word` (use the .includes() method).
-   - If true, log: "<word> found in sentence."
-   - Else, log: "<word> not found in sentence."
-*/
-
-console.log('Ex. 5 --------');
-
-function containsWord(sentence, word) {
-  // if (sentence.toLowerCase().includes(word.toLowerCase())) {
-  if (sentence.includes(word)) {
-    console.log(`${word} found in sentence`);
-  } else {
-    console.log(`${word} not found in sentence`);
+function findMin(numbers) {
+  if (numbers.length === 0) {
+    console.log("Array is empty");
+    return;
   }
+
+  let min = numbers[0];
+
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] < min) {
+      min = numbers[i];
+    }
+  }
+
+  console.log(min);
+  return min;
 }
-containsWord(
-  'Define a function `checkFileExtension(filename)` that checks if the filename',
-  'word',
+
+findMin([25, 15, 50, 9]);
+/*
+18. Count Occurrences of a Word in an Array
+    - Define a function `countOccurrences(arr, word)` that loops through `arr`
+      to count how many times `word` appears.
+    - Log the count.
+*/
+function countOccurrences(arr, word) {
+  let count = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === word) {
+      count++;
+    }
+  }
+
+  console.log(count);
+  return count;
+}
+
+// 
+ usage:
+countOccurrences(["apple", "kiwi", "apple", "cherry", "apple"], "apple");
+
+/*
+19. Remove Falsy Values
+    - Define a function `removeFalsyValues(arr)` that loops through an array
+      and returns a new array without falsy values (false, 0, "", null, undefined, NaN).
+    - Log the new array.
+*/
+function removeFalsyValues(arr) {
+  let truthyArray = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]) {
+      truthyArray.push(arr[i]);
+    }
+  }
+
+  console.log(truthyArray);
+  return truthyArray;
+}
+
+removeFalsyValues([0, 1, false, 2, "", 3, null, undefined, NaN, 4]);
+/*
+20. Sum of All Digits in a String
+    - Define a function `sumDigits(str)` that loops through each character of `str`,
+      checks if it's a digit, and if so, adds it to a total sum.
+    - Log the final sum.
+    - Example: "abc123" -> 6
+*/
+function sumDigits(str) {
+  let sum = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (char >= "0" && char <= "9") {
+      sum += Number(char);
+    }
+  }
+
+  console.log(sum);
+  return sum;
+}
+
+sumDigits("abc123");
+/*
+21. Average of Array Elements
+    - Define a function `averageArray(numbers)` that uses a loop
+      to calculate the average (sum / length).
+    - Log the average.
+*/
+function averageArray(numbers) {
+  if (numbers.length === 0) {
+    console.log("Array is empty");
+    return;
+  }
+
+  let sum = 0;
+
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+
+  let average = sum / numbers.length;
+  console.log(average);
+  return average;
+}
+
+averageArray([5, 10, 15, 20]);
+/*
+22. Flatten a 2D Array (Nested Loops)
+    - Define a function `flattenArray(twoDArray)` that takes an array of arrays
+      (e.g., [[1,2],[3,4]]) and uses nested loops to create a new one-dimensional array.
+    - Log the flattened array.
+*/
+function flattenArray(twoDArray) {
+  let flatArray = [];
+
+  // Outer loop: iterate through each sub-array
+  for (let i = 0; i < twoDArray.length; i++) {
+    // Inner loop: iterate through each element in the sub-array
+    for (let j = 0; j < twoDArray[i].length; j++) {
+      flatArray.push(twoDArray[i][j]);
+    }
+  }
+
+  console.log(flatArray);
+  return flatArray;
+}
+
+flattenArray([[1, 2], [3, 4], [5, 6]]);
+/*
+23. Find Words Containing a Letter
+    - Define a function `findWordsWithLetter(words, letter)` that loops through
+      an array of words and returns a new array of only the words that contain
+      the given letter.
+    - Log the filtered array.
+*/
+function findWordsWithLetter(words, letter) {
+  let filteredWords = [];
+
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].includes(letter)) {
+      filteredWords.push(words[i]);
+    }
+  }
+
+  console.log(filteredWords);
+  return filteredWords;
+}
+
+findWordsWithLetter(["pencil", "principle", "party", "date"], "p");
+/*
+24. Push and Pop Operations
+    - Define a function `pushPopExample(arr, itemToPush)` that:
+      - pushes itemToPush to arr
+      - logs the updated array
+      - then pops the last element
+      - logs the popped element
+      - logs the final array
+*/
+function pushPopExample(arr, itemToPush) {
+  arr.push(itemToPush);
+  console.log("After push:", arr);
+  const poppedItem = arr.pop();
+  console.log("Popped item:", poppedItem);
+  console.log("Final array:", arr);
+}
+pushPopExample([1, 2, 3], 4);
+/*
+25. Push and Shift Operations
+    - Define a function `manageQueue(queue, newPerson)` that:
+      - push `newPerson` to the end of `queue`
+      - logs the updated queue
+      - shifts (removes) the first person in the queue
+      - logs the removed person
+      - logs the final queue
+*/
+function manageQueue(queue, newPerson) {
+  queue.push(newPerson);
+  console.log("After adding:", queue);
+  const removedPerson = queue.shift();
+  console.log("Removed person:", removedPerson);
+
+  console.log("Final queue:", queue);
+}
+
+manageQueue(["Alice", "Bob", "Charlie"], "David");
+/*
+26. To-Do List Application 
+  - Define a function `updateTodoList(todoList, startIndex, deleteCount, ...newTasks)`:
+   - Logs the current list of tasks.
+   - Removes `deleteCount` tasks starting at `startIndex`.
+   - Inserts any new tasks at the end of the array.
+   - Logs the updated list.
+*/
+function updateTodoList(todoList, startIndex, deleteCount, ...newTasks) {
+  // Log current tasks
+  console.log("Current todo list:", todoList);
+
+  // Remove tasks starting at startIndex
+  todoList.splice(startIndex, deleteCount);
+
+  // Add new tasks at the end
+  todoList.push(...newTasks);
+
+  // Log updated list
+  console.log("Updated todo list:", todoList);
+}
+
+// Example usage:
+updateTodoList(
+  ["Study JS", "Eat breakfast", "Walk dog"], 
+  1, 
+  1, 
+  "Go jogging", "Read book"
 );
-containsWord('Bugün hava yagmurlu', 'Hava');
-
-/*
-6. File Extension Check
-   - Define a function `checkFileExtension(filename)` that checks if the filename
-     ends with ".pdf" using .endsWith().
-   - If it does, log: "This is a PDF file."
-   - Otherwise, log: "Not a PDF file."
-*/
-console.log('Ex. 6 --------');
-
-function checkFileExtension(filename) {
-  if (filename.toLowerCase().endsWith('.pdf')) {
-    // if (filename.toUpperCase().endsWith('.PDF')) {
-    console.log('This is a PDF file.');
-  } else {
-    console.log('Not a PDF file.');
-  }
-}
-checkFileExtension('myfile.pdf');
-checkFileExtension('myfile.PDF');
-checkFileExtension('myfile.exel');
-
-/*
-7. Compare Numbers (if-else)
-   - Define a function `compareNumbers(a, b)` that:
-     - Logs "a is bigger" if a > b
-     - Logs "b is bigger" if b > a
-     - Logs "Numbers are equal" if they are the same
-*/
-
-/*
-8. Palindrome Check
-   - Define a function `isPalindrome(str)` that checks if `str` is the same
-     forwards and backwards.
-   - If it is, log: "<str> is a palindrome"
-   - Otherwise, log: "<str> is not a palindrome"
-*/
-
-/*
-9. String Truncation
-   - Define a function `truncateString(text, maxLength)` that uses slice() to
-     cut the string to `maxLength` characters, then appends "..." if it was too long.
-   - Log the final truncated string.
-*/
-
-/*
-10. Check Even or Odd (if-else)
-   - Define a function `evenOrOdd(number)` that:
-     - Logs "Even" if the number is even
-     - Logs "Odd" if the number is odd
-*/
-
-/*
-11. URL Protocol Checker
-   - Define a function `checkProtocol(url)` that converts the URL to lowercase
-     and checks if it starts with "https" using .startsWith().
-   - Log "Secure connection" if true, otherwise "Unsecure connection".
-*/
-
-/*
-12. Switch: Day of the Week
-   - Define a function `getDayOfWeek(num)` that uses a switch statement:
-     1 -> "Monday"
-     2 -> "Tuesday"
-     ...
-     7 -> "Sunday"
-     - Log the matched day or "Invalid day" if out of range.
-*/
-
-function getDayofWeek(number) {
-  switch (number) {
-    case 1:
-      console.log('Monday');
-      break;
-    case 2:
-      console.log('Tuesday');
-      break;
-    case 3:
-      console.log('Wednesday');
-      break;
-    case 4:
-      console.log('Thursday');
-      break;
-    case 5:
-      console.log('Friday');
-      break;
-    case 6:
-      console.log('Saturday');
-      break;
-    case 7:
-      console.log('Sunday');
-      break;
-    default:
-      console.log('Unknow day');
-      break;
-  }
-}
-getDayofWeek(9);
-getDayofWeek(1);
-getDayofWeek('4');
-
-// == value equality (non-strict check); !=
-// === value & type equality (strict check); !==  
-
-
-/*
-13. Repeat a String;
-   - Define a function `repeatWord(word, times)` that uses the .repeat() method
-     to repeat `word` `times` times.
-   - Log the repeated result.
-*/
-
-/*
-14. Replace Substring
-   - Define a function `censorWord(sentence, target)` that replaces `target`
-     with "****" (use .replaceAll() or multiple .replace()).
-   - Log the censored sentence.
-*/
-
-/*
-15. Check First Character (if-else)
-   - Define a function `startsWithA(str)` that checks if the string starts with 'A'
-     (use .charAt(0) or [0]).
-   - Log "Starts with A" or "Does not start with A".
-*/
-
-/*
-16. Slice Last N Characters
-   - Define a function `sliceLastN(text, n)` that uses .slice(-n) to extract
-     the last `n` characters of `text`.
-   - Log the result.
-*/
-
-/*
-17. Switch: Grade Checker
-   - Define a function `gradeChecker(score)` that uses a switch (or if-else chain):
-     90+ -> "A"
-     80-89 -> "B"
-     70-79 -> "C"
-     60-69 -> "D"
-     below 60 -> "F"
-   - Log the grade.
-*/
-
-/*
-18. Character Replacement
-   - Define a function `replaceCharacter(str, oldChar, newChar)` that uses .replaceAll()
-     (or a loop) to swap all occurrences of oldChar with newChar.
-   - Log the result.
-*/
-
-/*
-19. Title Case a Sentence
-   - Define a function `titleCase(sentence)` that:
-     - Splits the sentence by spaces
-     - Uppercases the first letter of each word
-     - Joins them back
-   - Log the transformed string.
-*/
-
-/*
-20. Switch: Traffic Light
-   - Define a function `trafficLight(color)` that uses a switch statement:
-     - "red" -> log: "Stop"
-     - "yellow" -> log: "Caution"
-     - "green" -> log: "Go"
-     - anything else -> "Invalid color"
-*/
-function trafficLight(color) {
-  switch (color.toLowerCase()) {
-    case 'red':
-      console.log('stop');
-      break;
-    case 'yellow':
-      console.log('caution');
-      break;
-    case 'green':
-      console.log('go');
-      break;
-    default:
-      console.log('Invalid Color');
-  }
-}
-
-function trafficLightWithIf(color) {
-  if (color.toLowerCase() === 'red') {
-    console.log('stop');
-  } else if (color.toLowerCase() === 'yellow') {
-    console.log('caution');
-  } else if (color.toLowerCase() === 'green') {
-    console.log('go');
-  } else {
-    console.log('Invalid Color');
-  }
-}
-trafficLight('red');
-trafficLight('RED');
-trafficLight('reD');
-
-trafficLight('green');
-trafficLight('orange');
-trafficLight('black');
-
-/*
-21. Check String Length (if-else)
-   - Define a function `isLongString(str)` that checks if the string length
-     is more than 10.
-   - Log "Long string" or "Short string".
-*/
-
-/*
-22. Convert to Lowercase Then Check
-   - Define a function `isSpam(text)` that converts the text to lowercase
-     and checks if it includes "spam".
-   - If it does, log "This text is spam."
-   - Otherwise, log "This text is not spam."
-*/
-
-/*
-23. Extract Initials
-   - Define a function `getInitials(fullName)` that uses .split() to get each name part,
-     then logs the capitalized first letter of each.
-   - Example: "John Doe" -> "J.D."
-*/
-
-/*
-24. Switch: Month to Season
-   - Define a function `getSeason(monthNum)` (1-12). Use switch or if-else:
-     - 12, 1, 2  -> "Winter"
-     - 3, 4, 5   -> "Spring"
-     - 6, 7, 8   -> "Summer"
-     - 9, 10, 11 -> "Autumn"
-   - Log the season or "Invalid month" if out of range.
-*/
-
-/*
-25. Check If String Contains Number
-   - Define a function `containsNumber(str)` that uses a loop or a method like
-     .match() to check if there's any digit in the string.
-   - Log "Contains number" or "No number found".
-*/
-
-/*
-26. Pad a String
-   - Define a function `padString(str, maxLength)` that if str.length < maxLength,
-     uses .padEnd() or .padStart() to make the string reach maxLength with '*'.
-   - Log the padded string.
-*/
-
-/*
-27. If-Else: Voting Eligibility
-   - Define a function `canVote(age)` that logs:
-     - "Can vote" if age >= 18
-     - "Too young to vote" otherwise
-*/
-
-/*
-28. Reverse Words in a Sentence
-   - Define a function `reverseWords(sentence)` that:
-     - Splits the sentence by spaces
-     - Reverses each word individually
-     - Joins them back
-   - Log the result.
-*/
-
-/*
-29. Check Substring Position
-   - Define a function `findWordPosition(sentence, word)` that uses .indexOf(word)
-     to find the starting index. If not found, return -1.
-   - Log the index or log "Not found" if it's -1.
-*/
-
-/*
-30. Switch: Simple Calculator
-   - Define a function `calculate(a, operator, b)` that uses switch to handle:
-     - "+" -> a + b
-     - "-" -> a - b
-     - "*" -> a * b
-     - "/" -> a / b
-     - Otherwise -> "Invalid operator"
-   - Log the result.
-*/
