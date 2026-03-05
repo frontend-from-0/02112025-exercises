@@ -796,3 +796,5 @@ function calculate(a, operator, b) {
 calculate(10, "+", 5); 
 calculate(20, "/", 4); 
 calculate(7, "x", 3);  
+
+Resubmit
