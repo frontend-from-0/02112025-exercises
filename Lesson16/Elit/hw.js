@@ -163,6 +163,18 @@ printCharacters("Lesson");
    - Log the sum.
    - Example: {a: 10, b: 20, c: 5} -> 35
 */
+function sumObjectValues(obj){
+  let sum=0;
+  for(let key in obj){
+    if(typeof obj[key]==='number'){
+      sum+=obj[key]
+    }
+  }
+  console.log('summary of object values: ', sum);
+}
+const example= {a: 10, b: 20, c: 5, d: 'apple'};
+sumObjectValues(example);
+
 
 /*
 10. Print Keys of an Object (For-in)
@@ -170,6 +182,14 @@ printCharacters("Lesson");
       to log each key of the object.
     - Example: { name: "Alice", age: 25 } -> logs "name", then "age"
 */
+function printObjectKeys(obj){
+  for(let key in obj){
+    console.log(key);
+  }
+}
+const user= {name: "Alice", age: 25};
+printObjectKeys(user);
+
 
 /*
 11. Sum Array Using do-while Loop
@@ -178,6 +198,22 @@ printCharacters("Lesson");
     - Log the total.
 */
 
+function sumWithDoWhile(numbers){
+  let sum=0;
+  let i=0;
+  if(numbers.length===0)
+    return 0;
+do{
+  sum+=numbers[i]; i++
+}
+while(i<numbers.length);
+return sum;
+}
+
+const myNumbers=[10, 20, 30];
+console.log('sum:', sumWithDoWhile(myNumbers));
+
+
 /*
 12. Remove Duplicates from an Array
     - Define a function `removeDuplicates(arr)` that loops through the array
@@ -185,7 +221,17 @@ printCharacters("Lesson");
     - Hint: you could check if the item is already in the new array before pushing.
     - Log the new array without duplicates.
 */
-
+const original= [1, 2, 2, 3, 4, 4, 5];
+function removeDuplicates(arr){
+  let uniqueArr=[];
+  for(let item of arr){
+    if(!uniqueArr.includes(item)){
+      uniqueArr.push(item);
+    }
+  }
+console.log(uniqueArr);
+}
+removeDuplicates(original);
 /*
 13. Calculate Factorial (For Loop)
     - Define a function `factorial(n)` that calculates n! (n factorial)
@@ -193,6 +239,8 @@ printCharacters("Lesson");
     - Log the result. 
     - Example: factorial(5) -> 120
 */
+
+
 
 /*
 14. String -> Array -> String
