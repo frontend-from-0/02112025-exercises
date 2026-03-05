@@ -43,6 +43,11 @@ logUppercaseName("john");
 */
 
 console.log("Ex. 3 --------");
+function normalizeEmail(email) {
+  const normalizeEmail = email.toLowerCase();
+  console.log(normalizeEmail);
+}
+normalizeEmail("GUNERKELES@GMAIL.COM");
 
 /*
 4. Extract Domain
@@ -700,7 +705,6 @@ function canVote(age) {
 canVote(14);
 canVote(25);
 
-
 console.log("Ex. 27 -OR");
 
 function canVote(age) {
@@ -722,15 +726,15 @@ canVote(8);
 console.log("Ex. 28 --------");
 
 function reverseWords(sentence) {
-  let texts = sentence.split(' ');
+  let texts = sentence.split(" ");
   let result = [];
 
   for (let i = 0; i < texts.length; i++) {
     let text = texts[i];
-    let reversedWord = text.split('').reverse().join('');
+    let reversedWord = text.split("").reverse().join("");
     result.push(reversedWord);
   }
-  console.log(result.join(' '));
+  console.log(result.join(" "));
 }
 
 reverseWords("This is not finishing");
@@ -744,18 +748,17 @@ reverseWords("This is not finishing");
 console.log("Ex. 29 --------");
 
 function findWordPosition(sentence, word) {
-let index = sentence.indexOf(word);
+  let index = sentence.indexOf(word);
 
-if (index === -1) {
-console.log('Not Found');
-} else {
-console.log(index);
+  if (index === -1) {
+    console.log("Not Found");
+  } else {
+    console.log(index);
+  }
 }
-}
 
-findWordPosition('Hi my dear', 'dear');
-findWordPosition('I like coding', 'code');
-
+findWordPosition("Hi my dear", "dear");
+findWordPosition("I like coding", "code");
 
 /*
 30. Switch: Simple Calculator
@@ -775,16 +778,16 @@ function calculate(a, operator, b) {
 
   switch (operator) {
     case "+":
-    result = a + b;
+      result = a + b;
       break;
     case "-":
-    result = a - b;
+      result = a - b;
       break;
-      case "*":
-    result = a * b;
+    case "*":
+      result = a * b;
       break;
-      case "/":
-    result = a / b;
+    case "/":
+      result = a / b;
       break;
     default:
       console.log("Invalid operator");
@@ -793,8 +796,6 @@ function calculate(a, operator, b) {
   console.log(result);
 }
 
-calculate(10, "+", 5); 
-calculate(20, "/", 4); 
-calculate(7, "x", 3);  
-
-Resubmit
+calculate(10, "+", 5);
+calculate(20, "/", 4);
+calculate(7, "x", 3);
