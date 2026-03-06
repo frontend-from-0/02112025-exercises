@@ -85,15 +85,15 @@ console.log('Ex. 10. Result is:', result2 , typeof result2);
 
 // 11. Generate a random integer between 0 and 10 and log it.
 
-console.log('Ex. 11. Result is:', Math.floor(Math.random() * 10));
+console.log('Ex. 11. Result is:', Math.floor(Math.random() * 11));
 
 // 12. Round the number 3.7 down using Math.floor and 3.2 up using Math.ceil, log both.
 
-console.log('Ex. 12. Result is:', Math.floor(3.7), Math.ceil(3.2));
-
+console.log('Ex. 12. Result is:','The floored version of number 3.7 is ', Math.floor(3.7))
+console.log('and the ceiled version of number 3.2 is :', Math.ceil(3.2));
 // 13. Declare a boolean variable isStudent = true. Log it.
 
-isStudent = 'true';
+let isStudent = 'true';
 console.log(`Ex. 13. Result is: ${isStudent}`);
 
 // 14. Initialize counter = 0, then increment it by 1 using counter++ and log it.
@@ -115,13 +115,13 @@ const name3 = "Alice";
 const age = 30;
 const city = "Paris"
 
-console.log(`Ex. 16. Result is:`,  `${name3}` + " (" + `${age}` + ") " + "lives in " + `${city}`   )
+console.log(`Ex. 16. Result is: ${name3} (${age}) lives in ${city}`);
 // 17. Declare variables x=5, y=10, z=15. Log their total sum.
 
 const h = 5;
-y = 10;
-z = 15;
-sum = h + y + z;
+const y = 10;
+const z = 15;
+const sum = h + y + z;
 console.log( `Ex. 17. Result is: ${sum}`);
 
 // 18. Declare dividend=10 and divisor=3. Log the quotient (divisionResult) and difference (differenceResult).
@@ -179,10 +179,10 @@ console.log(`Ex. 25. Result is:`, numberEx10++ , numberEx10)
 
 let numberEx11 = -3;
 ++numberEx11;
-console.log(`Ex. 25. Result is:`, numberEx11*2)
+console.log(`Ex. 26. Result is:`, numberEx11*2)
 
 // 27. Declare a=2 and b=3. Increment a using the prefix ++ operator, then add b to the result and log it.
 
 let d = 2;
-let f = 3;
-console.log(`Ex. 25. Result is:`,(++d)+f)
+const f = 3;
+console.log(`Ex. 27. Result is:`, ++d + f)
