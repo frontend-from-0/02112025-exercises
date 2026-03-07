@@ -585,5 +585,4 @@ function calculate(a, operator, b) {
   }
   console.log(result);
 }
-
 // Örnek: calculate(10, "*", 5); // 50
