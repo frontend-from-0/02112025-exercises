@@ -240,6 +240,14 @@ removeDuplicates(original);
     - Example: factorial(5) -> 120
 */
 
+function factoriel(n){
+  let result=1;
+  for(let i=1; i<=n; i++){
+ result=result * i;
+  }
+ return result; 
+}
+console.log(factoriel(5));
 
 
 /*
@@ -249,6 +257,46 @@ removeDuplicates(original);
       a string. Use loops or built-in methods as you like.
     - Log the reversed sentence.
 */
+//Buılt-ın method
+function reverseWords(sentence){
+let word=sentence.split(' ');
+console.log ('1.step: ', word);
+
+let reversedWords = word.reverse();
+console.log ('2.step: ', reversedWords);
+
+let finalString=reversedWords.join(' ');
+console.log('3.step: ', finalString);
+return finalString;
+}
+reverseWords('Learning Javascript is fun');
+
+/* shortly:
+function reverseWords(sentence){
+let reversed= sentence.split(' ').reverse().join(' ');
+return reversed;
+}
+console.log(reverseWords('Learning Javascript is fun'));
+*/
+
+/*
+14. String -> Array -> String
+    - Define a function `reverseWords(sentence)` that splits the sentence 
+      into an array of words, reverses the array order, then joins it back into
+      a string. Use loops or built-in methods as you like.
+    - Log the reversed sentence. LOOP VERSION:
+*/
+
+function reverseArrayWords(sentence){
+  let words = sentence.split(' ');
+  let reversedArray=[];
+  for(let i=words.length-1; i>=0; i--){
+reversedArray.push(words[i]);
+  }
+  return reversedArray.join(' ');
+}
+console.log(reverseArrayWords('Learning Javascript is hard'));
+
 
 /*
 15. Filter Words Longer Than X
@@ -256,6 +304,20 @@ removeDuplicates(original);
       to collect only the words that have a length >= minLength.
     - Log the resulting array.
 */
+function filterLongWords(words, minlength){
+  let longWords= [];
+  for(let i=0; i<words.length; i++){
+  if(words[i].length >= minlength){
+longWords.push(words[i]);
+  }
+}
+  return longWords;
+}
+
+const finalFilteredWords= filterLongWords(['ali', 'ege', 'zeynep', 'erdem', 'nihal', 'ayşegül', 'nesrin'], 5);
+console.log(finalFilteredWords);
+
+
 
 /*
 16. Log Array Elements with Their Indices
