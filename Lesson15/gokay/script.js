@@ -132,7 +132,7 @@ compareNumbers(10, 5); // "a is bigger"
    - Otherwise, log: "<str> is not a palindrome"
 */
 function isPalindrome(str) {
-  let reversedStr = str.split("").reverse().join("");
+  const reversedStr = str.split("").reverse().join("");
 
   if (str.toLowerCase() === reversedStr.toLowerCase()) {
     console.log(str + " is a palindrome");
@@ -151,7 +151,7 @@ isPalindrome("radar"); // "radar is a palindrome"
 */
 function truncateString(text, maxLength) {
   if (text.length > maxLength) {
-    let truncated = text.slice(0, maxLength) + "...";
+    const truncated = text.slice(0, maxLength) + "...";
     console.log(truncated);
   } else {
     console.log(text);
@@ -245,7 +245,7 @@ getDayofWeek("4");
    - Log the repeated result.
 */
 function repeatWord(word, times) {
-  let result = word.repeat(times);
+  const result = word.repeat(times);
   console.log(result);
 }
 
@@ -258,7 +258,7 @@ repeatWord("Merhaba! ", 3); // "Merhaba! Merhaba! Merhaba! "
    - Log the censored sentence.
 */
 function censorWord(sentence, target) {
-  let censored = sentence.replaceAll(target, "****");
+  const censored = sentence.replaceAll(target, "****");
   console.log(censored);
 }
 
@@ -289,7 +289,7 @@ startsWithA("Araba"); // "Starts with A"
    - Log the result.
 */
 function sliceLastN(text, n) {
-  let result = text.slice(-n);
+  const result = text.slice(-n);
   console.log(result);
 }
 
@@ -335,7 +335,7 @@ gradeChecker(85); // "Grade: B"
    - Log the result.
 */
 function replaceCharacter(str, oldChar, newChar) {
-  let result = str.replaceAll(oldChar, newChar);
+  const result = str.replaceAll(oldChar, newChar);
   console.log(result);
 }
 
@@ -350,13 +350,13 @@ replaceCharacter("merhaba dünya", "a", "@"); // "merh@b@ düny@"
    - Log the transformed string.
 */
 function titleCase(sentence) {
-  let words = sentence.split(" ");
-  let capitalizedWords = words.map((word) => {
+  const words = sentence.split(" ");
+  const capitalizedWords = words.map((word) => {
     // İlk harfi büyük yap + geri kalanını (1. indeksten sonrasını) ekle
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   });
 
-  let result = capitalizedWords.join(" ");
+  const result = capitalizedWords.join(" ");
   console.log(result);
 }
 
@@ -443,8 +443,8 @@ function isSpam(text) {
    - Example: "John Doe" -> "J.D."
 */
 function getInitials(fullName) {
-  let parts = fullName.split(" ");
-  let initials = parts.map((name) => name[0].toUpperCase()).join(".") + ".";
+  const parts = fullName.split(" ");
+  const initials = parts.map((name) => name[0].toUpperCase()).join(".") + ".";
   console.log(initials);
 }
 
@@ -506,7 +506,7 @@ function containsNumber(str) {
    - Log the padded string.
 */
 function padString(str, maxLength) {
-  let result = str.length < maxLength ? str.padEnd(maxLength, "*") : str;
+  const result = str.length < maxLength ? str.padEnd(maxLength, "*") : str;
   console.log(result);
 }
 
@@ -533,7 +533,7 @@ function canVote(age) {
    - Log the result.
 */
 function reverseWords(sentence) {
-  let result = sentence
+  const result = sentence
     .split(" ")
     .map((word) => word.split("").reverse().join(""))
     .join(" ");
@@ -548,7 +548,7 @@ function reverseWords(sentence) {
    - Log the index or log "Not found" if it's -1.
 */
 function findWordPosition(sentence, word) {
-  let index = sentence.indexOf(word);
+  const index = sentence.indexOf(word);
   if (index !== -1) {
     console.log("Index: " + index);
   } else {
