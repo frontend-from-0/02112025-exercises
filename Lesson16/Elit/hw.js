@@ -351,9 +351,18 @@ findMin([2, 4, 8, 1, 7, 6, 9]);
       to count how many times `word` appears.
     - Log the count.
 */
-function countOccurrences(arr, word) {
-  function countOccurrences(arr, word) {}
-}
+
+  function countOccurrences(arr, word) {
+    let count=0;
+    for(let i=0; i<arr.length; i++){
+      if(arr[i].toLowerCase()===word.toLowerCase()){
+        count++;
+      }
+    }
+    return count;
+  }
+let result=countOccurrences(['ali', 'ali', 'ali', 'ali', 'veli', 'Ali', 'veli'], 'ali');
+console.log("Array has", result, 'ali');
 
 /*
 19. Remove Falsy Values
@@ -361,6 +370,30 @@ function countOccurrences(arr, word) {
       and returns a new array without falsy values (false, 0, "", null, undefined, NaN).
     - Log the new array.
 */
+function removeFalsyValues(arr){
+  let filteredArray=[];
+  for(let i=0; i<arr.length; i++){
+    if(arr[i]){
+      filteredArray.push(arr[i]);
+    }
+  }
+  return filteredArray;
+}
+const mixedArray=[0, 1, "merhaba", "", false, 42, null, undefined, NaN, "JS"];
+const resultOfFilteredArray=removeFalsyValues(mixedArray);
+
+console.log('Filtered Array: ', resultOfFilteredArray);
+
+/*
+19. questıon 19 PLUS .filter() Method
+    - Define a function `removeFalsyValues(arr)` that loops through an array
+      and returns a new array without falsy values (false, 0, "", null, undefined, NaN).
+    - Log the new array.
+*/
+const mixArray=[0, 1, "merhaba", "", false, 42, null, undefined, NaN, "JS"];
+const cleanArray= mixArray.filter(Boolean);
+console.log(cleanArray);
+
 
 /*
 20. Sum of All Digits in a String
@@ -369,6 +402,19 @@ function countOccurrences(arr, word) {
     - Log the final sum.
     - Example: "abc123" -> 6
 */
+function sumDigits(str){
+  let totalSum=0;
+  for(let i=0; i<str.length; i++){
+    if(str[i]>='0' && str[i]<='9'){
+      totalSum=totalSum + Number(str[i])
+    }
+  }
+  return totalSum;
+}
+let totalDigitSum=sumDigits('ABC012D45EF');
+console.log(totalDigitSum);
+
+
 
 /*
 21. Average of Array Elements
@@ -376,6 +422,18 @@ function countOccurrences(arr, word) {
       to calculate the average (sum / length).
     - Log the average.
 */
+function averageArray(numbers){
+  let sum=0;
+  for(let i=0; i<numbers.length; i++){
+    sum+=numbers[i];
+  }
+  let average= sum/numbers.length;
+  return average;
+}
+let averageResult=averageArray([2,4,6,8]);
+console.log(averageResult);
+
+
 
 /*
 22. Flatten a 2D Array (Nested Loops)
@@ -383,6 +441,20 @@ function countOccurrences(arr, word) {
       (e.g., [[1,2],[3,4]]) and uses nested loops to create a new one-dimensional array.
     - Log the flattened array.
 */
+function flattenArray(twoDArray){
+  let flat=[];
+  for(let i=0; i<twoDArray.length; i++){
+    for(let j=0; j<twoDArray[i].length; j++){
+flat.push(twoDArray[i][j]);
+    }
+  }
+  return flat;
+}
+let my2DArray= [[1,2],[3,4]];
+let result2D= flattenArray(my2DArray);
+console.log('The Flattened Array is: ', result2D);
+
+
 
 /*
 23. Find Words Containing a Letter
@@ -391,6 +463,18 @@ function countOccurrences(arr, word) {
       the given letter.
     - Log the filtered array.
 */
+function findWordsWithLetter(words, letter){
+  let filteredArray=[];
+  for(let i=0; i<words.length; i++){
+    if(words[i].toLowerCase().includes(letter.toLowerCase())){
+      filteredArray.push(words[i]);
+    }
+  }
+  return filteredArray;
+}
+let wordsWithLetter= ['apple', 'banana', 'orange'];
+let filteredWords=findWordsWithLetter(wordsWithLetter, 'e');
+console.log(filteredWords);
 
 /*
 24. Push and Pop Operations
@@ -401,6 +485,16 @@ function countOccurrences(arr, word) {
       - logs the popped element
       - logs the final array
 */
+
+function pushPopExample(arr, itemToPush){
+  arr.push(itemToPush);
+  console.log('Updated Array: ', arr);
+  let poppedItem= arr.pop();
+
+  console.log('Popped Item: ', poppedItem);
+  console.log('Final Array: ', arr);
+}
+pushPopExample([1,2,3,4], 5);
 
 /*
 25. Push and Shift Operations
