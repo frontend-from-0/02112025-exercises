@@ -73,14 +73,14 @@ countOddEven([1, 2, 3, 4, 5, 6]);
      to sum all integers from `start` to `end` (inclusive).
    - Log the final sum.
 */
-function sumRange(start, end){
-  let sum=0;
-  let current=start;
-  while(current<=end){
+function sumRange(start, end) {
+  let sum = 0;
+  let current = start;
+  while (current <= end) {
     sum = current + sum;
     current++;
   }
-  console.log('the final sum is ', sum);
+  console.log("the final sum is ", sum);
 }
 sumRange(1, 3);
 /*
@@ -113,7 +113,12 @@ function filterNegative(numbers) {
       positiveNumbers.push(numbers[i]);
     }
   }
-  console.log('Initial numbers array: ', numbers, 'Positive numbers array: ', positiveNumbers);
+  console.log(
+    "Initial numbers array: ",
+    numbers,
+    "Positive numbers array: ",
+    positiveNumbers,
+  );
 }
 filterNegative([5, 4, 0, -4, -5]);
 /*
@@ -163,18 +168,17 @@ printCharacters("Lesson");
    - Log the sum.
    - Example: {a: 10, b: 20, c: 5} -> 35
 */
-function sumObjectValues(obj){
-  let sum=0;
-  for(let key in obj){
-    if(typeof obj[key]==='number'){
-      sum+=obj[key]
+function sumObjectValues(obj) {
+  let sum = 0;
+  for (let key in obj) {
+    if (typeof obj[key] === "number") {
+      sum += obj[key];
     }
   }
-  console.log('summary of object values: ', sum);
+  console.log("summary of object values: ", sum);
 }
-const example= {a: 10, b: 20, c: 5, d: 'apple'};
+const example = { a: 10, b: 20, c: 5, d: "apple" };
 sumObjectValues(example);
-
 
 /*
 10. Print Keys of an Object (For-in)
@@ -182,14 +186,13 @@ sumObjectValues(example);
       to log each key of the object.
     - Example: { name: "Alice", age: 25 } -> logs "name", then "age"
 */
-function printObjectKeys(obj){
-  for(let key in obj){
+function printObjectKeys(obj) {
+  for (let key in obj) {
     console.log(key);
   }
 }
-const user= {name: "Alice", age: 25};
+const user = { name: "Alice", age: 25 };
 printObjectKeys(user);
-
 
 /*
 11. Sum Array Using do-while Loop
@@ -198,21 +201,19 @@ printObjectKeys(user);
     - Log the total.
 */
 
-function sumWithDoWhile(numbers){
-  let sum=0;
-  let i=0;
-  if(numbers.length===0)
-    return 0;
-do{
-  sum+=numbers[i]; i++
-}
-while(i<numbers.length);
-return sum;
+function sumWithDoWhile(numbers) {
+  let sum = 0;
+  let i = 0;
+  if (numbers.length === 0) return 0;
+  do {
+    sum += numbers[i];
+    i++;
+  } while (i < numbers.length);
+  return sum;
 }
 
-const myNumbers=[10, 20, 30];
-console.log('sum:', sumWithDoWhile(myNumbers));
-
+const myNumbers = [10, 20, 30];
+console.log("sum:", sumWithDoWhile(myNumbers));
 
 /*
 12. Remove Duplicates from an Array
@@ -221,15 +222,15 @@ console.log('sum:', sumWithDoWhile(myNumbers));
     - Hint: you could check if the item is already in the new array before pushing.
     - Log the new array without duplicates.
 */
-const original= [1, 2, 2, 3, 4, 4, 5];
-function removeDuplicates(arr){
-  let uniqueArr=[];
-  for(let item of arr){
-    if(!uniqueArr.includes(item)){
+const original = [1, 2, 2, 3, 4, 4, 5];
+function removeDuplicates(arr) {
+  let uniqueArr = [];
+  for (let item of arr) {
+    if (!uniqueArr.includes(item)) {
       uniqueArr.push(item);
     }
   }
-console.log(uniqueArr);
+  console.log(uniqueArr);
 }
 removeDuplicates(original);
 /*
@@ -240,15 +241,14 @@ removeDuplicates(original);
     - Example: factorial(5) -> 120
 */
 
-function factoriel(n){
-  let result=1;
-  for(let i=1; i<=n; i++){
- result=result * i;
+function factoriel(n) {
+  let result = 1;
+  for (let i = 1; i <= n; i++) {
+    result = result * i;
   }
- return result; 
+  return result;
 }
 console.log(factoriel(5));
-
 
 /*
 14. String -> Array -> String
@@ -258,18 +258,18 @@ console.log(factoriel(5));
     - Log the reversed sentence.
 */
 //Buılt-ın method
-function reverseWords(sentence){
-let word=sentence.split(' ');
-console.log ('1.step: ', word);
+function reverseWords(sentence) {
+  let word = sentence.split(" ");
+  console.log("1.step: ", word);
 
-let reversedWords = word.reverse();
-console.log ('2.step: ', reversedWords);
+  let reversedWords = word.reverse();
+  console.log("2.step: ", reversedWords);
 
-let finalString=reversedWords.join(' ');
-console.log('3.step: ', finalString);
-return finalString;
+  let finalString = reversedWords.join(" ");
+  console.log("3.step: ", finalString);
+  return finalString;
 }
-reverseWords('Learning Javascript is fun');
+reverseWords("Learning Javascript is fun");
 
 /* shortly:
 function reverseWords(sentence){
@@ -280,23 +280,18 @@ console.log(reverseWords('Learning Javascript is fun'));
 */
 
 /*
-14. String -> Array -> String
-    - Define a function `reverseWords(sentence)` that splits the sentence 
-      into an array of words, reverses the array order, then joins it back into
-      a string. Use loops or built-in methods as you like.
-    - Log the reversed sentence. LOOP VERSION:
+14. QUESTION 14 PLUS: LOOP VERSION:
 */
 
-function reverseArrayWords(sentence){
-  let words = sentence.split(' ');
-  let reversedArray=[];
-  for(let i=words.length-1; i>=0; i--){
-reversedArray.push(words[i]);
+function reverseArrayWords(sentence) {
+  let words = sentence.split(" ");
+  let reversedArray = [];
+  for (let i = words.length - 1; i >= 0; i--) {
+    reversedArray.push(words[i]);
   }
-  return reversedArray.join(' ');
+  return reversedArray.join(" ");
 }
-console.log(reverseArrayWords('Learning Javascript is hard'));
-
+console.log(reverseArrayWords("Learning Javascript is hard"));
 
 /*
 15. Filter Words Longer Than X
@@ -304,26 +299,33 @@ console.log(reverseArrayWords('Learning Javascript is hard'));
       to collect only the words that have a length >= minLength.
     - Log the resulting array.
 */
-function filterLongWords(words, minlength){
-  let longWords= [];
-  for(let i=0; i<words.length; i++){
-  if(words[i].length >= minlength){
-longWords.push(words[i]);
+function filterLongWords(words, minlength) {
+  let longWords = [];
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].length >= minlength) {
+      longWords.push(words[i]);
+    }
   }
-}
   return longWords;
 }
 
-const finalFilteredWords= filterLongWords(['ali', 'ege', 'zeynep', 'erdem', 'nihal', 'ayşegül', 'nesrin'], 5);
+const finalFilteredWords = filterLongWords(
+  ["ali", "ege", "zeynep", "erdem", "nihal", "ayşegül", "nesrin"],
+  5,
+);
 console.log(finalFilteredWords);
-
-
 
 /*
 16. Log Array Elements with Their Indices
     - Define a function `logElementsWithIndex(arr)` that loops through the array
       and logs "Index: i, Value: arr[i]" for each element.
 */
+function logElementsWithIndex(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(`Index: ${i}, Value: ${arr[i]}`);
+  }
+}
+logElementsWithIndex(["apple", "banana", "orange"]);
 
 /*
 17. Find the Smallest Number in an Array
@@ -331,6 +333,17 @@ console.log(finalFilteredWords);
       to find and return the smallest number.
     - Log the smallest number.
 */
+function findMin(numbers) {
+  let minNumber = numbers[0];
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] < minNumber) {
+      minNumber = numbers[i];
+    }
+  }
+  console.log("Minimum Number is:", minNumber);
+  return minNumber;
+}
+findMin([2, 4, 8, 1, 7, 6, 9]);
 
 /*
 18. Count Occurrences of a Word in an Array
@@ -338,6 +351,9 @@ console.log(finalFilteredWords);
       to count how many times `word` appears.
     - Log the count.
 */
+function countOccurrences(arr, word) {
+  function countOccurrences(arr, word) {}
+}
 
 /*
 19. Remove Falsy Values
@@ -432,8 +448,7 @@ function oddEvenNumbers(numbers) {
 }
 oddEvenNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-
 //  QUESTION 8 PLUS  .()split method
 
-let sentence = 'I like coding';
-let words = sentence.split(' ');  // ['I', 'like', 'coding']
+let sentence = "I like coding";
+let words = sentence.split(" "); // ['I', 'like', 'coding']
