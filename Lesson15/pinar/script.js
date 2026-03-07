@@ -146,8 +146,8 @@ console.log('Ex. 8 --------');
 
 function isPalindrome(str) {
   if ( str === str.split('').reverse().join('')){
-     console.log('<str> is a palindrome')
-  } else {console.log('<str> is not a palindrome')}
+     console.log(`${str} is a palindrome`)
+  } else {console.log(`${str} is not a palindrome`)}
 }
 
 isPalindrome('ada');
@@ -162,10 +162,13 @@ isPalindrome('adak');
 console.log('Ex. 9 --------');
 
 function truncateString(text, maxLength){
-  const truncated = text.slice(maxLength);
+  let truncated = text;
+  if(text.length > maxLength){
+    truncated = text.slice(0, maxLength) + "...";
+  }
   console.log(truncated);
 }
- truncateString('This is very very very very soo very upuzun very text', 16);
+ truncateString('uzunbirkelime', 5);
 /*
 10. Check Even or Odd (if-else)
    - Define a function `evenOrOdd(number)` that:
@@ -271,8 +274,8 @@ repeatWord('JS is Hard',3);
 console.log('Ex. 14 --------');
 
 function censorWord(sentences, target){
-let CensoredWord = sentences.replaceAll(target, "****")
-console.log(CensoredWord)
+let CensoredSentence = sentences.replaceAll(target, "****")
+console.log(CensoredSentence)
 }
 
 censorWord('kötü bir kelime', 'kötü')
@@ -286,13 +289,14 @@ censorWord('kötü bir kelime', 'kötü')
 console.log('Ex. 15 --------');
 
 function startsWith(str) {
-  if (str.charAt(0) == 'A' ){
+  if (str.charAt(0).toUpperCase() === 'A' ){
     console.log('Starts with A')
   } else {console.log('Does not starts with A')}
 }
 
 startsWith('Arkadaş');
 startsWith('arkadaş');
+startsWith('Kardeş');
 
 /*
 16. Slice Last N Characters
@@ -324,8 +328,8 @@ console.log('Ex. 17 --------');
 
 function gradeChecker(score) {
 
-  switch (score){
-    case 90 <= :
+  switch (true){
+    case score >= 90 :
       console.log("A");
       break;
     case 80 <= score <= 89 :
@@ -373,6 +377,19 @@ replaceCharacter('Benim KüçüK Dünyam', 'ü', 'u');
 */
 console.log('Ex. 19 --------');
 
+function titleCase(sentence){
+  const words = sentence.split(" ");
+  const wordsArray = [ ];
+  console.log("kelimeyi böldüm")
+  for (let word of words){
+  const transformed = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  wordsArray.push(transformed);
+  }
+  console.log("şimdi birleştiriyorum")
+   console.log(wordsArray.join(" "));
+   
+}
+titleCase("Benim adım pınar ertanç");
 
 /*
 20. Switch: Traffic Light
@@ -447,8 +464,8 @@ isLongString("Cek");
 console.log('Ex. 22 --------');
 
 function isSpam(text){
-  const loverCaseText = text.toLowerCase()
-  if(loverCaseText.includes("spam")){
+  const lowerCaseText = text.toLowerCase()
+  if(lowerCaseText.includes("spam")){
     console.log("This text is spam")
   } else { console.log("This text is not spam")}
    
@@ -464,7 +481,16 @@ isSpam("Bu bir reklam mailidir.")
 */
 console.log('Ex. 23 --------');
 
-
+function getInitials(fullName){
+  const namePart = fullName.split(" ");
+  const nameArray = [ ];
+for( let name of namePart){
+  nameArray.push(name.charAt(0).toUpperCase());
+  
+}
+console.log(nameArray.join(".") + ".");
+}
+getInitials("Pınar ertanç");
 
 /*
 24. Switch: Month to Season
@@ -538,11 +564,11 @@ containsNumber("Pinar otuz altı yaşında.")
 console.log('Ex. 26 --------');
 
 function padString(str, maxLength){
- let result = str.length<maxLength.padEnd(str, maxLength, "*");
- console.log(result);
+ 
+ console.log(str.padEnd(maxLength, '*'));
 }
 
-console.log("12345", 9);
+padString("12345", 9);
 
 /*
 27. If-Else: Voting Eligibility
