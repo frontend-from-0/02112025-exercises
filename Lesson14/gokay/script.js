@@ -114,7 +114,9 @@ const cityAlice = "Paris";
 console.log(`Ex. 16: ${nameAlice} (${ageAlice}) lives in ${cityAlice}.`);
 
 // 17. Declare variables x=5, y=10, z=15 and log their total sum.
-const xVal = 5, yVal = 10, zVal = 15;
+const xVal = 5; 
+const yVal = 10; 
+constzVal = 15;
 console.log('Ex. 17: Total sum:', xVal + yVal + zVal);
 
 // 18. Declare dividend=10 and divisor=3. Log the quotient and difference.
