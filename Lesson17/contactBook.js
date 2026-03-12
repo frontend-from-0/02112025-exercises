@@ -39,7 +39,6 @@ const contacts = [
 ];
 
 const emptyContactBook = [];
-
 /*
 -----------------------------------------------------------
   STEP 2: Display All Contacts
@@ -51,7 +50,6 @@ Function: displayAllContacts()
 Example output:
   Name: Alice, Phone: 123-456-7890, Email: alice@example.com
 */
-
 function displayAllContacts(contactBook) {
   console.log('Displaying all contacts...');
 
@@ -188,6 +186,24 @@ Function: removeContact(name)
 - Logs "Contact removed successfully." if found.
 - Otherwise, logs: "No contact found with the name: <name>"
 */
+function removeContact(name, contactBook){
+  console.log('Attempting to remove contact: ', name);
+  const index= contactBook.findIndex(
+    function (contact){
+      return contact.name.toLowerCase() === name.toLowerCase();
+});
+if(index !== -1){
+  contactBook.splice(index, 1);
+  console.log('Contact removed successfully.');
+}else {
+  console.log('No contact found with the name: ', name);
+}
+console.log('----------------');
+}
+
+removeContact('John', contacts);
+displayAllContacts(contacts);
+
 
 /*
 -----------------------------------------------------------
@@ -196,6 +212,30 @@ Function: removeContact(name)
 Below are some sample function calls to demonstrate the 
 Contact Book in action.
 */
+function searchContacts(query, contactBook){
+  console.log('Searchig for: ', query);
+
+  const filteredResult = contactBook.filter(function(contact){
+    return contact.name.toLowerCase().includes(query.toLowerCase());
+  });
+  displayAllContacts(filteredResult);
+}
+
+
+console.log('Test is starting:');
+addContact("Selin", "0555-111-2233", "selin@mail.com", contacts);
+updateContact("muhammed", "999-9999", "yeni-muhammed@mail.com", contacts);
+console.log('Running search test...');
+searchContacts('selin', contacts);
+removeContact('John', contacts);
+console.log('Final Contact Book:');
+displayAllContacts(contacts);
+
+
+
+
+
+
 
 /*
 -----------------------------------------------------------
@@ -209,3 +249,45 @@ Contact Book in action.
 3. Search by multiple fields:
    - e.g., find a contact by phone number or email.
 */
+function findContact(name, contactBook){
+for(let i=0; i<contactBook.length; i++){
+if(contactBook[i].name.toLowerCase().includes(name.toLowerCase())){
+  console.log("Contact matched: ", contactBook[i].name);
+  return contactBook[i];
+}
+}
+console.log("No matches found: " + name);
+return null;
+}
+
+findContact('muh', contacts);
+findContact('elit', contacts);
+console.log('--------------')
+
+function sortContactsByName(contacts){
+  return contacts.sort (function(a,b) {
+    return a.name.localeCompare(b.name);
+  })
+}
+sortContactsByName(contacts);
+console.log('Sorted contact list: ', contacts); 
+console.log('--------------')
+displayAllContacts(contacts);
+
+function findContact(name, contactBook){
+for(let i=0; i<contactBook.length; i++){
+if(contactBook[i].name.toLowerCase().includes(name.toLowerCase()) || 
+contactBook[i].phone.includes(name) ||
+contactBook[i].email.toLowerCase().includes(name.toLowerCase())
+){
+  console.log("Contact matched: ", contactBook[i].name);
+  return contactBook[i];
+}
+}
+console.log("No matches found: " + name);
+return null;
+}
+
+findContact('sel', contacts);
+findContact('elit', contacts);
+console.log('--------------')
