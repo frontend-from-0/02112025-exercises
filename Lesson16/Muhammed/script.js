@@ -329,7 +329,7 @@ reverseWords("Javascript öğrenmek çok eğlenceli");
 
 function filterLongWords(words, minLength) {
 
-  let uzunKelimeler = [];
+  const uzunKelimeler = [];
 
   for (let i = 0; i < words.length; i++) {
 
@@ -451,7 +451,7 @@ countOccurrences(siparisListesi, "ayran");
 */
 
 function removeFalsyValues(arr) {
-  let result = [];
+  const result = [];
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
@@ -567,7 +567,7 @@ flattenArray([[1, 2], [3, 4]]);
 
 
 function findWordsWithLetter(words, letter) {
-  let filteredWords = [];
+  const filteredWords = [];
 
   for (let i = 0; i < words.length; i++) {
     const currentWord = words[i];
