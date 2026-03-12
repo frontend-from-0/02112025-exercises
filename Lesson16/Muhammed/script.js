@@ -517,7 +517,8 @@ function averageArray(numbers) {
     sum += numbers[i]; 
   }
 
-  let average = sum / numbers.length;
+  const average = sum / numbers.length;
+ 
 
   console.log(average);
   return average;
@@ -539,7 +540,7 @@ function flattenArray(twoDArray) {
   let flatArray = [];
 
   for (let i = 0; i < twoDArray.length; i++) {
-    let subArray = twoDArray[i]; 
+    const subArray = twoDArray[i]; 
 
     for (let j = 0; j < subArray.length; j++) {
       
@@ -569,7 +570,7 @@ function findWordsWithLetter(words, letter) {
   let filteredWords = [];
 
   for (let i = 0; i < words.length; i++) {
-    let currentWord = words[i];
+    const currentWord = words[i];
 
     if (currentWord.includes(letter)) {
       
@@ -602,16 +603,15 @@ function pushPopExample(arr, itemToPush) {
 
   console.log("Eklendikten sonra dizi:", arr);
 
-  let poppedElement = arr.pop();
+  const poppedElement = arr.pop();
 
   console.log("Çıkarılan eleman:", poppedElement);
 
   console.log("Dizinin son hali:", arr);
 }
 
-let meyvelers = ["elma", "armut"];
-pushPopExample(meyvelers, "muz");
 
+pushPopExample(["elma", "armut"], "muz");
 
 
 
@@ -631,15 +631,14 @@ function manageQueue(queue, newPerson) {
 
   console.log("Yeni kişi eklendikten sonra kuyruk:", queue);
 
-  let removedPerson = queue.shift();
+  const removedPerson = queue.shift();
 
   console.log("Kuyruktan ayrılan kişi:", removedPerson);
 
   console.log("Kuyruğun son hali:", queue);
 }
 
-let bankaSırasi = ["Ali", "Ayşe", "Mehmet"];
-manageQueue(bankaSırasi, "Fatma");
+manageQueue(["Ali", "Ayşe", "Mehmet"], "Fatma");
 
 
 
