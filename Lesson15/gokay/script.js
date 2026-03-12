@@ -42,7 +42,15 @@ logUppercaseName("john");
    - Example: "USER@Example.COM" -> "user@example.com"
 */
 
-console.log("Ex. 3 --------");
+function normalizeEmail(email) {
+    const normalized = email.toLowerCase();
+    console.log("Normalize Edilmiş Email:", normalized);
+    
+    return normalized;
+}
+
+const input = "USER@Example.COM";
+const result = normalizeEmail(input);
 
 /*
 4. Extract Domain
@@ -122,7 +130,6 @@ function compareNumbers(a, b) {
   }
 }
 
-// Örnek kullanım:
 compareNumbers(10, 5); // "a is bigger"
 /*
 8. Palindrome Check
@@ -141,7 +148,7 @@ function isPalindrome(str) {
   }
 }
 
-// Örnek kullanım:
+
 isPalindrome("radar"); // "radar is a palindrome"
 /*
 9. String Truncation
@@ -158,7 +165,7 @@ function truncateString(text, maxLength) {
   }
 }
 
-// Örnek kullanım:
+
 truncateString("JavaScript öğrenmek çok keyifli!", 10); // "JavaScript..."
 
 /*
@@ -175,7 +182,6 @@ function evenOrOdd(number) {
   }
 }
 
-// Örnek kullanım:
 evenOrOdd(7); // "Odd"
 /*
 11. URL Protocol Checker
@@ -191,7 +197,7 @@ function checkProtocol(url) {
   }
 }
 
-// Örnek kullanım:
+
 checkProtocol("HTTPS://google.com"); // "Secure connection"
 /*
 12. Switch: Day of the Week
@@ -249,7 +255,7 @@ function repeatWord(word, times) {
   console.log(result);
 }
 
-// Örnek kullanım:
+
 repeatWord("Merhaba! ", 3); // "Merhaba! Merhaba! Merhaba! "
 /*
 14. Replace Substring
@@ -262,7 +268,7 @@ function censorWord(sentence, target) {
   console.log(censored);
 }
 
-// Örnek kullanım:
+
 censorWord("Bu kötü bir kelime, başka bir kötü kelime daha.", "kötü");
 // "Bu **** bir kelime, başka bir **** kelime daha."
 /*
@@ -272,16 +278,15 @@ censorWord("Bu kötü bir kelime, başka bir kötü kelime daha.", "kötü");
    - Log "Starts with A" or "Does not start with A".
 */
 function startsWithA(str) {
-  // Büyük/küçük harf duyarlılığını yönetmek için toUpperCase() eklenebilir
-  if (str[0] === "A" || str[0] === "a") {
-    console.log("Starts with A");
-  } else {
-    console.log("Does not start with A");
-  }
+   
+    if (!str) return false;
+    return str[0].toUpperCase() === "A";
 }
 
-// Örnek kullanım:
-startsWithA("Araba"); // "Starts with A"
+console.log(startsWithA("Apple"));  // true
+console.log(startsWithA("armut"));  // true
+console.log(startsWithA("Banana")); // false
+
 /*
 16. Slice Last N Characters
    - Define a function `sliceLastN(text, n)` that uses .slice(-n) to extract
@@ -307,27 +312,26 @@ sliceLastN("JavaScript", 6); // "Script"
 */
 function gradeChecker(score) {
   let grade;
-  switch (true) {
-    case score >= 90:
-      grade = "A";
-      break;
-    case score >= 80:
-      grade = "B";
-      break;
-    case score >= 70:
-      grade = "C";
-      break;
-    case score >= 60:
-      grade = "D";
-      break;
-    default:
-      grade = "F";
+
+  if (score >= 90) {
+    grade = "A";
+  } else if (score >= 80) {
+    grade = "B";
+  } else if (score >= 70) {
+    grade = "C";
+  } else if (score >= 60) {
+    grade = "D";
+  } else {
+    grade = "F";
   }
+
   console.log("Grade: " + grade);
 }
 
-// Örnek kullanım:
-gradeChecker(85); // "Grade: B"
+gradeChecker(95); // Grade: A
+gradeChecker(82); // Grade: B
+gradeChecker(55); // Grade: F
+
 /*
 18. Character Replacement
    - Define a function `replaceCharacter(str, oldChar, newChar)` that uses .replaceAll()
@@ -339,7 +343,7 @@ function replaceCharacter(str, oldChar, newChar) {
   console.log(result);
 }
 
-// Örnek kullanım:
+
 replaceCharacter("merhaba dünya", "a", "@"); // "merh@b@ düny@"
 /*
 19. Title Case a Sentence
@@ -360,7 +364,7 @@ function titleCase(sentence) {
   console.log(result);
 }
 
-// Örnek kullanım:
+
 titleCase("bu bir başlık cümlesidir"); // "Bu Bir Başlık Cümlesidir"
 /*
 20. Switch: Traffic Light
@@ -419,7 +423,10 @@ function isLongString(str) {
   }
 }
 
-// Örnek: isLongString("Merhaba Dünya"); // "Long string"
+isLongString("Hello World");
+isLongString("gokay.karakoc@code2career.com");
+isLongString("Example");
+
 /*
 22. Convert to Lowercase Then Check
    - Define a function `isSpam(text)` that converts the text to lowercase
@@ -435,7 +442,9 @@ function isSpam(text) {
   }
 }
 
-// Örnek: isSpam("Harika bir FIRSAT, sakın kaçırma! sPaM"); // "This text is spam."
+isSpam("Harika bir FIRSAT, sakın kaçırma! sPaM");
+isSpam("Bu normal bir mesajdır.");
+
 /*
 23. Extract Initials
    - Define a function `getInitials(fullName)` that uses .split() to get each name part,
@@ -448,7 +457,8 @@ function getInitials(fullName) {
   console.log(initials);
 }
 
-// Örnek: getInitials("John Doe"); // "J.D."
+getInitials("John Doe"); 
+getInitials("Mustafa Kemal Atatürk");
 /*
 24. Switch: Month to Season
    - Define a function `getSeason(monthNum)` (1-12). Use switch or if-else:
@@ -484,6 +494,10 @@ function getSeason(monthNum) {
       console.log("Invalid month");
   }
 }
+
+getSeason(1);
+getSeason(7);
+getSeason(15);
 /*
 25. Check If String Contains Number
    - Define a function `containsNumber(str)` that uses a loop or a method like
@@ -498,7 +512,9 @@ function containsNumber(str) {
   }
 }
 
-// Örnek: containsNumber("User123"); // "Contains number"
+containsNumber("User123");
+containsNumber("JavaScript");
+
 /*
 26. Pad a String
    - Define a function `padString(str, maxLength)` that if str.length < maxLength,
@@ -506,11 +522,12 @@ function containsNumber(str) {
    - Log the padded string.
 */
 function padString(str, maxLength) {
-  const result = str.length < maxLength ? str.padEnd(maxLength, "*") : str;
+  const result = str.padEnd(maxLength, "*");
   console.log(result);
 }
 
-// Örnek: padString("Selam", 10); // "Selam*****"
+padString("Selam", 10);
+padString("UzunBirMetinTesti", 5);
 /*
 27. If-Else: Voting Eligibility
    - Define a function `canVote(age)` that logs:
@@ -524,6 +541,10 @@ function canVote(age) {
     console.log("Too young to vote");
   }
 }
+
+canVote(20);
+canVote(15);
+
 /*
 28. Reverse Words in a Sentence
    - Define a function `reverseWords(sentence)` that:
@@ -540,7 +561,9 @@ function reverseWords(sentence) {
   console.log(result);
 }
 
-// Örnek: reverseWords("Merhaba Dünya"); // "abahreM aynüD"
+reverseWords("Merhaba Dünya");
+reverseWords("Kod yazmak eğlencelidir");
+
 /*
 29. Check Substring Position
    - Define a function `findWordPosition(sentence, word)` that uses .indexOf(word)
@@ -555,6 +578,9 @@ function findWordPosition(sentence, word) {
     console.log("Not found");
   }
 }
+
+findWordPosition("Javascript harika bir dil", "harika");
+findWordPosition("Hava bugün çok güzel", "yağmur");
 /*
 30. Switch: Simple Calculator
    - Define a function `calculate(a, operator, b)` that uses switch to handle:
@@ -585,4 +611,7 @@ function calculate(a, operator, b) {
   }
   console.log(result);
 }
-// Örnek: calculate(10, "*", 5); // 50
+
+calculate(10, "*", 5);
+calculate(20, "/", 4);
+calculate(10, "%", 2);
