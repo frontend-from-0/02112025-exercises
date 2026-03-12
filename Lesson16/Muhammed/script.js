@@ -307,11 +307,7 @@ factorial(11);
 
 
 function reverseWords(sentence) {
-  const kelimeDizisi = sentence.split(" ");
-
-  const tersDizi = kelimeDizisi.reverse();
-
-  const yeniCumle = tersDizi.join(" ");
+  const yeniCumle = sentence.split(" ").reverse().join(" ");
 
   console.log(yeniCumle);
 }
