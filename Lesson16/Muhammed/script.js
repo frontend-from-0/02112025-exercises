@@ -248,7 +248,7 @@ sumWithDoWhile([5, 15]);
 
 function removeDuplicates(arr) {
 
-  let benzersizSepet = [];
+  const benzersizSepet = [];
 
   for (const eleman of arr) {
 
