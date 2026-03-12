@@ -482,7 +482,7 @@ function sumDigits(str) {
   let sum = 0; 
 
   for (let i = 0; i < str.length; i++) {
-    let char = str[i];
+    const char = str[i];
 
     if (char >= '0' && char <= '9') {
       sum += parseInt(char); 
