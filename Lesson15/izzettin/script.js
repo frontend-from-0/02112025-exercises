@@ -43,6 +43,16 @@ logUppercaseName('john');
 */
 
 console.log('Ex. 3 --------');
+function normalizeEmail(email) {
+  return email.toLowerCase();
+}
+
+const originalEmail = "USER@Example.COM";
+
+const cleanEmail = normalizeEmail(originalEmail);
+
+console.log(cleanEmail);
+
 
 /*
 4. Extract Domain
@@ -574,14 +584,16 @@ containsNumber("I am 25 years");
 
 
 function padString(str, maxLength) {
-  if (str.length < maxLength) {
-    console.log(str.padEnd(maxLength, '*'));
-  } else {
-    console.log(str);
-  }
-}
-padString("Selam", 10); 
 
+
+  const padded = str.padEnd(maxLength, "*");
+
+  console.log(padded);
+  return padded;
+}
+
+padString("Elma",10);
+padString("JavaScript", 5);
 
 
 
