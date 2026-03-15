@@ -610,7 +610,6 @@ function pushPopExample(arr, itemToPush) {
 }
 
 
-
 pushPopExample(["elma", "armut"], "muz");
 
 
