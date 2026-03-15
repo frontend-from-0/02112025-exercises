@@ -117,7 +117,7 @@ reverseArray([3, 7, 9, 1, 2]);
    - Log the new array.
 */
 function filterNegative(numbers) {
-  let result = [];
+  const result = [];
   for (let i = 0; i < numbers.length; i++) {
     if (numbers[i] >= 0) {
       result.push(numbers[i]);
@@ -248,7 +248,7 @@ sumWithDoWhile([5, 15]);
 
 function removeDuplicates(arr) {
 
-  let benzersizSepet = [];
+  const benzersizSepet = [];
 
   for (const eleman of arr) {
 
@@ -333,7 +333,7 @@ reverseWords("Javascript öğrenmek çok eğlenceli");
 
 function filterLongWords(words, minLength) {
 
-  let uzunKelimeler = [];
+  const uzunKelimeler = [];
 
   for (let i = 0; i < words.length; i++) {
 
@@ -455,7 +455,7 @@ countOccurrences(siparisListesi, "ayran");
 */
 
 function removeFalsyValues(arr) {
-  let result = [];
+  const result = [];
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
@@ -486,7 +486,7 @@ function sumDigits(str) {
   let sum = 0; 
 
   for (let i = 0; i < str.length; i++) {
-    let char = str[i];
+    const char = str[i];
 
     if (char >= '0' && char <= '9') {
       sum += parseInt(char); 
@@ -521,7 +521,7 @@ function averageArray(numbers) {
     sum += numbers[i]; 
   }
 
-  let average = sum / numbers.length;
+  const average = sum / numbers.length;
 
   console.log(average);
   return average;
@@ -540,10 +540,10 @@ averageArray([10, 20, 30, 40]);
 
 
 function flattenArray(twoDArray) {
-  let flatArray = [];
+  const flatArray = [];
 
   for (let i = 0; i < twoDArray.length; i++) {
-    let subArray = twoDArray[i]; 
+    const subArray = twoDArray[i]; 
 
     for (let j = 0; j < subArray.length; j++) {
       
@@ -570,10 +570,10 @@ flattenArray([[1, 2], [3, 4]]);
 
 
 function findWordsWithLetter(words, letter) {
-  let filteredWords = [];
+  const filteredWords = [];
 
   for (let i = 0; i < words.length; i++) {
-    let currentWord = words[i];
+    const currentWord = words[i];
 
     if (currentWord.includes(letter)) {
       
@@ -606,14 +606,14 @@ function pushPopExample(arr, itemToPush) {
 
   console.log("Eklendikten sonra dizi:", arr);
 
-  let poppedElement = arr.pop();
+  const poppedElement = arr.pop();
 
   console.log("Çıkarılan eleman:", poppedElement);
 
   console.log("Dizinin son hali:", arr);
 }
 
-let meyvelers = ["elma", "armut"];
+const meyvelers = ["elma", "armut"];
 pushPopExample(meyvelers, "muz");
 
 
@@ -635,15 +635,15 @@ function manageQueue(queue, newPerson) {
 
   console.log("Yeni kişi eklendikten sonra kuyruk:", queue);
 
-  let removedPerson = queue.shift();
+  const removedPerson = queue.shift();
 
   console.log("Kuyruktan ayrılan kişi:", removedPerson);
 
   console.log("Kuyruğun son hali:", queue);
 }
 
-let bankaSırasi = ["Ali", "Ayşe", "Mehmet"];
-manageQueue(bankaSırasi, "Fatma");
+const bankaSirasi = ["Ali", "Ayşe", "Mehmet"];
+manageQueue(bankaSirasi, "Fatma");
 
 
 
