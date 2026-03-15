@@ -307,11 +307,7 @@ factorial(11);
 
 
 function reverseWords(sentence) {
-  const kelimeDizisi = sentence.split(" ");
-
-  const tersDizi = kelimeDizisi.reverse();
-
-  const yeniCumle = tersDizi.join(" ");
+  const yeniCumle = sentence.split(" ").reverse().join(" ");
 
   console.log(yeniCumle);
 }
@@ -521,7 +517,7 @@ function averageArray(numbers) {
     sum += numbers[i]; 
   }
 
-  const average = sum / numbers.length;
+  let average = sum / numbers.length;
 
   console.log(average);
   return average;
@@ -613,9 +609,10 @@ function pushPopExample(arr, itemToPush) {
   console.log("Dizinin son hali:", arr);
 }
 
-const meyvelers = ["elma", "armut"];
+let meyvelers = ["elma", "armut"];
 pushPopExample(meyvelers, "muz");
 
+pushPopExample(["elma", "armut"], "muz");
 
 
 
@@ -642,8 +639,8 @@ function manageQueue(queue, newPerson) {
   console.log("Kuyruğun son hali:", queue);
 }
 
-const bankaSirasi = ["Ali", "Ayşe", "Mehmet"];
-manageQueue(bankaSirasi, "Fatma");
+let bankaSırasi = ["Ali", "Ayşe", "Mehmet"];
+manageQueue(bankaSırasi, "Fatma");
 
 
 
