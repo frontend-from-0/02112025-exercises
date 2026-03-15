@@ -55,7 +55,7 @@ findMax([4, 9, -50, 10]);
 function countOddEven(numbers) {
   let oddCount = 0;
   let eventCount = 0;
-  for (i = 0; i < numbers.length; i++) {
+  for (let i = 0; i < numbers.length; i++) {
     if (numbers[i] % 2 === 0) {
       eventCount++;
     } else {
@@ -252,7 +252,7 @@ function removeDuplicates(arr) {
 
   for (const eleman of arr) {
 
-    if (benzersizSepet.includes(eleman)){
+    if (!benzersizSepet.includes(eleman)){
       benzersizSepet.push(eleman);
     }
   }
@@ -517,7 +517,7 @@ function averageArray(numbers) {
     sum += numbers[i]; 
   }
 
-  let average = sum / numbers.length;
+  const average = sum / numbers.length;
 
   console.log(average);
   return average;
@@ -609,8 +609,7 @@ function pushPopExample(arr, itemToPush) {
   console.log("Dizinin son hali:", arr);
 }
 
-let meyvelers = ["elma", "armut"];
-pushPopExample(meyvelers, "muz");
+
 
 pushPopExample(["elma", "armut"], "muz");
 
@@ -639,8 +638,7 @@ function manageQueue(queue, newPerson) {
   console.log("Kuyruğun son hali:", queue);
 }
 
-let bankaSırasi = ["Ali", "Ayşe", "Mehmet"];
-manageQueue(bankaSırasi, "Fatma");
+manageQueue(["Ali", "Ayşe", "Mehmet"], "Fatma");
 
 
 
