@@ -55,7 +55,7 @@ findMax([4, 9, -50, 10]);
 function countOddEven(numbers) {
   let oddCount = 0;
   let eventCount = 0;
-  for (i = 0; i < numbers.length; i++) {
+  for (let i = 0; i < numbers.length; i++) {
     if (numbers[i] % 2 === 0) {
       eventCount++;
     } else {
@@ -117,7 +117,7 @@ reverseArray([3, 7, 9, 1, 2]);
    - Log the new array.
 */
 function filterNegative(numbers) {
-  let result = [];
+  const result = [];
   for (let i = 0; i < numbers.length; i++) {
     if (numbers[i] >= 0) {
       result.push(numbers[i]);
@@ -252,7 +252,7 @@ function removeDuplicates(arr) {
 
   for (const eleman of arr) {
 
-    if (benzersizSepet.includes(eleman)){
+    if (!benzersizSepet.includes(eleman)){
       benzersizSepet.push(eleman);
     }
   }
@@ -518,7 +518,6 @@ function averageArray(numbers) {
   }
 
   const average = sum / numbers.length;
- 
 
   console.log(average);
   return average;
@@ -537,7 +536,7 @@ averageArray([10, 20, 30, 40]);
 
 
 function flattenArray(twoDArray) {
-  let flatArray = [];
+  const flatArray = [];
 
   for (let i = 0; i < twoDArray.length; i++) {
     const subArray = twoDArray[i]; 
