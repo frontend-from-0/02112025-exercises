@@ -32,12 +32,13 @@ console.log(a / b);
 console.log(a - b, a * b, a / b);
 
 console.log('------');
+console.log(`Fifteen is ${a + b} and not ${2 * a + b}.`);
 
 // 4. Use template literals to log: "My name is (userName). I like JS."
 
-console.log(`Fifteen is ${a + b} and not ${2 * a + b}.`);
-userName = 'Pınar';
-console.log(`My name is ${userName}. I like JS.`);
+//daha önce yukarıda userName kullanıldığı için userName =userN olarak değiştirilmiştirildi.
+let userN = 'Pınar';
+console.log(`My name is ${userN}. I like JS.`);
 
 // 5. Declare a string password = "securePass". Log the length of password.
 const password = 'securePass';
@@ -116,7 +117,7 @@ console.log(`Ex. 16: ${nameAlice} (${ageAlice}) lives in ${cityAlice}.`);
 // 17. Declare variables x=5, y=10, z=15 and log their total sum.
 const xVal = 5; 
 const yVal = 10; 
-constzVal = 15;
+const zVal = 15;
 console.log('Ex. 17: Total sum:', xVal + yVal + zVal);
 
 // 18. Declare dividend=10 and divisor=3. Log the quotient and difference.
@@ -138,7 +139,7 @@ console.log('Ex. 20: Product:', firstFactor * secondFactor);
 console.log('Ex. 21: Pi value:', Math.PI);
 
 // 22. Declare counter=0. Increment it using three different methods and log each.
-const c = 0;
+let c = 0;
 c = c + 1;
 console.log('Method 1:', c);
 c += 1;
@@ -147,28 +148,28 @@ c++;
 console.log('Method 3:', c);
 
 // 23. Declare initialTemperature=20. Increase it by 5 and log the result.
-const initialTemperature = 20;
+let initialTemperature = 20;
 initialTemperature += 5;
 console.log('Ex. 23: Temperature:', initialTemperature);
 
 // 24. Prefix ++ (pre-increment) operator usage:
-const numberEx9 = 6;
+let numberEx9 = 6;
 console.log('Ex. 24: Prefix increment:', ++numberEx9); // Increments first, then logs.
 console.log('Ex. 24: Current value:', numberEx9);
 
 // 25. Postfix ++ (post-increment) operator usage:
-const numberEx10 = 8;
+let numberEx10 = 8;
 console.log('Ex. 25: Postfix increment:', numberEx10++); // Logs first (8), then increments in memory.
 console.log('Ex. 25: Updated value:', numberEx10);    // Now shows as 9.
 
 // 26. numberEx11=-3. Increment it by 1 using prefix ++, then multiply by 2.
-const numberEx11 = -3;
+let numberEx11 = -3;
 const result26 = (++numberEx11) * 2; 
 console.log('Ex. 26: Result:', result26); 
 // Explanation: -3 becomes -2 first, then multiplied by 2 = -4.
 
 // 27. a=2 and b=3. Increment a using prefix ++, then add b.
-const ex27A = 2;
+let ex27A = 2;
 const ex27B = 3;
 const result27 = (++ex27A) + ex27B; 
 console.log('Ex. 27: Result:', result27); 
