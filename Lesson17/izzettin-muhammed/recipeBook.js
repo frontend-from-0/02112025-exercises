@@ -66,7 +66,7 @@ function displayAllRecipes(recipeBook) {
     console.log('No recipes found.');
     return;
  }
- for (let recipe of recipeBook) {
+ for (const recipe of recipeBook) {
     console.log(`Name: ${recipe.name}`);
     console.log(`Ingredients: ${recipe.ingredients.join(', ')}`);
     console.log(`Cooking Time: ${recipe.cookingTime} minutes`);
