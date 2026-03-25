@@ -220,7 +220,7 @@ filterByIngredient("Meat", recipes);
 console.log('-----------------------');
 
 function filterByMaxTime(maxMinutes, recipeBook) {
-  let less30Minutes = [];
+  const filteredRecipes = [];
   console.log(`Recipes that take max ${maxMinutes} minutes to cook:`);
   for (const recipe of recipeBook) {
     if (recipe.cookingTime <= maxMinutes) {
