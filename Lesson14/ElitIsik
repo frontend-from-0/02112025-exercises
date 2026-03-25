@@ -134,7 +134,7 @@ const dividend=10;
 const divisor=3; 
 
 const quotient= dividend / divisor;
-console.log(quotient);
+console.log(`${dividend} - ${divisor} = ${quotient}`);
 
 const difference= dividend - divisor;
 console.log(difference);
