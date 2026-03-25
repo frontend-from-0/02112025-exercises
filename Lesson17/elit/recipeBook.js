@@ -201,7 +201,7 @@ Function: filterByMaxTime(maxMinutes)
 
 function filterByIngredient(ingredient, recipeBook) {
   const searchItem = ingredient.toLowerCase();
-  let foundRecipes=[];
+  const foundRecipes=[];
 
   for (const recipe of recipeBook) {
     if (recipe.ingredients.includes(searchItem)) {
