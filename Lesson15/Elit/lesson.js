@@ -153,7 +153,7 @@ isPalindrome("orange");
 
 function truncateString(text, maxLength) {
   if (text.length > maxLength) {
-    let result = text.slice(0, maxLength) + "...";
+    const result = text.slice(0, maxLength) + "...";
     return result;
   } else {
     let result = text;
