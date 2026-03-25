@@ -88,9 +88,6 @@ console.log (typeof number);  // 'number'
 
 
 // 11. Generate a random integer between 0 and 10 and log it.
-  const randomNumber= (Math.random()*11);
-  console.log(randomNumber);   // bu şekilde integer olmaz.*10 dersek de 10'a eşit olamaz. Integar olması için:
-
   const randomNumber=(Math.floor(Math.random()*11));
   console.log(randomNumber);
 
