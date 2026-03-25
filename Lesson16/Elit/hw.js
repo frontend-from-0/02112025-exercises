@@ -427,7 +427,7 @@ function averageArray(numbers) {
   for (let i = 0; i < numbers.length; i++) {
     sum += numbers[i];
   }
-  let average = sum / numbers.length;
+  const average = sum / numbers.length;
   return average;
 }
 let averageResult = averageArray([2, 4, 6, 8]);
