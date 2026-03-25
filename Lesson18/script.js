@@ -1,8 +1,9 @@
 /*
 ===========================================================
-  LIBRARY MANAGEMENT SYSTEM
+  LIBRARY MANAGEMENT SYSTEM - FULL IMPLEMENTATION
 ===========================================================
 In this assignment, you'll build a simple Library Management
+
 System to practice Object-Oriented Programming in JavaScript.
 
 You'll practice:
@@ -11,163 +12,206 @@ You'll practice:
 3. Methods and basic validation
 4. Arrays and basic array methods (push, find, filter)
 5. Conditional logic and simple calculations
-
 You can run this file with Node.js or in the browser console.
+
 Follow the steps in order and test each part as you go.
 */
 
+// --- STEP 1: Book Class ---
 /*
------------------------------------------------------------
-  STEP 1: Create the Book Class
------------------------------------------------------------
 1. Define a `Book` class.
 2. The constructor should accept:
-   - `title` (string, at least 3 characters)
-   - `author` (string, at least 3 characters)
-   - `isbn` (string, should be unique in the library)
+- `title` (string, at least 3 characters)
+- `author` (string, at least 3 characters)
+- `isbn` (string, should be unique in the library)
 3. Add a property `isBorrowed` that is `false` by default.
 4. Add basic validation in the constructor:
-   - If `title` or `author` is not valid, throw an Error.
+- If `title` or `author` is not valid, throw an Error.
 5. Add a method `toggleBorrowedStatus()` that flips
-   `isBorrowed` between `true` and `false`.
+`isBorrowed` between `true` and `false`.
 */
 
 
+class Book {
+  #isBorrowed = false;
+
+  constructor(title, author, isbn) {
+    if (typeof title !== 'string' || title.length < 3) throw new Error("Geçersiz Kitap Adı");
+    if (typeof author !== 'string' || author.length < 3) throw new Error("Geçersiz Yazar");
+    
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+  }
+
+  get isBorrowed() {
+    return this.#isBorrowed;
+  }
+
+  toggleBorrowedStatus() {
+    this.#isBorrowed = !this.#isBorrowed;
+  }
+}
 /*
 -----------------------------------------------------------
-  STEP 2: Create the Member Class
+
+STEP 2: Create the Member Class
+
 -----------------------------------------------------------
+
 1. Define a `Member` class.
 2. The constructor should accept:
-   - `name` (string, at least 3 characters)
-   - `memberId` (string or number, should be unique)
+- `name` (string, at least 3 characters)
+- `memberId` (string or number, should be unique)
 3. Add a `borrowedBooks` property that starts as an empty
-   array. It will store the ISBNs of borrowed books.
+array. It will store the ISBNs of borrowed books.
 4. Add validation in the constructor and throw an Error
-   if `name` is not valid.
+if `name` is not valid.
 5. Add methods:
-   - `borrowBook(isbn)`:
-       - Add the `isbn` to `borrowedBooks` if it is not
-         already there.
-   - `returnBook(isbn)`:
-       - Remove the `isbn` from `borrowedBooks` if it exists.
+- `borrowBook(isbn)`:
+- Add the `isbn` to `borrowedBooks` if it is not
+already there.
+- `returnBook(isbn)`:
+- Remove the `isbn` from `borrowedBooks` if it exists.
 */
+class Member {
+  constructor(name, memberId) {
+    if (typeof name !== 'string' || name.length < 3) throw new Error("Geçersiz Üye İsmi");
+    
+    this.name = name;
+    this.memberId = memberId;
+    this.borrowedBooks = []; // ISBN listesi
+  }
 
+  borrowBook(isbn) {
+    if (!this.borrowedBooks.includes(isbn)) {
+      this.borrowedBooks.push(isbn);
+    }
+  }
 
-/*
------------------------------------------------------------
-  STEP 3: Create the Library Class
------------------------------------------------------------
-1. Define a `Library` class.
-2. Use private fields to store internal data:
-   - `#books` (array of Book instances)
-   - `#members` (array of Member instances)
-   - `#lateFeesPerDay` (number, e.g. 0.5)
-   - `#borrowRecords` (object) to remember when a
-     member borrowed a specific book.
-     Example key: `${memberId}-${isbn}`.
-3. In the constructor:
-   - Initialize `#books` and `#members` as empty arrays.
-   - Initialize `#borrowRecords` as an empty object.
-   - Set `#lateFeesPerDay` to a number (e.g. 0.5).
-*/
+  returnBook(isbn) {
+    this.borrowedBooks = this.borrowedBooks.filter(item => item !== isbn);
+  }
+}
 
+// --- STEP 3, 4, 5 & 6: Library Class ---
+class Library {
+  #books = [];
+  #members = [];
+  #lateFeesPerDay = 0.5;
+  #borrowRecords = {};
 
-/*
------------------------------------------------------------
-  STEP 4: Add Library Methods (Managing Books & Members)
------------------------------------------------------------
-Inside the `Library` class, add the following methods:
+  constructor() {
+    console.log("--- Kütüphane Sistemi Aktif ---");
+  }
 
-1. `addBook(book)`:
-   - Accepts a `Book` instance.
-   - Check if a book with the same `isbn` already exists in
-     `#books`. If it does, log a message and DO NOT add it.
-   - Otherwise, push the book into `#books`.
+  // Step 4: Kitap ve Üye Yönetimi
+  addBook(book) {
+    if (this.#books.find(b => b.isbn === book.isbn)) {
+      console.log(`Hata: ${book.isbn} zaten mevcut.`);
+      return;
+    }
+    this.#books.push(book);
+    console.log(`Kitap Eklendi: ${book.title}`);
+  }
 
-2. `removeBook(isbn)`:
-   - Find the book by `isbn`.
-   - Only remove it if `isBorrowed` is `false`.
-   - If you remove it, log a success message.
-   - If the book does not exist, or is borrowed, log a
-     different message.
+  registerMember(member) {
+    if (this.#members.find(m => m.memberId === member.memberId)) {
+      console.log(`Hata: ${member.memberId} ID'li üye zaten var.`);
+      return;
+    }
+    this.#members.push(member);
+    console.log(`Üye Kaydedildi: ${member.name}`);
+  }
 
-3. `registerMember(member)`:
-   - Accepts a `Member` instance.
-   - Ensure there is no existing member with the same
-     `memberId` in `#members`.
-   - If unique, add the member and log a success message.
-*/
+  // Step 5: Ödünç Alma ve İade
+  borrowBook(memberId, isbn, borrowDate) {
+    const member = this.#members.find(m => m.memberId === memberId);
+    const book = this.#books.find(b => b.isbn === isbn);
 
+    if (!member || !book) {
+      console.log("Hata: Üye veya Kitap bulunamadı.");
+      return;
+    }
 
-/*
------------------------------------------------------------
-  STEP 5: Borrowing and Returning Books
------------------------------------------------------------
-Add the following methods to the `Library` class:
+    if (book.isBorrowed) {
+      console.log(`Üzgünüz, '${book.title}' şu an ödünçte.`);
+      return;
+    }
 
-1. `borrowBook(memberId, isbn, borrowDate)`:
-   - Find the member by `memberId`.
-   - Find the book by `isbn`.
-   - If either is not found, log an error message.
-   - If the book is already borrowed, log that it is not
-     available.
-   - Otherwise:
-       - Mark the book as borrowed (use Book method).
-       - Call `borrowBook(isbn)` on the Member instance.
-       - Store the `borrowDate` in `#borrowRecords` using a
-         key like `${memberId}-${isbn}`.
+    // İşlemleri gerçekleştir
+    book.toggleBorrowedStatus();
+    member.borrowBook(isbn);
+    this.#borrowRecords[`${memberId}-${isbn}`] = new Date(borrowDate);
+    
+    console.log(`BAŞARILI: ${member.name}, '${book.title}' kitabını aldı.`);
+  }
 
-2. `returnBook(memberId, isbn, returnDate)`:
-   - Find the member and the book (like in `borrowBook`).
-   - If not found, log an error.
-   - If the book is not marked as borrowed, log a message.
-   - Otherwise:
-       - Mark the book as available again.
-       - Call `returnBook(isbn)` on the Member instance.
-       - Look up the `borrowDate` from `#borrowRecords`.
-       - Calculate how many days passed between
-         `borrowDate` and `returnDate`.
-       - If the book was kept more than 14 days:
-           - Calculate how many days late it is.
-           - Multiply this number by `#lateFeesPerDay`.
-           - Log the late fee to the console.
-       - Remove the record from `#borrowRecords`.
-*/
+  returnBook(memberId, isbn, returnDate) {
+    const member = this.#members.find(m => m.memberId === memberId);
+    const book = this.#books.find(b => b.isbn === isbn);
+    const recordKey = `${memberId}-${isbn}`;
+    const borrowDate = this.#borrowRecords[recordKey];
 
-/*
------------------------------------------------------------
-  STEP 6: Viewing Library Information
------------------------------------------------------------
-Add the following methods to the `Library` class:
+    if (!member || !book || !borrowDate) {
+      console.log("Hata: Geçersiz iade işlemi.");
+      return;
+    }
 
-1. `viewAvailableBooks()`:
-   - Log all books where `isBorrowed` is `false`.
-   - For each book, log its `title`, `author`, and `isbn`.
+    // Gecikme Ücreti Hesaplama
+    const rDate = new Date(returnDate);
+    const diffTime = Math.abs(rDate - borrowDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-2. `viewBorrowedBooks()`:
-   - Log all books where `isBorrowed` is `true`.
-*/
+    if (diffDays > 14) {
+      const lateDays = diffDays - 14;
+      const fee = lateDays * this.#lateFeesPerDay;
+      console.log(`DİKKAT: ${lateDays} gün gecikme! Ücret: ${fee} TL`);
+    }
 
-/*
------------------------------------------------------------
-  STEP 7: Test Your Library
------------------------------------------------------------
-1. Create a few `Book` instances, for example:
-   - "The Hobbit" by "J.R.R. Tolkien"
-   - "1984" by "George Orwell"
-2. Create a couple of `Member` instances.
-3. Create a `Library` instance.
-4. Add the books and register the members.
-5. Borrow and return books. Try:
-   - Returning a book on time.
-   - Returning a book after more than 14 days to see the
-     late fee log.
-6. Call:
-   - `viewAvailableBooks()`
-   - `viewBorrowedBooks()`
-   at different times and check the console output.
-*/
+    // Durumları güncelle
+    book.toggleBorrowedStatus();
+    member.returnBook(isbn);
+    delete this.#borrowRecords[recordKey];
+    console.log(`BAŞARILI: '${book.title}' iade edildi.`);
+  }
 
+  // Step 6: Görüntüleme
+  viewAvailableBooks() {
+    console.log("\n--- Mevcut Kitaplar ---");
+    this.#books
+      .filter(b => !b.isBorrowed)
+      .forEach(b => console.log(`- ${b.title} (${b.author}) [ISBN: ${b.isbn}]`));
+  }
 
+  viewBorrowedBooks() {
+    console.log("\n--- Ödünç Verilenler ---");
+    this.#books
+      .filter(b => b.isBorrowed)
+      .forEach(b => console.log(`- ${b.title} (Şu an dışarıda)`));
+  }
+}
 
+// --- STEP 7: TEST ALANI ---
+const myLibrary = new Library();
+
+// 1. Nesneleri Oluştur
+const book1 = new Book("Hobbit", "J.R.R. Tolkien", "ISBN-001");
+const book2 = new Book("1984", "George Orwell", "ISBN-002");
+const member1 = new Member("Ali Veli", "M01");
+
+// 2. Kütüphaneye Ekle
+myLibrary.addBook(book1);
+myLibrary.addBook(book2);
+myLibrary.registerMember(member1);
+
+// 3. Ödünç Alma (1 Mart'ta almış olsun)
+myLibrary.borrowBook("M01", "ISBN-001", "2024-03-01");
+
+// 4. Durumu Görüntüle
+myLibrary.viewAvailableBooks();
+myLibrary.viewBorrowedBooks();
+
+// 5. İade Etme (20 Mart'ta iade etsin - 19 gün geçmiş, 5 gün gecikme)
+console.log("\n--- İade İşlemi Başlıyor ---");
+myLibrary.returnBook("M01", "ISBN-001", "2024-03-20");
