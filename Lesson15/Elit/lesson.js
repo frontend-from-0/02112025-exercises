@@ -523,10 +523,7 @@ containsNumber("elitaltun");
    - Log the padded string.
 */
 function padString(str, maxLength) {
-  let result = str;
-  if (str.length < maxLength) {
-    result = str.padEnd(maxLength, "*");
-  }
+  const result = str.padEnd(maxLength, "*");
   console.log(result);
 }
 
