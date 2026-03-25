@@ -147,7 +147,7 @@ const lastName=Yılmaz
 const fullName='firstName' + '' + 'lastName';
 console.log(fullName);
 //veya
-const fullName='${firstName} ${lastName}';
+const fullNameAlt='${firstName} ${lastName}';
 console.log(fullName);
 
 
