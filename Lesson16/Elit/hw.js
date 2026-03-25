@@ -507,7 +507,7 @@ pushPopExample([1, 2, 3, 4], 5);
 function manageQueue(queue, newPerson){
   queue.push(newPerson);
   console.log('the updated queue: ', queue);
-  let removedItem=queue.shift();
+  const removedItem = queue.shift();
   console.log('The removed person: ', removedItem);
   console.log('The final queue: ', queue);
   return queue;
