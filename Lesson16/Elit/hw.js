@@ -284,8 +284,8 @@ console.log(reverseWords('Learning Javascript is fun'));
 */
 
 function reverseArrayWords(sentence) {
-  let words = sentence.split(" ");
-  let reversedArray = [];
+  const words = sentence.split(" ");
+  const reversedArray = [];
   for (let i = words.length - 1; i >= 0; i--) {
     reversedArray.push(words[i]);
   }
