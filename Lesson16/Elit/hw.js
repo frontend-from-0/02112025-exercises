@@ -488,7 +488,7 @@ console.log(filteredWords);
 function pushPopExample(arr, itemToPush) {
   arr.push(itemToPush);
   console.log("Updated Array: ", arr);
-  let poppedItem = arr.pop();
+  const poppedItem = arr.pop();
 
   console.log("Popped Item: ", poppedItem);
   console.log("Final Array: ", arr);
