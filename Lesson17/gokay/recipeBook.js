@@ -27,15 +27,15 @@ Run this file in Node.js or the browser console to test.
 */
 const recipes = [
   {
-    name: 'Omlet',
-    ingredients: ['yumurta', 'süt', 'peynir'],
-    cookingTime: 10
+    name: "Omlet",
+    ingredients: ["yumurta", "süt", "peynir"],
+    cookingTime: 10,
   },
   {
-    name: 'Makarna',
-    ingredients: ['makarna', 'su', 'tuz', 'salça'],
-    cookingTime: 15
-  }
+    name: "Makarna",
+    ingredients: ["makarna", "su", "tuz", "salça"],
+    cookingTime: 15,
+  },
 ];
 
 /*
@@ -48,18 +48,18 @@ Function: displayAllRecipes()
   Ingredients: pasta, tomato, garlic
   Cooking Time: 20 minutes
 */
-function displayAllRecipes() {
-  console.log('--- Yemek Kitabı ---');
-  if (recipes.length === 0) {
-    console.log('Henüz kayıtlı tarif yok.');
+function displayAllRecipes(recipeList) {
+  console.log("--- Yemek Kitabı ---");
+  if (recipeList.length === 0) {
+    console.log("Henüz kayıtlı tarif yok.");
     return;
   }
 
-  recipes.forEach(recipe => {
+  recipeList.forEach((recipe) => {
     console.log(`Name: ${recipe.name}`);
-    console.log(`Ingredients: ${recipe.ingredients.join(', ')}`);
+    console.log(`Ingredients: ${recipe.ingredients.join(", ")}`);
     console.log(`Cooking Time: ${recipe.cookingTime} minutes`);
-    console.log('--------------------');
+    console.log("--------------------");
   });
 }
 
@@ -74,7 +74,9 @@ Function: addRecipe(name, ingredients, cookingTime)
 - ingredients should be an array like ['egg', 'milk', 'flour']
 */
 function addRecipe(name, ingredients, cookingTime) {
-  const exists = recipes.find(r => r.name.toLowerCase() === name.toLowerCase());
+  const exists = recipes.find(
+    (r) => r.name.toLowerCase() === name.toLowerCase(),
+  );
 
   if (exists) {
     console.warn(`Uyarı: "${name}" tarifi zaten mevcut!`);
@@ -96,11 +98,13 @@ Function: viewRecipe(name)
 */
 
 function viewRecipe(name) {
-  const recipe = recipes.find(r => r.name.toLowerCase() === name.toLowerCase());
+  const recipe = recipes.find(
+    (r) => r.name.toLowerCase() === name.toLowerCase(),
+  );
 
   if (recipe) {
     console.log(`Tarif Bulundu: ${recipe.name}`);
-    console.log(`Malzemeler: ${recipe.ingredients.join(', ')}`);
+    console.log(`Malzemeler: ${recipe.ingredients.join(", ")}`);
     console.log(`Süre: ${recipe.cookingTime} dk`);
   } else {
     console.log(`"${name}" isminde bir tarif bulunamadı.`);
@@ -117,7 +121,9 @@ Function: updateRecipe(name, newIngredients, newCookingTime)
 - Logs success or error message.
 */
 function updateRecipe(name, newIngredients, newCookingTime) {
-  const recipe = recipes.find(r => r.name.toLowerCase() === name.toLowerCase());
+  const recipe = recipes.find(
+    (r) => r.name.toLowerCase() === name.toLowerCase(),
+  );
 
   if (recipe) {
     recipe.ingredients = newIngredients;
@@ -137,7 +143,9 @@ Function: deleteRecipe(name)
 - Logs success or error message.
 */
 function deleteRecipe(name) {
-  const index = recipes.findIndex(r => r.name.toLowerCase() === name.toLowerCase());
+  const index = recipes.findIndex(
+    (r) => r.name.toLowerCase() === name.toLowerCase(),
+  );
 
   if (index !== -1) {
     recipes.splice(index, 1);
@@ -160,23 +168,33 @@ Function: filterByMaxTime(maxMinutes)
 // Malzemeye göre filtrele
 function filterByIngredient(ingredient) {
   console.log(`İçinde "${ingredient}" olan tarifler:`);
-  const found = recipes.filter(r => 
-    r.ingredients.some(ing => ing.toLowerCase().includes(ingredient.toLowerCase()))
+  const found = recipes.filter((r) =>
+    r.ingredients.some((ing) =>
+      ing.toLowerCase().includes(ingredient.toLowerCase()),
+    ),
   );
-  
+
   found.length > 0 ? console.table(found) : console.log("Eşleşen tarif yok.");
+  if (found.length > 0) {
+    displayAllRecipes(found);
+  } else {
+    console.log("Eşleşen tarif yok.");
+  }
 }
 
 // Süreye göre filtrele (Hızlı yemekler)
 function filterByMaxTime(maxMinutes) {
   console.log(`${maxMinutes} dakika veya daha kısa sürede pişenler:`);
-  const quickRecipes = recipes.filter(r => r.cookingTime <= maxMinutes);
-  
-  quickRecipes.length > 0 ? console.table(quickRecipes) : console.log("Hızlı tarif bulunamadı.");
+  const quickRecipes = recipes.filter((r) => r.cookingTime <= maxMinutes);
+
+  if (quickRecipes.length > 0) {
+    displayAllRecipes(quickRecipes);
+  } else {
+    console.log("Hızlı tarif bulunamadı.");
+  }
 }
 
-
-addRecipe('Menemen', ['yumurta', 'domates', 'biber'], 12);
-filterByIngredient('yumurta'); // Hem Omlet hem Menemen gelmeli
+addRecipe("Menemen", ["yumurta", "domates", "biber"], 12);
+filterByIngredient("yumurta"); // Hem Omlet hem Menemen gelmeli
 filterByMaxTime(11); // Sadece Omlet gelmeli
 displayAllRecipes();
