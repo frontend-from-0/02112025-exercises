@@ -300,7 +300,7 @@ console.log(reverseArrayWords("Learning Javascript is hard"));
     - Log the resulting array.
 */
 function filterLongWords(words, minlength) {
-  let longWords = [];
+  const longWords = [];
   for (let i = 0; i < words.length; i++) {
     if (words[i].length >= minlength) {
       longWords.push(words[i]);
