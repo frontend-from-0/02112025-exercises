@@ -204,11 +204,11 @@ let result= (++numberEx11) * 2;
 console.log(result);    //-4
 
 // 27. Declare a=2 and b=3. Increment a using the prefix ++ operator, then add b to the result and log it.
-let a=2;
-let b=3;
+let j=2;
+const k=3;
 
-++a;   // yeni a değeri 3 oldu.
+++j;
 
-let result=a + b;  // 6
-console.log(result);
+const ex27Result = j + k;
+console.log('Ex. 27', ex27Result);
 
