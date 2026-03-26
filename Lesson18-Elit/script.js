@@ -156,55 +156,6 @@ Inside the `Library` class, add the following methods:
      `memberId` in `#members`.
    - If unique, add the member and log a success message.
 */
-/*
------------------------------------------------------------
-  STEP 4: Add Library Methods (Managing Books & Members)
------------------------------------------------------------
-Inside the `Library` class, add the following methods:
-
-1. `addBook(book)`:
-   - Accepts a `Book` instance.
-   - Check if a book with the same `isbn` already exists in
-     `#books`. If it does, log a message and DO NOT add it.
-   - Otherwise, push the book into `#books`.
-
-2. `removeBook(isbn)`:
-   - Find the book by `isbn`.
-   - Only remove it if `isBorrowed` is `false`.
-   - If you remove it, log a success message.
-   - If the book does not exist, or is borrowed, log a
-     different message.
-
-3. `registerMember(member)`:
-   - Accepts a `Member` instance.
-   - Ensure there is no existing member with the same
-     `memberId` in `#members`.
-   - If unique, add the member and log a success message.
-*//*
------------------------------------------------------------
-  STEP 4: Add Library Methods (Managing Books & Members)
------------------------------------------------------------
-Inside the `Library` class, add the following methods:
-
-1. `addBook(book)`:
-   - Accepts a `Book` instance.
-   - Check if a book with the same `isbn` already exists in
-     `#books`. If it does, log a message and DO NOT add it.
-   - Otherwise, push the book into `#books`.
-
-2. `removeBook(isbn)`:
-   - Find the book by `isbn`.
-   - Only remove it if `isBorrowed` is `false`.
-   - If you remove it, log a success message.
-   - If the book does not exist, or is borrowed, log a
-     different message.
-
-3. `registerMember(member)`:
-   - Accepts a `Member` instance.
-   - Ensure there is no existing member with the same
-     `memberId` in `#members`.
-   - If unique, add the member and log a success message.
-*/
 
 class Library {
   #books;
@@ -219,46 +170,133 @@ class Library {
     this.#borrowRecords = {};
   }
 
-addBook(book){
-  const exists = this.#books.some(b => b.isbn === book.isbn);
-  if(exists){
-    console.log(`Book with ISBN ${book.isbn} alreay exists.`);
-  }else{
-    this.#books.push(book);
-    console.log(`Book "${book.title}" added to the library.`);
+  addBook(book) {
+    const exists = this.#books.some((b) => b.isbn === book.isbn);
+    if (exists) {
+      console.log(`Book with ISBN ${book.isbn} alreay exists.`);
+    } else {
+      this.#books.push(book);
+      console.log(`Book "${book.title}" added to the library.`);
+    }
+  }
+
+  removeBook(isbn) {
+    const foundBook = this.#books.find((b) => b.isbn === isbn);
+    if (foundBook && !foundBook.isBorrowed) {
+      this.#books = this.#books.filter((b) => b.isbn !== isbn);
+      console.log(`Book with ISBN ${isbn} has been removed.`);
+    } else if (!foundBook) {
+      console.log(`Book with ISBN ${isbn} not found.`);
+    } else {
+      console.log(
+        `Cannot remove book ${isbn} because it is currently borrowed.`,
+      );
+    }
+  }
+
+  registerMember(member) {
+    const exists = this.#members.some((m) => m.memberId === member.memberId);
+    if (exists) {
+      console.log(`Member ID ${member.memberId} is already registered.`);
+    } else {
+      this.#members.push(member);
+      console.log(
+        `Member "${member.name}" (ID: ${member.memberId}) has been registered.`,
+      );
+    }
+  }
+  borrowBook(memberId, isbn, borrowDate) {
+    const foundMember = this.#members.find((m) => m.memberId === memberId);
+    const foundBook = this.#books.find((b) => b.isbn === isbn);
+
+    if (!foundMember || !foundBook) {
+      console.log("Error: Member or book not found.");
+    } else if (foundBook.isBorrowed) {
+      console.log(`The book "${foundBook.title}" is already borrowed.`);
+    } else {
+      foundBook.toggleBorrowedStatus();
+      foundMember.borrowBook(isbn);
+      this.#borrowRecords[`${memberId}-${isbn}`] = borrowDate;
+      console.log(
+        `Book "${foundBook.title}" succesfully borrowed by ${foundMember.name}.`,
+      );
+    }
+  }
+
+  returnBook(memberId, isbn, returnDate) {
+    const foundMember = this.#members.find((m) => m.memberId === memberId);
+    const foundBook = this.#books.find((b) => b.isbn === isbn);
+
+    if (!foundMember || !foundBook) {
+      console.log("Error: Member or book not found.");
+      return;
+    }
+
+    const borrowDateStr = this.#borrowRecords[`${memberId}-${isbn}`];
+    if (!borrowDateStr) {
+      console.log("Error:No Borrow record found for this member and book.");
+      return;
+    }
+
+    const bDate = new Date(borrowDateStr);
+    const rDate = new Date(returnDate);
+
+    const diffInMs = rDate - bDate;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    if (diffInDays > 14) {
+      const lateDays = diffInDays - 14;
+      const totalLateFees = lateDays * this.#lateFeesPerDay;
+      console.log(
+        `Late return! Fee: $${totalLateFees.toFixed(2)}. (${lateDays} days late)`,
+      );
+    }
+    foundBook.toggleBorrowedStatus();
+    foundMember.returnBook(isbn);
+    delete this.#borrowRecords[`${memberId}-${isbn}`];
+  }
+
+  viewAvailableBooks() {
+    console.log(`Viewing availale books...`);
+    this.#books.forEach((book) => {
+      if (!book.isBorrowed) {
+        console.log(`${book.title} by ${book.author} (ISBN: ${book.isbn})`);
+      }
+    });
+  }
+  /*
+for(const book of this.#books){
+if(!book.isBorrowed){
+      console.log(`${book.title} by ${book.author} (ISBN: ${book.isbn})`)
+    }
+}
+*/
+
+  viewBorrowedBooks() {
+    console.log(`Viewing borrowed books...`);
+    for (const book of this.#books) {
+      if (book.isBorrowed) {
+        console.log(`${book.title} by ${book.author} (ISBN: ${book.isbn})`);
+      }
+    }
+  }
+
+  findBooksByAuthor(authorName) {
+    return this.#books.filter(
+      (book) => book.author.toLowerCase() === authorName.toLowerCase(),
+    );
   }
 }
-
-removeBook(isbn){
-const foundBook = this.#books.find(b=> b.isbn === isbn);
-if( foundBook && !foundBook.isBorrowed){
-  this.#books = this.#books.filter(b => b.isbn !== isbn);
-  console.log(`Book with ISBN ${isbn} has been removed.`);
-}else if(!foundBook){
-console.log(`Book with ISBN ${isbn} not found.`);
-}else{
-  console.log(`Cannot remove book ${isbn} because it is currently borrowed.`);
-}
-}
-
-registerMember(member){
-  const exists = this.#members.some(m => m.memberId === member.memberId);
-  if(exists){
-    console.log(`Member ID ${member.memberId} is already registered.`);
-  }else{
-    this.#members.push(member);
-    console.log(`Member "${member.name}" (ID: ${member.memberId}) has been registered.`);
-  }
-}
-}
-
 
 const myLibrary = new Library();
 const book1 = new Book("5 am Club", "Robin Sharma", "ISBN-001");
-const book2 = new Book("Let Them Theory", "Mel Robbins", "ISBN-002")
+const book2 = new Book("Let Them Theory", "Mel Robbins", "ISBN-002");
 const member3 = new Member("İlayda Yildiz", "M03");
+const book3 = new Book("The Hobbit", "J.R.R. Tolkien", "ISBN-555");
+const book4 = new Book("1984", "George Orwell", "ISBN-444");
+const member4 = new Member("Evrim Göksel", "M04");
 
-console.log('---Testing Registration---');
+console.log("---Testing Registration---");
 myLibrary.addBook(book1);
 console.log("---------");
 myLibrary.addBook(book1);
@@ -274,8 +312,59 @@ console.log("\n--- Testing Removal ---");
 myLibrary.removeBook("ISBN-001");
 console.log("---------");
 myLibrary.removeBook("ISBN-999");
+console.log("---------");
 
+myLibrary.addBook(book1);
+myLibrary.addBook(book3);
+myLibrary.addBook(book4);
+myLibrary.registerMember(member3);
+myLibrary.registerMember(member4);
 
+console.log(`---Testing Borrowing---`);
+myLibrary.borrowBook("M03", "ISBN-001", "2026-03-01");
+console.log("---------");
+myLibrary.borrowBook("M03", "ISBN-001", "2026-03-01");
+console.log("---------");
+myLibrary.borrowBook("M04", "ISBN-001", "2026-03-10");
+console.log("---------");
+console.log(
+  `The book list of the member "${member3.name}":`,
+  member3.borrowedBooks,
+);
+console.log("---------");
+
+console.log("--- Testing Return & Fees ---");
+myLibrary.returnBook("M03", "ISBN-001", "2026-03-11");
+console.log("---------");
+myLibrary.borrowBook("M03", "ISBN-001", "2026-03-01");
+console.log("---------");
+console.log("Testing Late Fees...");
+myLibrary.returnBook("M03", "ISBN-001", "2026-03-21");
+console.log("---------");
+myLibrary.returnBook("M03", "ISBN-001", "2026-03-25");
+console.log("---------");
+console.log("---Testing Search & Listing---");
+
+myLibrary.viewAvailableBooks();
+const robinSharmaBooks = myLibrary.findBooksByAuthor("Robin Sharma");
+if (robinSharmaBooks.length > 0) {
+  console.log(`\nResults for "Robin Sharma":`);
+  robinSharmaBooks.forEach((book) => {
+    console.log(`- ${book.title} (ISBN: ${book.isbn})`);
+  });
+} else {
+  console.log("No books found for this author.");
+}
+console.log("---------");
+const orhanPamukBooks = myLibrary.findBooksByAuthor("Orhan Pamuk");
+if (orhanPamukBooks.length > 0) {
+  console.log(`\nResults for "Orhan Pamuk":`);
+  orhanPamukBooks.forEach((book) => {
+    console.log(`- ${book.title} (ISBN: ${book.isbn})`);
+  });
+} else {
+  console.log("No books found for this author.");
+}
 
 /*
 -----------------------------------------------------------
