@@ -148,7 +148,10 @@ function viewContact(name, contactBook) {
     console.log('Email: ' + maybeContact.email);
     return;
   }
+<<<<<<< HEAD
   console.log('Looking for contact with the name ' + name);
+=======
+>>>>>>> c4d4ef3 (Lesson17 notes are resolved)
   console.log('No contact found with the name: ' + name);
   console.log('----------------');
 }
@@ -174,11 +177,16 @@ function updateContact(name, newPhone, newEmail, contactBook) {
   if (maybeContact) {
     maybeContact.phone = newPhone;
     maybeContact.email = newEmail;
+<<<<<<< HEAD
     console.log("Searching contact to update by name", name);
     console.log("Contact is found and updaiting..")
     console.log('Contact updated successfully.');
   } else {
     console.log("Searching contact to update by name", name)
+=======
+    console.log('Contact updated successfully.');
+  } else {
+>>>>>>> c4d4ef3 (Lesson17 notes are resolved)
     console.log('No contact found with the name ', name);
      console.log('----------------');
   }
@@ -247,12 +255,19 @@ function nameCheck(name, contactBook){
 for(const contact of contactBook){
   if(contact.name.includes(name)){
     console.log("Contact was found with name: ", name);
+<<<<<<< HEAD
   } 
   
   else {
     console.log("Contact doesn't exist.")
   }
 }
+=======
+    return;
+  }  
+}
+console.log("Contact doesn't exist.")
+>>>>>>> c4d4ef3 (Lesson17 notes are resolved)
 }
 
 nameCheck("Pınar",contacts);
@@ -266,10 +281,17 @@ function sortContacts(contacts){
   contacts.sort(function(a,b) { 
     const A = a.name;
     const B = b.name;
+<<<<<<< HEAD
     if(B > A){
       return -1;
       
     }else if ( B < A){
+=======
+    if(A<B){
+      return -1;
+      
+    }else if (A>B){
+>>>>>>> c4d4ef3 (Lesson17 notes are resolved)
       return 1;
     } else {
       return 0;
@@ -290,7 +312,11 @@ function multipleFieldsSearch(phone, email, contactBook) {
   for (let i = 0; i < contactBook.length; i++) {
     if (contactBook[i].phone === phone) {
      
+<<<<<<< HEAD
       console.log(contactBook[i],"Contact found by name.");
+=======
+      console.log(contactBook[i],"Contact found by phone.");
+>>>>>>> c4d4ef3 (Lesson17 notes are resolved)
     } 
     
   }

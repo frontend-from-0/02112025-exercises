@@ -60,11 +60,11 @@ Function: displayAllRecipes()
 console.log("--- STEP 2 ---")
 console.log("Recipe book displaying..")
 function displayAllRecipes(recipeBook){
-  if(recipeBook < 1){
+  if(recipeBook.length < 1){
     console.log("No recipe to display.")
     return;
   }
-  for(i = 0; i < recipeBook.length; i++){
+  for(let i = 0; i < recipeBook.length; i++){
     console.log(
       `Name: ${recipeBook[i].name}, Ingredients: ${recipeBook[i].ingredients}, Cooking Time: ${recipeBook[i].cookingTime} minutes `)
     }
@@ -87,7 +87,7 @@ console.log("--- STEP 3 ---")
 
 function addRecipe(name, ingredients, cookingTime){
   console.log(`Searching is there ${name} recipe..`)
-  for(i = 0; i < recipes.length; i++){
+  for(let i = 0; i < recipes.length; i++){
     if(recipes[i].name === name){
      console.log("This recipe is already exist."); 
     return;
@@ -117,7 +117,7 @@ console.log("--- STEP 4 ---")
 function viewRecipe(name){
    console.log(`Searcing ${name} recipe..`);
    
-for(i = 0; i < recipes.length; i++){
+for(let i = 0; i < recipes.length; i++){
   if(recipes[i].name === name){
     console.log(`${name} recipe is found. You can see as below;`);
     console.log(recipes[i]); 
@@ -139,12 +139,12 @@ Function: updateRecipe(name, newIngredients, newCookingTime)
 */
 console.log("--- STEP 5 ---")
 
-function updateRecipe(name, newIngredients, newCookingTİme){
+function updateRecipe(name, newIngredients, newCookingTime){
   console.log(`Searcing ${name} recipe..`);
-for(i = 0; i < recipes.length; i++){
+for(let i = 0; i < recipes.length; i++){
   if(recipes[i].name === name){
 recipes[i].ingredients = newIngredients;
-recipes[i].cookingTime = newCookingTİme; 
+recipes[i].cookingTime = newCookingTime; 
 console.log(`${name} recipe is found and updated`);
 displayAllRecipes(recipes);
 return;
@@ -166,7 +166,7 @@ console.log("--- STEP 6 ---")
 function deleteRecipe(name, recipeBook){
  console.log(`Searcing ${name} recipe..`);
  let index = -1;
-for(i = 0; i < recipeBook.length; i++){
+for(let i = 0; i < recipeBook.length; i++){
   if(recipeBook[i].name === name){
     index = i;
   }
@@ -178,11 +178,9 @@ if (index !== -1){
 
 } else {console.log(`Sorry, but there is no recipe called ${name} :( , delete unseccsessfull!`)
 }
-console.log("Updated recipe list as below;")
-  displayAllRecipes(recipes);
 }
-deleteRecipe("Omlet",recipes);
-deleteRecipe("Beef",recipes);
+deleteRecipe("Omlet",recipeBook);
+deleteRecipe("Beef",recipeBook);
 
 
 console.log("-----------------------------------------------------------");
@@ -197,9 +195,9 @@ console.log("--- STEP 7 ---")
 console.log("--Additional Practice 1--")
 function filterByIngredient(ingredient, recipeBook){
   let found = false;
-  for(const ingredients of recipeBook){
-  if(ingredients.ingredients.includes(ingredient)){
-    console.log("Recipe was found by ingredient: ", ingredient); 
+  for(const recipe of recipeBook){
+  if(recipe.ingredients.includes(ingredient)){
+    console.log("Recipe was found by ingredient: ", recipe); 
     found = true;
   }   
 }
@@ -215,9 +213,9 @@ Function: filterByMaxTime(maxMinutes)
 - Shows recipes that take <= maxMinutes to cook.
 */
 console.log("--Additional Practice 2--")
-console.log("Looking for recipe for less than 10 minutes cooking time from Recipe Book.. ");
+console.log(`Looking for recipe for less than ${maxMinutes} minutes cooking time from Recipe Book.. `);
 function filterByMaxTime(maxMinutes,recipeBook){
-  for(i = 0; i < recipeBook.length; i++){
+  for(let i = 0; i < recipeBook.length; i++){
     if(recipeBook[i].cookingTime <= maxMinutes){
       console.log("Found! Here you are, bonna petit!")
       console.log(recipeBook[i])
