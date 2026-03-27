@@ -113,7 +113,7 @@ class Library{
  addBook(book){
  for(const currentBook of this.#books){
    if(currentBook.isbn === book.isbn){
-      console.log(`This ${book} already exist.`);
+      console.log(`This ${book.title} already exist.`);
       return;
    }       
  }
