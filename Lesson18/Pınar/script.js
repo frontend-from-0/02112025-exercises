@@ -35,7 +35,7 @@ Follow the steps in order and test each part as you go.
 class Book{
 
  constructor(title, author, isbn){
-   if( typeof title === 'string' && title.trim().length > 3){
+   if( typeof title === 'string' && title.trim().length >= 3){
       this.title = title;
    } else {throw Error ('Title should be a string with more than 3 characters')
  }
@@ -129,10 +129,6 @@ class Library{
         console.log(`The book ${book.isbn} removed successfully!`)
         return;
       }
-      else{
-      console.log(`This book ${book.isbn} can not remove, please check borrowed list.`);
-      return;
-   }
    }
      console.log(`This book ${book.isbn} doen\'t exist.`)
  }
@@ -172,9 +168,11 @@ class Library{
 
    if(foundBook.isBorrowed){
       console.log("This book is already borrowed.")
+      return;
    }
 
     foundBook.toggleBorrowedStatus();
+    foundMember.borrowBook(isbn);
 
     const borrowKey =`${memberId}-${isbn}`;
     this.#borrowRecords[borrowKey] = borrowDate;
@@ -201,18 +199,22 @@ class Library{
    } 
   
     if(!foundBook.isBorrowed){
-      console.log("This book is already exist.")
+      console.log("This book is not borrowed.")
+      return;
    }
    
    foundBook.toggleBorrowedStatus();
+   foundMember.returnBook(isbn);
 
    const borrowKey =`${memberId}-${isbn}`;
-    borrowDate = this.#borrowRecords[borrowKey];
+    const borrowDate = this.#borrowRecords[borrowKey];
      
-   const lateDays = returnDate - borrowDate;
+   const timeDiff = newDate(returnDate)-newDate(borrowDate);
+   const lateDays = Math.floor(timeDiff/(1000*3600*24));
 
    if(lateDays > 14){
      let lateFee = (lateDays - 14)*this.#lateFeesPerDay;
+     console.log(`This book is returned ${lateDays-14} days late.`);
       console.log(`Total late fee is: ${lateFee}`);
    }
  
