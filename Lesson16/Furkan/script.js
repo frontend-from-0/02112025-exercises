@@ -57,8 +57,8 @@ console.log("Ex. 3 --------");
 
 function countOddEven(numbers) {
   let oddCount = 0;
-  let eventCount = 0;
-  for (i = 0; i < numbers.length; i++) {
+  let evenCount = 0;
+  for (let i = 0; i < numbers.length; i++) {
     if (numbers[i] % 2 === 0) {
       eventCount++;
     } else {
@@ -552,7 +552,8 @@ const todoList = ["Study JS", "Eat breakfast", "Walk dog"];
 function updateTodoList(todoList, startIndex, deleteCount, ...newTasks) {
   console.log("Current list:", todoList);
 
-  const removed = todoList.splice(startIndex, deleteCount, ...newTasks);
+  const removed = todoList.splice(startIndex, deleteCount);
+   todoList.push(...newTasks);
 
   if (removed.length > 0) {
     console.log("Removed tasks:", removed);
