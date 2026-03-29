@@ -63,14 +63,12 @@ function displayAllRecipes(recipeBook) {
     return;
   }
 
-  for (let i = 0; i < recipeBook.length; i++) {
+  for (const recipe of recipeBook) {
     console.log(
-      `Name: ${recipeBook[i].name}, İngredients: ${recipeBook[i].ingredients} , CookingTime: ${recipeBook[i].cookingTime}`,
+      `Name: ${recipe.name}\nIngredients: ${recipe.ingredients.join(", ")}\nCooking Time: ${recipe.cookingTime} minutes`
     );
+    console.log("------------------");
   }
-  console.log("End of recipes.");
-  console.log("------------------");
-}
 displayAllRecipes(recipes);
 
 function findRecipe(name, recipeBook) {
@@ -94,11 +92,11 @@ Function: addRecipe(name, ingredients, cookingTime)
 function addRecipe(name, ingredients, cookingTime) {
   console.log("Adding recipe:", name);
 
-  for (let recipe of recipes) {
-    if (recipe.name.toLowerCase() === name.toLowerCase()) {
-      console.log("Recipe already exists!");
-      return;
-    }
+  const foundRecipe = findRecipe(name, recipeBook);
+
+  if (foundRecipe) {
+    console.log("Recipe already exists!");
+    return;
   }
 
   const newRecipe = {
@@ -125,16 +123,17 @@ Function: viewRecipe(name)
 function viewRecipe(name) {
   console.log("Looking for recipe with name" + " " + name);
 
-  for (let recipe of recipes) {
-    if (recipe.name.toLowerCase() === name.toLowerCase()) {
+  const foundRecipe = findRecipe(name, recipeBook);
+  
+  if (foundRecipe) {
       console.log("Name:", recipe.name);
       console.log("Ingredients:", recipe.ingredients);
       console.log("Cooking Time:", recipe.cookingTime);
-      return;
-    }
+    } else {
+    console.log("Recipe not found");
   }
-  console.log("Recipe note found");
 }
+
 viewRecipe("Pancake", recipes);
 viewRecipe("Omlette", recipes);
 viewRecipe("Pasta", recipes);
@@ -149,18 +148,15 @@ Function: updateRecipe(name, newIngredients, newCookingTime)
 - Logs success or error message.
 */
 function updateRecipe(name, newIngredients, newCookingTime) {
-  for (let recipe of recipes) {
-    if (recipe.name.toLowerCase() === name.toLowerCase()) {
-      recipe.ingredients = newIngredients;
-      recipe.cookingTime = newCookingTime;
+  const foundRecipe = findRecipe(name, recipeBook);
 
-      console.log("Recipe updated successfully!");
-      return;
-    }
+  if (foundRecipe) {
+    foundRecipe.ingredients = newIngredients;
+    foundRecipe.cookingTime = newCookingTime;
+    console.log("Recipe updated successfully");
+  } else {
+    console.log("Recipe not found");
   }
-
-  console.log("Recipe not found.");
-}
 
 updateRecipe("Pasta", ["pasta", "garlic", "sauce"], 15, recipes);
 updateRecipe("omlette", ["egg", "salt", "avocado"], 12, recipes);
@@ -183,8 +179,8 @@ function deleteRecipe(name, recipeBook) {
     (recipe) => recipe.name.toLowerCase() === name.toLowerCase(),
   );
   if (index === -1) {
-    (console.log("No recipe found with the name:", name),
-      console.log("----------------"));
+    console.log("No recipe found with the name:", name);
+    console.log("----------------");
     return;
   }
   recipeBook.splice(index, 1);
@@ -207,14 +203,22 @@ Function: filterByIngredient(ingredient)
 Function: filterByMaxTime(maxMinutes)
 - Shows recipes that take <= maxMinutes to cook.
 */
-function filterByIngredient(ingredient) {
+function filterByIngredient(ingredient, recipeBook) {
   console.log("Recipes containing:", ingredient);
 
-  for (let recipe of recipes) {
-    if (recipe.ingredients.includes(ingredient)) {
+  const normalizedIngredient = ingredient.toLowerCase();
+  let found = false;
+
+  for (let recipe of recipeBook) {
+    const hasIngredient = recipe.ingredients.some(
+      (item) => item.toLoweCase() === normalizedIngredient
+        );
+    if (hasIngredient) {
       console.log(recipe.name);
+      found = true;
     }
   }
 }
-filterByIngredient("tomato");
-filterByIngredient("oil");
+filterByIngredient("tomato", recipes);
+filterByIngredient("OIL", recipes);
+filterByIngredient("cheese", recipes);
