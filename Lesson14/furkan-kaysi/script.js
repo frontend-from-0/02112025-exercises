@@ -87,14 +87,14 @@ let randomNumber = Math.floor(Math.random() * 11)
 console.log(randomNumber);
 
 // 12. Round the number 3.7 down using Math.floor and 3.2 up using Math.ceil, log both.
-let down = Math.floor(3.7);
-let up = Math.ceil(3.2);
+let flooredNum = Math.floor(3.7);
+let ceiledNum = Math.ceil(3.2);
 console.log(down);
 console.log(up);
 
 // 13. Declare a boolean variable isStudent = true. Log it.
 let isStudent = true;
-console.log(typeof isStudent);
+console.log(isStudent);
 
 // 14. Initialize counter = 0, then increment it by 1 using counter++ and log it.
 let counter = 0;
@@ -108,42 +108,42 @@ console.log(points);
 
 // 16. Declare name="Alice", age=30, city="Paris". Log "Alice (30) lives in Paris" using template literals.
 name = "Alice";
-let age = 30;
-let city = "Paris"
+const age = 30;
+const city = "Paris"
 console.log(`${name} (${age}) lives in ${city}`);
 
 // 17. Declare variables x=5, y=10, z=15. Log their total sum.
 x = 5;
-let y = 10;
-let z = 15;
-let total = x + y + z;
+const y = 10;
+const z = 15;
+const total = x + y + z;
 console.log(total);
 
 // 18. Declare dividend=10 and divisor=3. Log the quotient (divisionResult) and difference (differenceResult).
-let dividend = 10;
-let divisor = 3;
+const dividend = 10;
+const divisor = 3;
 
-let divisionResult = dividend / divisor;
-let differenceResult = dividend - divisor;
+const divisionResult = dividend / divisor;
+const differenceResult = dividend - divisor;
 
 console.log(divisionResult);
 console.log(differenceResult);
 
 
 // 19. Declare firstName and lastName. Create fullName by concatenating them with a space and log it.
-let firstName = "Furkan";
-let lastName = "Kaysi";
+const firstName = "Furkan";
+const lastName = "Kaysi";
 
-let fullName = firstName + " " + lastName;
+const fullName = firstName + " " + lastName;
 
 console.log(fullName);
 
 // 20. Declare firstFactor=7 and secondFactor=2. Log the product.
 
-let firstFactor = 7;
-let secondFactor = 2;
+const firstFactor = 7;
+const secondFactor = 2;
 
-let product = firstFactor * secondFactor;
+const product = firstFactor * secondFactor;
 
 console.log(product);
 
@@ -156,13 +156,13 @@ console.log(Math.PI);
 counter = 0;
 
 counter++;
-console.log(counter);
+console.log('counter++; ', counter);
 
 counter += 4;
-console.log(counter);
+console.log('counter += 4; ', counter);
 
 counter = counter+3;
-console.log(counter);
+console.log('counter = counter+3; ', counter);
 
 // 23. Declare initialTemperature=20. Increase it by 5 and log the result.
 
@@ -174,18 +174,18 @@ initialTemperature += 5;
 // 24. Declare numberEx9=6. Increment it using the prefix ++ operator and log both the variable and the incremented value.
 
 let numberEx9 = 6;
-let incrementedValue = ++numberEx9;
 
-console.log(numberEx9);
-console.log(incrementedValue);
+console.log("Initial:", numberEx9);
+console.log("Prefix expression result:", ++numberEx9);
+console.log("After prefix:", numberEx9);
 
 // 25. Declare numberEx10=8. Increment it using the postfix ++ operator and log both the original variable and the incremented value.
 
 let numberEx10 = 8;
-incrementedValue = numberEx10++;
 
-console.log(numberEx10);
-console.log(incrementedValue);
+console.log("Initial:", numberEx10);
+console.log("Postfix expression result:", numberEx10++);
+console.log("After postfix:", numberEx10);
 
 // 26. Declare numberEx11=-3. Increment it by 1 using prefix ++, then multiply the result by 2 and log the final value.
 
