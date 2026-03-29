@@ -392,6 +392,10 @@ function trafficLight(color) {
       console.log('Invalid Color');
   }
 }
+trafficLight("red");
+trafficLight("yellow");
+trafficLight("green");
+trafficLight("blue");
 
 function trafficLightWithIf(color) {
   if (color.toLowerCase() === 'red') {
@@ -526,12 +530,7 @@ containsNumber('abc4def');
    - Log the padded string.
 */
 function padString(str, maxLength) {
-  if (str.length < maxLength) {
-    const padded = str.padEnd(maxLength, '*');
-    console.log(padded);
-  } else {
-    console.log(str);
-  }
+  console.log(str.padEnd(maxLength, '*'));
 }
 padString('hello', 6);
 padString('hi', 8);
