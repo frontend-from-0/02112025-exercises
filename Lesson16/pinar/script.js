@@ -243,7 +243,7 @@ console.log("Ex. 12. result is:")
 
 function removeDuplicates(arr){
 console.log("Cheking dublicate element in array..", arr)
-  let newArray = [ ];
+  const newArray = [ ];
   for (const element of arr){
     if(!newArray.includes(element)){
       newArray.push(element);
@@ -286,14 +286,9 @@ factorial(5);
 
 console.log("Ex. 14. result is:")
 
-function reverseWords(sentence){
-  const words = sentence.split(" ");
-  const reversedArray = [ ];
-  for( const word of words){
-    reversedArray.unshift(word);
-    reversedSentence = reversedArray.join(" ");
-  }
-console.log("Reversed sentence is:",reversedSentence);
+function reverseWords(sentence) {
+  const reversedSentence = sentence.split(" ").reverse().join(" ");
+  console.log("Reversed sentence is:", reversedSentence);
 }
 
 reverseWords("Bugün hava rüzgarlı ve soğuk");
@@ -307,9 +302,9 @@ console.log("Ex. 15. result is:")
 
 function filterLongWords(words, minLength){
   console.log("Filtering the words by length..")
-let resultArray = [ ];
+const resultArray = [ ];
 for (let i = 0; i < words.length; i++){
-  let currentWord = words[i];
+  const currentWord = words[i];
   if(currentWord.length >= minLength){
 resultArray.push(currentWord);
   }
@@ -383,7 +378,7 @@ countOccurrences(["mavi", 3, "yeşil", "mavi"], "mavi");
 console.log("Ex. 19. result is:")
 function removeFalsyValues(arr){
   console.log("Searching falsy values in ",arr)
-  let newArray = [ ];
+  const newArray = [ ];
 for (let i = 0; i < arr.length; i++){
 if(arr[i]){
   newArray.push(arr[i])
@@ -440,7 +435,7 @@ averageArray([1,2,3,4,5]);
 console.log("Ex. 22. result is:")
 
 function flattenArray(twoDArray){
-let newArray = [ ];
+const newArray = [ ];
 for (const arr of twoDArray){
   for(const element of arr){
     newArray.push(element);
@@ -460,7 +455,7 @@ flattenArray([["Can", "Pınar"],["Sema", "İnci"]]);
 console.log("Ex. 23. result is:")
 function findWordsWithLetter(words, letter){
   console.log('Searching from '  + words + 'which is contain letter ' + letter )
-  let newArray = [ ];
+  const newArray = [ ];
 for(const word of words){
   if(word.includes(letter)){
     newArray.push(word);
@@ -535,4 +530,4 @@ function updateTodoList(todoList, startIndex, deleteCount, ...newTasks){
 
 
 const todoList = ['Study JS', 'Eat breakfast', 'Walk dog'];
-updateTodoList(todoList, 1, 2, 'Drink coffee', 'Call mom', 'Have fun!');
+updateTodoList(todoList, 1, 2, 'Drink coffee', 'Call mom', 'Have fun');
