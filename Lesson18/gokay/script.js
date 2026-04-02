@@ -31,14 +31,15 @@ Follow the steps in order and test each part as you go.
 `isBorrowed` between `true` and `false`.
 */
 
-
 class Book {
   #isBorrowed = false;
 
   constructor(title, author, isbn) {
-    if (typeof title !== 'string' || title.length < 3) throw new Error("Geçersiz Kitap Adı");
-    if (typeof author !== 'string' || author.length < 3) throw new Error("Geçersiz Yazar");
-    
+    if (typeof title !== "string" || title.trim().length < 3)
+      throw new Error("Geçersiz Kitap Adı");
+    if (typeof author !== "string" || author.trim().length < 3)
+      throw new Error("Geçersiz Yazar");
+    if (typeof isbn !== "string") throw new Error("Geçersiz ISBN");
     this.title = title;
     this.author = author;
     this.isbn = isbn;
@@ -76,8 +77,11 @@ already there.
 */
 class Member {
   constructor(name, memberId) {
-    if (typeof name !== 'string' || name.length < 3) throw new Error("Geçersiz Üye İsmi");
-    
+    if (typeof name !== "string" || name.length < 3)
+      throw new Error("Geçersiz Üye İsmi");
+    if (typeof memberId !== "string" && typeof memberId !== "number")
+      throw new Error("Geçersiz Üye ID");
+
     this.name = name;
     this.memberId = memberId;
     this.borrowedBooks = []; // ISBN listesi
@@ -90,7 +94,7 @@ class Member {
   }
 
   returnBook(isbn) {
-    this.borrowedBooks = this.borrowedBooks.filter(item => item !== isbn);
+    this.borrowedBooks = this.borrowedBooks.filter((item) => item !== isbn);
   }
 }
 
@@ -107,7 +111,7 @@ class Library {
 
   // Step 4: Kitap ve Üye Yönetimi
   addBook(book) {
-    if (this.#books.find(b => b.isbn === book.isbn)) {
+    if (this.#books.find((b) => b.isbn === book.isbn)) {
       console.log(`Hata: ${book.isbn} zaten mevcut.`);
       return;
     }
@@ -115,8 +119,28 @@ class Library {
     console.log(`Kitap Eklendi: ${book.title}`);
   }
 
+  removeBook(isbn) {
+    const bookIndex = this.#books.findIndex((b) => b.isbn === isbn);
+
+    if (bookIndex === -1) {
+      console.log(`Hata: ${isbn} ISBN numaralı kitap bulunamadı.`);
+      return;
+    }
+
+    const book = this.#books[bookIndex];
+
+    if (book.isBorrowed) {
+      console.log(
+        `Hata: "${book.title}" şu an bir üyede, iade edilmeden silinemez.`,
+      );
+    } else {
+      this.#books.splice(bookIndex, 1);
+      console.log(`Kitap Silindi: ${book.title}`);
+    }
+  }
+
   registerMember(member) {
-    if (this.#members.find(m => m.memberId === member.memberId)) {
+    if (this.#members.find((m) => m.memberId === member.memberId)) {
       console.log(`Hata: ${member.memberId} ID'li üye zaten var.`);
       return;
     }
@@ -126,8 +150,8 @@ class Library {
 
   // Step 5: Ödünç Alma ve İade
   borrowBook(memberId, isbn, borrowDate) {
-    const member = this.#members.find(m => m.memberId === memberId);
-    const book = this.#books.find(b => b.isbn === isbn);
+    const member = this.#members.find((m) => m.memberId === memberId);
+    const book = this.#books.find((b) => b.isbn === isbn);
 
     if (!member || !book) {
       console.log("Hata: Üye veya Kitap bulunamadı.");
@@ -143,15 +167,20 @@ class Library {
     book.toggleBorrowedStatus();
     member.borrowBook(isbn);
     this.#borrowRecords[`${memberId}-${isbn}`] = new Date(borrowDate);
-    
+
     console.log(`BAŞARILI: ${member.name}, '${book.title}' kitabını aldı.`);
   }
 
   returnBook(memberId, isbn, returnDate) {
-    const member = this.#members.find(m => m.memberId === memberId);
-    const book = this.#books.find(b => b.isbn === isbn);
+    const member = this.#members.find((m) => m.memberId === memberId);
+    const book = this.#books.find((b) => b.isbn === isbn);
     const recordKey = `${memberId}-${isbn}`;
     const borrowDate = this.#borrowRecords[recordKey];
+
+    if (!book.isBorrowed) {
+      console.log("Kitap zaten kütüphanede.");
+      return;
+    }
 
     if (!member || !book || !borrowDate) {
       console.log("Hata: Geçersiz iade işlemi.");
@@ -180,15 +209,17 @@ class Library {
   viewAvailableBooks() {
     console.log("\n--- Mevcut Kitaplar ---");
     this.#books
-      .filter(b => !b.isBorrowed)
-      .forEach(b => console.log(`- ${b.title} (${b.author}) [ISBN: ${b.isbn}]`));
+      .filter((b) => !b.isBorrowed)
+      .forEach((b) =>
+        console.log(`- ${b.title} (${b.author}) [ISBN: ${b.isbn}]`),
+      );
   }
 
   viewBorrowedBooks() {
     console.log("\n--- Ödünç Verilenler ---");
     this.#books
-      .filter(b => b.isBorrowed)
-      .forEach(b => console.log(`- ${b.title} (Şu an dışarıda)`));
+      .filter((b) => b.isBorrowed)
+      .forEach((b) => console.log(`- ${b.title} (Şu an dışarıda)`));
   }
 }
 
