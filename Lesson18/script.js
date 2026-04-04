@@ -31,8 +31,6 @@ Follow the steps in order and test each part as you go.
 5. Add a method `toggleBorrowedStatus()` that flips
    `isBorrowed` between `true` and `false`.
 */
-
-
 /*
 -----------------------------------------------------------
   STEP 2: Create the Member Class
@@ -53,7 +51,6 @@ Follow the steps in order and test each part as you go.
        - Remove the `isbn` from `borrowedBooks` if it exists.
 */
 
-
 /*
 -----------------------------------------------------------
   STEP 3: Create the Library Class
@@ -71,7 +68,6 @@ Follow the steps in order and test each part as you go.
    - Initialize `#borrowRecords` as an empty object.
    - Set `#lateFeesPerDay` to a number (e.g. 0.5).
 */
-
 
 /*
 -----------------------------------------------------------
@@ -98,7 +94,6 @@ Inside the `Library` class, add the following methods:
      `memberId` in `#members`.
    - If unique, add the member and log a success message.
 */
-
 
 /*
 -----------------------------------------------------------
@@ -169,5 +164,229 @@ Add the following methods to the `Library` class:
    at different times and check the console output.
 */
 
+class Book {
+  constructor(title, author, isbn) {
+    if (typeof title !== "string" || title.length < 3) {
+      throw new Error("Title must be at least 3 characters.");
+    }
+    if (typeof author !== "string" || author.length < 3) {
+      throw new Error("Author must be at least 3 characters.");
+    }
 
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+    this.isBorrowed = false;
+  }
 
+  toggleBorrowedStatus() {
+    this.isBorrowed = !this.isBorrowed;
+  }
+}
+
+class Member {
+  constructor(name, memberId) {
+    if (typeof name !== "string" || name.length < 3) {
+      throw new Error("Member name must be at least 3 characters.");
+    }
+
+    this.name = name;
+    this.memberId = memberId;
+    this.borrowedBooks = [];
+  }
+
+  borrowBook(isbn) {
+    if (!this.borrowedBooks.includes(isbn)) {
+      this.borrowedBooks.push(isbn);
+    }
+  }
+
+  returnBook(isbn) {
+    this.borrowedBooks = this.borrowedBooks.filter((id) => id !== isbn);
+  }
+}
+
+class Library {
+  #books = [];
+  #members = [];
+  #borrowRecords = {};
+  #lateFeesPerDay = 0.5;
+
+  addBook(book) {
+    const alreadyExists = this.#books.find((b) => b.isbn === book.isbn);
+
+    if (alreadyExists) {
+      console.log(`A book with ISBN "${book.isbn}" already exists.`);
+      return;
+    }
+
+    this.#books.push(book);
+    console.log(`"${book.title}" added to the library.`);
+  }
+
+  removeBook(isbn) {
+    const book = this.#books.find((b) => b.isbn === isbn);
+
+    if (!book) {
+      console.log(`No book found with ISBN "${isbn}".`);
+      return;
+    }
+
+    if (book.isBorrowed) {
+      console.log(
+        `"${book.title}" is currently borrowed and cannot be removed.`,
+      );
+      return;
+    }
+
+    this.#books = this.#books.filter((b) => b.isbn !== isbn);
+    console.log(`"${book.title}" has been removed from the library.`);
+  }
+
+  registerMember(member) {
+    const alreadyExists = this.#members.find(
+      (m) => m.memberId === member.memberId,
+    );
+
+    if (alreadyExists) {
+      console.log(
+        `A member with ID "${member.memberId}" is already registered.`,
+      );
+      return;
+    }
+
+    this.#members.push(member);
+    console.log(`Member "${member.name}" registered successfully.`);
+  }
+
+  borrowBook(memberId, isbn, borrowDate) {
+    const member = this.#members.find((m) => m.memberId === memberId);
+    const book = this.#books.find((b) => b.isbn === isbn);
+
+    if (!member) {
+      console.log(`No member found with ID "${memberId}".`);
+      return;
+    }
+    if (!book) {
+      console.log(`No book found with ISBN "${isbn}".`);
+      return;
+    }
+    if (book.isBorrowed) {
+      console.log(`"${book.title}" is already borrowed by someone else.`);
+      return;
+    }
+
+    book.toggleBorrowedStatus();
+    member.borrowBook(isbn);
+
+    const recordKey = `${memberId}-${isbn}`;
+    this.#borrowRecords[recordKey] = borrowDate;
+
+    console.log(`"${book.title}" borrowed by ${member.name} on ${borrowDate}.`);
+  }
+
+  returnBook(memberId, isbn, returnDate) {
+    const member = this.#members.find((m) => m.memberId === memberId);
+    const book = this.#books.find((b) => b.isbn === isbn);
+
+    if (!member) {
+      console.log(`No member found with ID "${memberId}".`);
+      return;
+    }
+    if (!book) {
+      console.log(`No book found with ISBN "${isbn}".`);
+      return;
+    }
+    if (!book.isBorrowed) {
+      console.log(`"${book.title}" is not currently marked as borrowed.`);
+      return;
+    }
+
+    book.toggleBorrowedStatus();
+    member.returnBook(isbn);
+
+    const recordKey = `${memberId}-${isbn}`;
+    const borrowDate = new Date(this.#borrowRecords[recordKey]);
+    const returnDateObj = new Date(returnDate);
+
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysKept = Math.floor((returnDateObj - borrowDate) / msPerDay);
+
+    console.log(
+      `"${book.title}" returned by ${member.name}. Kept for ${daysKept} days.`,
+    );
+
+    const allowedDays = 14;
+    if (daysKept > allowedDays) {
+      const daysLate = daysKept - allowedDays;
+      const fee = daysLate * this.#lateFeesPerDay;
+      console.log(
+        `Late fee: ${daysLate} day(s) × $${this.#lateFeesPerDay} = $${fee.toFixed(2)}`,
+      );
+    } else {
+      console.log(`Returned on time! No late fee.`);
+    }
+
+    delete this.#borrowRecords[recordKey];
+  }
+
+  viewAvailableBooks() {
+    const available = this.#books.filter((b) => !b.isBorrowed);
+
+    if (available.length === 0) {
+      console.log("No books are currently available.");
+      return;
+    }
+
+    console.log("Available books:");
+    available.forEach((b) => {
+      console.log(`  - "${b.title}" by ${b.author} | ISBN: ${b.isbn}`);
+    });
+  }
+
+  viewBorrowedBooks() {
+    const borrowed = this.#books.filter((b) => b.isBorrowed);
+
+    if (borrowed.length === 0) {
+      console.log("No books are currently borrowed.");
+      return;
+    }
+
+    console.log("Borrowed books:");
+    borrowed.forEach((b) => {
+      console.log(`  - "${b.title}" by ${b.author} | ISBN: ${b.isbn}`);
+    });
+  }
+}
+
+const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "ISBN-001");
+const book2 = new Book("1984", "George Orwell", "ISBN-002");
+const book3 = new Book("Dune", "Frank Herbert", "ISBN-003");
+
+const member1 = new Member("Furkan", "M1");
+const member2 = new Member("Ali", "M2");
+
+const library = new Library();
+
+library.addBook(book1);
+library.addBook(book2);
+library.addBook(book3);
+library.addBook(book1);
+
+library.registerMember(member1);
+library.registerMember(member2);
+
+library.viewAvailableBooks();
+
+library.borrowBook("M1", "ISBN-001", "2026-01-01");
+library.borrowBook("M2", "ISBN-002", "2025-02-11");
+library.borrowBook("M1", "ISBN-001", "2024-01-05");
+
+library.viewAvailableBooks();
+library.viewBorrowedBooks();
+
+library.returnBook("M1", "ISBN-001", "2026-01-11");
+
+library.returnBook("M2", "ISBN-002", "2025-03-01");
+
+library.viewAvailableBooks();
