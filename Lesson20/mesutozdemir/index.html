@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Booking</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Book an Appointment</h1>
+      </header>
+
+      <form class="booking">
+        <section class="calendar">
+          <label for="user-name">Your Name</label>
+          <input type="text" id="user-name" />
+          <label for="user-email">Your Email Address</label>
+          <input type="email" id="user-email" />
+          <label for="date">Select a date</label>
+          <input type="date" id="date" />
+          <h2 id="timeslots-heading">Available Time Slots</h2>
+          <fieldset class="timeslots" aria-labelledby="timeslots-heading">
+            <legend class="hidden">Choose a time slot</legend>
+            <button
+              class="slot"
+              type="button"
+              aria-label="Select 09:00 time slot"
+            >
+              10:30
+            </button>
+            <button
+              class="slot"
+              type="button"
+              aria-label="Select 13:00 time slot"
+            >
+              13:00
+            </button>
+            <button
+              class="slot"
+              type="button"
+              aria-label="Select 14:30 time slot"
+            >
+              14:30
+            </button>
+            <button
+              class="slot"
+              type="button"
+              aria-label="Select 16:00 time slot"
+            >
+              16:00
+            </button>
+          </fieldset>
+        </section>
+
+        <aside class="summary">
+          <h2>Your Appointment</h2>
+          <p>User Name: <span id="entered-user-name">-</span></p>
+          <p>User Email: <span id="entered-user-email">-</span></p>
+          <p>Date: <span id="selected-date">-</span></p>
+          <p>Time: <span id="selected-time">-</span></p>
+          <form id="myForm">
+          <button id="confirm" type="submit" disabled>Confirm Booking</button>
+          </form>
+        </aside>
+      </form>
+    </div>
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <div class="checkmark">✔</div>
+        <h2>Your reservation has been received.</h2>
+        <p>We will contact you as soon as possible.</p>
+        <button id="closeModal">Okey</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
