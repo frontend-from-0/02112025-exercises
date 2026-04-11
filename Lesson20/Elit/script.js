@@ -19,7 +19,23 @@ const timeSlotElements = document.getElementsByClassName("slot-input");
 const selectedDateElement = document.getElementById("selected-date");
 const selectedTimeElement = document.getElementById("selected-time");
 const confirmButton = document.getElementById("confirm");
-const data = { date: null, time: null };
+const data = { name: null, email: null, date: null, time: null };
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("mail_address");
+const selectedNameElement = document.getElementById("selected-name");
+const selectedEmailElement = document.getElementById("selected-email");
+
+let tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+dateInput.min = tomorrow.toISOString().split("T")[0];
+
+function allowSubmit() {
+  if (data.name && data.email && data.date && data.time) {
+    confirmButton.removeAttribute("disabled");
+  } else {
+    confirmButton.setAttribute("disabled", true);
+  }
+}
 
 dateInput.addEventListener("change", () => {
   if (dateInput.value) {
@@ -40,17 +56,24 @@ dateInput.addEventListener("change", () => {
   });
 });
 
-/*function deselectTimeSlots() {
-  [...timeSlotElements].forEach((element) =>
-    element.classList.remove('selected'),
-  );
-}
-*/
-
-function allowSubmit() {
-  if (data.date && data.time) {
-    confirmButton.removeAttribute("disabled");
+nameInput.addEventListener("blur", () => {
+  if (nameInput.value) {
+    selectedNameElement.textContent = nameInput.value;
+    data.name = nameInput.value;
   } else {
-    confirmButton.setAttribute("disabled", true);
+    selectedNameElement.textContent = "-";
+    data.name = null;
   }
-}
+  allowSubmit();
+});
+
+emailInput.addEventListener("blur", () => {
+  if (emailInput.value) {
+    selectedEmailElement.textContent = emailInput.value;
+    data.email = emailInput.value;
+  } else {
+    selectedEmailElement.textContent = "-";
+    data.email = null;
+  }
+  allowSubmit();
+});
