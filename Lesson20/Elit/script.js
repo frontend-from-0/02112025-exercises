@@ -14,46 +14,43 @@
 4. Make confirm button disabled by default, only when all fields are filled it should be enabled (toggle a css class and disabled property)
 */
 
-const dateInput = document.getElementById('date');
-const timeSlotElements = document.getElementsByClassName('slot');
-const selectedDateElement = document.getElementById('selected-date');
-const selectedTimeElement = document.getElementById('selected-time');
-const confirmButton = document.getElementById('confirm');
+const dateInput = document.getElementById("date");
+const timeSlotElements = document.getElementsByClassName("slot-input");
+const selectedDateElement = document.getElementById("selected-date");
+const selectedTimeElement = document.getElementById("selected-time");
+const confirmButton = document.getElementById("confirm");
 const data = { date: null, time: null };
 
-
-dateInput.addEventListener('change', () => {
+dateInput.addEventListener("change", () => {
   if (dateInput.value) {
     selectedDateElement.textContent = dateInput.value;
     data.date = dateInput.value;
   } else {
-    selectedDateElement.textContent = '-';
-    data.date=null;
+    selectedDateElement.textContent = "-";
+    data.date = null;
   }
   allowSubmit();
 });
 
 [...timeSlotElements].forEach((element) => {
-  element.addEventListener('click', () => {
-    deselectTimeSlots();
-
-    selectedTimeElement.textContent = element.textContent;
-    element.classList.add('selected');
-    data.time = element.textContent;
+  element.addEventListener("change", () => {
+    selectedTimeElement.textContent = element.value;
+    data.time = element.value;
     allowSubmit();
   });
 });
 
-function deselectTimeSlots() {
+/*function deselectTimeSlots() {
   [...timeSlotElements].forEach((element) =>
     element.classList.remove('selected'),
   );
 }
+*/
 
 function allowSubmit() {
   if (data.date && data.time) {
-    confirmButton.removeAttribute('disabled');
+    confirmButton.removeAttribute("disabled");
   } else {
-    confirmButton.setAttribute('disabled', true);
+    confirmButton.setAttribute("disabled", true);
   }
 }

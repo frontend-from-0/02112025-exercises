@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,15 +14,71 @@
 
       <form class="booking">
         <section class="calendar">
+          <div class="user-info">
+            <div class="user-detail">
+              <label for="username">Your Username:</label>
+              <input
+                type="text"
+                id="username"
+                class="name-input"
+                name="username"
+                required
+              />
+            </div>
+            <div class="user-detail">
+              <label for="mail_address">Your Email Adress:</label>
+              <input
+                type="email"
+                id="mail_address"
+                class="mail-input"
+                name="mailAddress"
+                required
+              />
+            </div>
+          </div>
+          <h2 id="date-heading">Appoinment Date</h2>
           <label for="date">Select a date</label>
           <input type="date" id="date" />
           <h2 id="timeslots-heading">Available Time Slots</h2>
           <fieldset class="timeslots" aria-labelledby="timeslots-heading">
             <legend class="hidden">Choose a time slot</legend>
-            <button class="slot" type="button" aria-label="Select 09:00 time slot">10:30</button>
+            <input
+              type="radio"
+              id="slot1"
+              class="slot-input"
+              name="time-slot"
+              value="10:30"
+            />
+            <label for="slot1" class="slot-label">10:30</label>
+            <input
+              type="radio"
+              id="slot2"
+              class="slot-input"
+              name="time-slot"
+              value="13:00"
+            />
+            <label for="slot2" class="slot-label">13:00</label>
+            <input
+              type="radio"
+              id="slot3"
+              class="slot-input"
+              name="time-slot"
+              value="14:30"
+            />
+            <label for="slot3" class="slot-label">14:30</label>
+            <input
+              type="radio"
+              id="slot4"
+              class="slot-input"
+              name="time-slot"
+              value="16:00"
+            />
+            <label for="slot4" class="slot-label">16:00</label>
+
+            <!--  <button class="slot" type="button" aria-label="Select 09:00 time slot">10:30</button>
             <button class="slot" type="button" aria-label="Select 13:00 time slot">13:00</button>
             <button class="slot" type="button" aria-label="Select 14:30 time slot">14:30</button>
-            <button class="slot" type="button" aria-label="Select 16:00 time slot">16:00</button>
+            <button class="slot" type="button" aria-label="Select 16:00 time slot">16:00</button> -->
           </fieldset>
         </section>
 

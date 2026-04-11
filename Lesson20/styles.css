@@ -1,3 +1,7 @@
+body {
+  background-color: red !important;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -101,12 +105,10 @@ fieldset {
   background-color: #565859;
 }
 
-
-
 .hidden {
   display: none;
 }
-
+/*
 .selected {
   background-color: #0077cc;
   color: white;
@@ -114,4 +116,20 @@ fieldset {
 
 .selected:hover {
   background-color: #005fa3;
+}
+*/
+.slot-input {
+  display: none;
+}
+
+.slot-input:checked + .slot-label {
+  background-color: #c9770b;
+  color: white;
+}
+.user-info {
+  display: flex;
+  gap: 20px;
+}
+.user-detail {
+  flex: 1;
 }
