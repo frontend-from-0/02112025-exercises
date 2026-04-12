@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Appointment Booking</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -25,6 +28,7 @@
                 name="name"
                 required
               />
+               <p id="nameError" class="input-error hidden"></p>
             </div>
             <div class="user-detail">
               <label for="mail_address">Your Email Adress:</label>
@@ -33,8 +37,10 @@
                 id="mail_address"
                 class="mail-input"
                 name="mailAddress"
+                placeholder="email@example.com"
                 required
               />
+               <p id="emailError" class="input-error hidden"></p>
             </div>
           </section>
         </div>
@@ -87,6 +93,7 @@
             <p>Date: <span id="selected-date">-</span></p>
             <p>Time: <span id="selected-time">-</span></p>
             <button id="confirm" type="submit" disabled>Confirm Booking</button>
+            <p id="status-message"></p>
           </aside>
         </div>
       </form>

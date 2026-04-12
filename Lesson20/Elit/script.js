@@ -24,6 +24,59 @@ const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("mail_address");
 const selectedNameElement = document.getElementById("selected-name");
 const selectedEmailElement = document.getElementById("selected-email");
+const statusMessage = document.getElementById('status-message');
+
+
+const namePattern = /^[a-zA-ZÀ-ÿığüşöçİĞÜŞÖÇ]+(?: [a-zA-ZÀ-ÿığüşöçİĞÜŞÖÇ]+)*$/;
+const nameErrorParagraph = document.getElementById('nameError');
+
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const emailErrorParagraph = document.getElementById('emailError');
+
+function validateName(name){
+if(name.length<1){
+  nameErrorParagraph.textContent = 'name is required.';
+nameErrorParagraph.classList.remove('hidden');
+nameInput.classList.add('input-invalid');
+return false;
+} else if (name.length > 50) {
+    nameErrorParagraph.textContent =
+      'First name can be 50 characters max.';
+    nameErrorParagraph.classList.remove('hidden');
+    nameInput.classList.add('input-invalid');
+    return false;
+}else if (!namePattern.test(name)) {
+    nameErrorParagraph.textContent =
+    'Names can only contain letters and standard punctuation like hyphens or spaces.';
+    nameErrorParagraph.classList.remove('hidden');
+    nameInput.classList.add('input-invalid');
+    return false;
+}else {
+    nameErrorParagraph.textContent = '';
+   nameErrorParagraph.classList.add('hidden');
+   nameInput.classList.remove('input-invalid');
+   return true;
+  }
+}
+
+function validateEmail(email){
+  if(email.length<1){
+    emailErrorParagraph.textContent = 'An email address is required so we can contact you.';
+    emailErrorParagraph.classList.remove('hidden');
+    emailInput.classList.add('input-invalid');
+    return false;
+  }else if(!emailPattern.test(email)){
+    emailErrorParagraph.textContent = 'That doesn’t look like a valid email address (e.g. name@gmail.com).';
+    emailErrorParagraph.classList.remove('hidden');
+     emailInput.classList.add('input-invalid');
+    return false;
+  }else {
+    emailErrorParagraph.textContent = '';
+    emailErrorParagraph.classList.add('hidden');
+     emailInput.classList.remove('input-invalid');
+    return true;
+  }
+}
 
 let tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -56,8 +109,10 @@ dateInput.addEventListener("change", () => {
   });
 });
 
-nameInput.addEventListener("blur", () => {
-  if (nameInput.value) {
+nameInput.addEventListener("input", () => {
+const isValid = validateName(nameInput.value);
+
+  if (isValid) {
     selectedNameElement.textContent = nameInput.value;
     data.name = nameInput.value;
   } else {
@@ -67,8 +122,10 @@ nameInput.addEventListener("blur", () => {
   allowSubmit();
 });
 
-emailInput.addEventListener("blur", () => {
-  if (emailInput.value) {
+emailInput.addEventListener("input", () => {
+const isValid = validateEmail(emailInput.value);
+
+  if (isValid) {
     selectedEmailElement.textContent = emailInput.value;
     data.email = emailInput.value;
   } else {
@@ -77,3 +134,33 @@ emailInput.addEventListener("blur", () => {
   }
   allowSubmit();
 });
+
+confirmButton.addEventListener('click', ()=>{
+  statusMessage.innerHTML = `
+    <p>Your appointment has been successfully confirmed! ✅</p>
+    <ul>
+      <li><strong>Name:</strong> ${data.name}</li>
+      <li><strong>Email:</strong> ${data.email}</li>
+      <li><strong>Date:</strong> ${data.date}</li>
+      <li><strong>Time:</strong> ${data.time}</li>
+    </ul>
+  `;
+  statusMessage.style.color = "green";
+
+  nameInput.value = "";
+  emailInput.value = "";
+  dateInput.value = "";
+  [...timeSlotElements].forEach(slot => slot.checked = false);
+
+  selectedNameElement.textContent = "-";
+  selectedEmailElement.textContent = "-";
+  selectedDateElement.textContent = "-";
+  selectedTimeElement.textContent = "-";
+
+  data.name = null;
+  data.email = null;
+  data.date = null;
+  data.time = null;
+  confirmButton.setAttribute("disabled", true);
+  console.log("Submitted data:", data);
+})
