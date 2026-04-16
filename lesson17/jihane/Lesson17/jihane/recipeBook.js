@@ -1,690 +1,276 @@
-console.log("Lesson 16 is running");
-
 /*
-1. Sum Array Elements with a For Loop
-   - Define a function `sumArray(numbers)` that uses a for loop
-     to sum all elements in an array of numbers.
-   - Log the final sum.
+===========================================================
+  RECIPE BOOK APPLICATION
+===========================================================
+In this mini-project, you will create a simple Recipe Book 
+to store and manage recipes.
+
+You'll practice:
+1. Arrays and objects
+2. Loops (for, for-of, findIndex)
+3. Conditionals (if-else)
+4. CRUD operations (Create, Read, Update, Delete)
+5. Extra challenge: Filter by ingredient or cooking time
+
+Run this file in Node.js or the browser console to test.
 */
 
-console.log('Ex.1 ');
+/*
+-----------------------------------------------------------
+  STEP 1: Setup and Initial Recipes
+-----------------------------------------------------------
+1. Create a variable 'recipes' with a suitable data type with a few starter recipes.
+2. Each recipe  should have:
+   - name (string)
+   - ingredients (array of strings)
+   - cookingTime (number, in minutes)
+*/
 
-function sumArray(numbers) {
-  let sum = 0;
-  // index - i , j, l, m
-  for (let i = 0; i < numbers.length; i++) {
-    if (typeof numbers[i] === 'number') {
-      sum += numbers[i];
-    } else {
-      // maybe try to convert value to a number, otherwise warn user that the value is in incorrect format
-    }
+const recipes = [
+  { name : 'Pasta',
+    ingredients : ['pasta', 'tomato', 'garlic'],
+    cookingTime : 20, 
+  },
+  {
+    name : 'Guacamole',
+    ingredients: ['lime', 'avocados', 'salt'],
+    cookingTime : 10,
+  },
+  {
+    name : 'Pizza',
+    ingredients: ['surdough', 'tomato', 'cheese'],
+    cookingTime : 15, 
+  },
+  {
+    name : 'Pancake',
+    ingredients: ['milk', 'egg', 'flour', 'sugar'],
+    cookingTime : 10, 
   }
-  console.log(sum);
+]
+
+
+/*
+-----------------------------------------------------------
+  STEP 2: Display All Recipes
+-----------------------------------------------------------
+Function: displayAllRecipes()
+- Logs each recipe from recipes in a nice format:
+  Name: Pasta
+  Ingredients: pasta, tomato, garlic
+  Cooking Time: 20 minutes
+*/
+
+function displayAllRecipes(recipeBook) {
+   console.log('Displaying all recipes...');
+
+  if (recipeBook.length < 1) {
+    console.log('No recipes to display.');
+    console.log('----------------');
+    return;
+  }
+
+  console.log('-------------------');
+
+  for (let i = 0; i < recipeBook.length; i++) {
+    console.log(`Name: ${recipeBook[i].name}`);
+    console.log(`Ingredients: ${recipeBook[i].ingredients}`);
+    console.log(`Cooking Time: ${recipeBook[i].cookingTime}`);
+    console.log('End of the recipe.');
+    console.log('----------------------');
+  }
 }
 
-sumArray([1, 3, '5', 7, -22, 22]);
+displayAllRecipes(recipeBook);
 
-/* 
-1 - index 0 => let sum = 1;
-3 - index 1
-5 - index 2
-6 - index 3
--22 - index 4
-22 - index 5
-break
-*/
-
-console.log('-------');
 
 /*
-2. Find Maximum Number in an Array
-   - Define a function `findMax(numbers)` that uses a for loop to iterate
-     through an array and find the largest value.
-   - Log the largest value.
+-----------------------------------------------------------
+  STEP 3: Add a New Recipe
+-----------------------------------------------------------
+Function: addRecipe(name, ingredients, cookingTime)
+- Checks if a recipe with the same name exists.
+- If yes, log a warning and return.
+- If not, add the new recipe and log success.
+- ingredients should be an array like ['egg', 'milk', 'flour']
 */
-console.log('Ex.2 ');
 
-function findMax(numbers) {
-  let max = numbers[0];
-  for (let i = 1; i < numbers.length; i++) {
-    if (numbers[i] > max) {
-      max = numbers[i];
-    }
-  }
-  console.log('The maximum number of the array is: ', max);
-}
+function addRecipe(name, ingredients, cookingTime, recipeBook) {
+  console.log(`Trying to add recipe: ${name}`);
 
-// findMax ([1,2,3,4,5])
-// findMax ([100,2,3,4,5])
-findMax([100, 2, -53, 4, 50]);
-
-console.log('-------');
-/*
-3. Count Odd and Even Numbers
-   - Define a function `countOddEven(numbers)` that loops through an array
-     of numbers and counts how many are odd and how many are even.
-   - Log the counts in the format: "Odd: X, Even: Y"
-*/
-console.log('Ex. 3');
-
-function countOddEven(numbers) {
-  let odds = 0; //let odds;
-  let evens = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    if (typeof numbers[i] !== 'number') {
-      console.log('Error: please only provide numbers!');
+  // Check if recipe already exists
+  for (let i = 0; i < recipeBook.length; i++) {
+    if (recipeBook[i].name.toLowerCase() === name.toLowerCase()) {
+      console.log(`Recipe "${name}" already exists.`);
       return;
     }
-
-    if (numbers[i] % 2 === 0) {
-      evens++;
-    } else {
-      odds++;
-    }
-  }
-  console.log('Even:', evens, 'Odd:', odds);
-}
-
-countOddEven([1, 2, 3, 4, 5, 6]);
-
-console.log('-------');
-
-/*
-4. Sum of Numbers in a Range (While Loop)
-   - Define a function `sumRange(start, end)` that uses a while loop
-     to sum all integers from `start` to `end` (inclusive).
-   - Log the final sum.
-*/
-console.log('Ex. 4');
-
-function sumRange(start, end) {
-  let sum = 0;
-
-  while (start <= end) {
-    sum += start;
-    start++;
   }
 
-  console.log(sum);
+  // Create new recipe object
+  const newRecipe = {
+    name: name,
+    ingredients: ingredients,
+    cookingTime: cookingTime
+  };
+
+  // Add to recipeBook
+  recipeBook.push(newRecipe);
+
+  console.log(`Recipe "${name}" added successfully.`);
 }
 
-sumRange(1, 4);
-
-
-console.log('-------');
+addRecipe('Omelette', ['egg', 'salt', 'butter'], 5, recipes);
+displayAllRecipes(recipes);
 
 
 
 /*
-5. Reverse an Array
-   - Define a function `reverseArray(arr)` that reverses the elements
-     of an array manually using a for loop (without using .reverse()).
-   - Log the reversed array.
+-----------------------------------------------------------
+  STEP 4: View a Recipe by Name
+-----------------------------------------------------------
+Function: viewRecipe(name)
+- Looks for the recipe by name and logs all its info.
+- If not found, shows a message.
 */
 
-console.log('Ex. 5');
+function viewRecipe(name, recipeBook) {
+  console.log(`Searching for recipe: ${name}`);
 
-function reverseArray(arr) {
-  const reversedArray = [];
-  for (let i = arr.length - 1; i >= 0; i--) {
-    const currentElement = arr[i];
-    reversedArray.push(currentElement);
-  }
-  console.log(reversedArray);
-}
-
-reverseArray(['apple', 'banana', true]);
-
-/*
-6. Filter Out Negative Numbers
-   - Define a function `filterNegative(numbers)` that loops through
-     an array of numbers and creates a new array without any negative values.
-   - Log the new array.
-*/
-
-console.log('Ex. 6');
-
-function filterNegative(numbers) {
-  let result = [];
-
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] >= 0) {
-      result.push(numbers[i]);
+  // Search for the recipe
+  for (let i = 0; i < recipeBook.length; i++) {
+    if (recipeBook[i].name.toLowerCase() === name.toLowerCase()) {
+      console.log('Recipe found:');
+      console.log(`Name: ${recipeBook[i].name}`);
+      console.log(`Ingredients: ${recipeBook[i].ingredients.join(', ')}`);
+      console.log(`Cooking Time: ${recipeBook[i].cookingTime} minutes`);
+      console.log('----------------------');
+      return;
     }
   }
 
-  console.log(result);
-}
-filterNegative([3, -1, 0, -7, 5]);
-
-
-
-
-console.log('-------');
-
-/*
-7. Double the Values (For-of Loop)
-   - Define a function `doubleValues(numbers)` that uses a for-of loop
-     to multiply each number by 2, storing results in a new array.
-   - Log the new array.
-*/
-console.log('Ex.7');
-function doubleValues(numbers) {
-  const result = [];
-  for (const number of numbers) {
-    result.push(number * 2);
-  }
-  console.log(result);
-}
-doubleValues([38, 25, 77, 81]);
-
-console.log('-------');
-
-/*
-8. Print Each Character of a String (For-of)
-   - Define a function `printCharacters(str)` that uses a for-of loop
-     to log each character in the string on a separate line.
-*/
-
-console.log('Ex.7');
-
-function printCharacters(str) {
-  for (const char of str) {
-    console.log(char);
-  }
+  // If not found
+  console.log(`No recipe found with the name: ${name}`);
 }
 
-printCharacters("Hello");
-
-
-
-console.log('-------');
+viewRecipe('Pasta', recipes);
+viewRecipe('Burger', recipes);
 
 /*
-9. Sum All Values in an Object
-   - Define a function `sumObjectValues(obj)` that iterates over the
-     properties of an object (using a for-in loop) and sums all numeric values.
-   - Log the sum.
-   - Example: {a: 10, b: 20, c: 5} -> 35
+-----------------------------------------------------------
+  STEP 5: Update a Recipe
+-----------------------------------------------------------
+Function: updateRecipe(name, newIngredients, newCookingTime)
+- Finds the recipe by name.
+- Updates ingredients and cookingTime.
+- Logs success or error message.
 */
 
-console.log('Ex.9');
+function updateRecipe(name, newIngredients, newCookingTime, recipeBook) {
+  console.log(`Trying to update recipe: ${name}`);
 
-function sumObjectValues(obj) {
-  let sum = 0;
+  // Search for the recipe
+  for (let i = 0; i < recipeBook.length; i++) {
+    if (recipeBook[i].name.toLowerCase() === name.toLowerCase()) {
+      
+      // Update values
+      recipeBook[i].ingredients = newIngredients;
+      recipeBook[i].cookingTime = newCookingTime;
 
-  for (let key in obj) {
-    if (typeof obj[key] === "number") {
-      sum += obj[key];
+      console.log(`Recipe "${name}" updated successfully.`);
+      return;
     }
   }
 
-  console.log(sum);
+  // If not found
+  console.log(`No recipe found with the name: ${name}`);
 }
 
-sumObjectValues({ a: 10, b: 20, c: 5 });
-
-console.log('-------');
+updateRecipe('Pasta', ['pasta', 'cream', 'mushroom'], 25, recipes);
+displayAllRecipes(recipes);
 
 
 /*
-10. Print Keys of an Object (For-in)
-    - Define a function `printObjectKeys(obj)` that uses a for-in loop
-      to log each key of the object.
-    - Example: { name: "Alice", age: 25 } -> logs "name", then "age"
-*/
-console.log('Ex.10');
-
-function printObjectKeys(obj) {
-  for (let key in obj) {
-    console.log(key);
-  }
-}
-
-printObjectKeys({ name: 'yasar', age: 27, city: 'mersin' });
-
-/*
-11. Sum Array Using do-while Loop
-    - Define a function `sumWithDoWhile(numbers)` that uses a do-while loop
-      to sum all numbers in the array.
-    - Log the total.
+-----------------------------------------------------------
+  STEP 6: Delete a Recipe
+-----------------------------------------------------------
+Function: deleteRecipe(name)
+- Finds and removes the recipe from the array.
+- Logs success or error message.
 */
 
-console.log('Ex.11');
+function deleteRecipe(name, recipeBook) {
+  console.log(`Trying to delete recipe: ${name}`);
 
-function sumWithDoWhile(numbers) {
-  let sum = 0;
-  let i = 0;
+  // Find index of the recipe
+  for (let i = 0; i < recipeBook.length; i++) {
+    if (recipeBook[i].name.toLowerCase() === name.toLowerCase()) {
+      
+      // Remove recipe using splice
+      recipeBook.splice(i, 1);
 
-  do {
-    sum += numbers[i];
-    i++;
-  } while (i < numbers.length);
-
-  console.log(sum);
-}
-
-sumWithDoWhile([3, 5, 7]);
-
-
-
-
-console.log('-------');
-
-
-/*
-12. Remove Duplicates from an Array
-    - Define a function `removeDuplicates(arr)` that loops through the array
-      and creates a new array without duplicate elements.
-    - Hint: you could check if the item is already in the new array before pushing.
-    - Log the new array without duplicates.
-*/
-
-console.log('Ex.12');
-
-function removeDuplicates(arr) {
-  let uniqueArr = [];
-
-  for (const item of arr) {
-    if (!uniqueArr.includes(item)) {
-      uniqueArr.push(item);
+      console.log(`Recipe "${name}" deleted successfully.`);
+      return;
     }
   }
 
-  console.log(uniqueArr);
+  // If not found
+  console.log(`No recipe found with the name: ${name}`);
 }
 
-removeDuplicates([1, 2, 2, 3, 1, 4]);
-
-
-
-
-
-console.log('-------');
-
-/*
-13. Calculate Factorial (For Loop)
-    - Define a function `factorial(n)` that calculates n! (n factorial)
-      using a for loop.
-    - Log the result. 
-    - Example: factorial(5) -> 120
-*/
-
-console.log('Ex.13');
-function factorial(n) {
-  let result = 1;
-
-  for (let i = 1; i <= n; i++) {
-    result *= i;
-  }
-
-  console.log(result);
-}
-
-factorial(5);
-
-
-
-console.log('-------');
-
-/*
-14. String -> Array -> String
-    - Define a function `reverseWords(sentence)` that splits the sentence 
-      into an array of words, reverses the array order, then joins it back into
-      a string. Use loops or built-in methods as you like.
-    - Log the reversed sentence.
-*/
-
-console.log('Ex.14');
-
-function reverseWords(sentence) {
-  let words = sentence.split(" ");
-  let reversedSentence = words.reverse().join(" ");
-  console.log(reversedSentence);
-}
-
-reverseWords("I love JavaScript");
-
-
-
-
-
-
-console.log('-------');
-
-
+deleteRecipe('Pizza', recipes);
+displayAllRecipes(recipes);
 
 
 /*
-15. Filter Words Longer Than X
-    - Define a function `filterLongWords(words, minLength)` that uses a for loop
-      to collect only the words that have a length >= minLength.
-    - Log the resulting array.
+-----------------------------------------------------------
+  STEP 7: Extra Challenge â€“ Filter Recipes
+-----------------------------------------------------------
+Function: filterByIngredient(ingredient)
+- Shows all recipes that use a certain ingredient.
+
+Function: filterByMaxTime(maxMinutes)
+- Shows recipes that take <= maxMinutes to cook.
 */
 
-console.log('Ex.15');
 
-function filterLongWords(words, minLength) {
-  let result = [];
+function filterByIngredient(ingredient, recipeBook) {
+  console.log(`Filtering recipes with ingredient: ${ingredient}`);
 
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].length >= minLength) {
-      result.push(words[i]);
+  let found = false;
+
+  for (let i = 0; i < recipeBook.length; i++) {
+    if (recipeBook[i].ingredients.includes(ingredient)) {
+      console.log(`Name: ${recipeBook[i].name}`);
+      console.log(`Ingredients: ${recipeBook[i].ingredients.join(', ')}`);
+      console.log(`Cooking Time: ${recipeBook[i].cookingTime} minutes`);
+      console.log('----------------------');
+      found = true;
     }
   }
 
-  console.log(result);
-}
-
-filterLongWords(["cat", "elephant", "dog", "tiger"], 4);
-
-
-
-console.log('-------');
-
-
-
-/*
-16. Log Array Elements with Their Indices
-    - Define a function `logElementsWithIndex(arr)` that loops through the array
-      and logs "Index: i, Value: arr[i]" for each element.
-*/
-
-
-console.log('Ex.16');
-
-function logElementsWithIndex(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    console.log(`Index: ${i}, Value: ${arr[i]}`);
+  if (!found) {
+    console.log(`No recipes found with ingredient: ${ingredient}`);
   }
 }
 
-logElementsWithIndex(["apple", "banana", "cherry"]);
+function filterByMaxTime(maxMinutes, recipeBook) {
+  console.log(`Filtering recipes with cooking time <= ${maxMinutes} minutes`);
 
+  let found = false;
 
-
-
-
-console.log('-------');
-
-/*
-17. Find the Smallest Number in an Array
-    - Define a function `findMin(numbers)` that loops through the array
-      to find and return the smallest number.
-    - Log the smallest number.
-*/
-
-console.log('Ex.17');
-
-function findMin(numbers) {
-  let min = numbers[0];
-
-  for (let i = 1; i < numbers.length; i++) {
-    if (numbers[i] < min) {
-      min = numbers[i];
+  for (let i = 0; i < recipeBook.length; i++) {
+    if (recipeBook[i].cookingTime <= maxMinutes) {
+      console.log(`Name: ${recipeBook[i].name}`);
+      console.log(`Ingredients: ${recipeBook[i].ingredients.join(', ')}`);
+      console.log(`Cooking Time: ${recipeBook[i].cookingTime} minutes`);
+      console.log('----------------------');
+      found = true;
     }
   }
 
-  console.log(min);
-}
-
-findMin([8, 3, 12, 5, 1]);
-
-
-
-
-
-console.log('-------');
-
-/*
-18. Count Occurrences of a Word in an Array
-    - Define a function `countOccurrences(arr, word)` that loops through `arr`
-      to count how many times `word` appears.
-    - Log the count.
-*/
-
-console.log('Ex.18');
-
-function countOccurrences(arr, word) {
-  let count = 0;
-
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === word) {
-      count++;
-    }
+  if (!found) {
+    console.log(`No recipes found under ${maxMinutes} minutes`);
   }
-
-  console.log(count);
 }
 
-countOccurrences(["apple", "banana", "apple", "orange", "apple"], "apple");
-
-
-
-
-
-console.log('-------');
-
-/*
-19. Remove Falsy Values
-    - Define a function `removeFalsyValues(arr)` that loops through an array
-      and returns a new array without falsy values (false, 0, "", null, undefined, NaN).
-    - Log the new array.
-*/
-
-console.log('Ex.19');
-
-function removeFalsyValues(arr) {
-  let result = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      result.push(arr[i]);
-    }
-  }
-
-  console.log(result);
-}
-
-removeFalsyValues([0, "hello", false, 42, "", null, "world", undefined]);
-
-
-
-
-console.log('-------');
-
-/*
-20. Sum of All Digits in a String
-    - Define a function `sumDigits(str)` that loops through each character of `str`,
-      checks if it's a digit, and if so, adds it to a total sum.
-    - Log the final sum.
-    - Example: "abc123" -> 6
-*/
-
-console.log('Ex.20');
-
-function sumDigits(str) {
-  let sum = 0;
-
-  for (const char of str) {
-    if (char >= "0" && char <= "9") {
-      sum += Number(char);
-    }
-  }
-
-  console.log(sum);
-}
-
-sumDigits("abc123");
-
-
-
-console.log('-------');
-
-/*
-21. Average of Array Elements
-    - Define a function `averageArray(numbers)` that uses a loop
-      to calculate the average (sum / length).
-    - Log the average.
-*/
-
-
-
-console.log('Ex.21');
-
-function averageArray(numbers) {
-  let sum = 0;
-
-  for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
-  }
-
-  let average = sum / numbers.length;
-  console.log(average);
-}
-
-averageArray([10, 20, 30, 40]);
-
-
-
-
-
-console.log('-------');
-/*
-22. Flatten a 2D Array (Nested Loops)
-    - Define a function `flattenArray(twoDArray)` that takes an array of arrays
-      (e.g., [[1,2],[3,4]]) and uses nested loops to create a new one-dimensional array.
-    - Log the flattened array.
-*/
-
-
-console.log('Ex.22');
-function flattenArray(twoDArray) {
-  let result = [];
-
-  for (let i = 0; i < twoDArray.length; i++) {
-    for (let j = 0; j < twoDArray[i].length; j++) {
-      result.push(twoDArray[i][j]);
-    }
-  }
-
-  console.log(result);
-}
-
-flattenArray([[1, 2], [3, 4]]);
-
-
-console.log('-------');
-
-/*
-23. Find Words Containing a Letter
-    - Define a function `findWordsWithLetter(words, letter)` that loops through
-      an array of words and returns a new array of only the words that contain
-      the given letter.
-    - Log the filtered array.
-*/
-
-console.log('Ex.23');
-
-function findWordsWithLetter(words, letter) {
-  let result = [];
-
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].includes(letter)) {
-      result.push(words[i]);
-    }
-  }
-
-  console.log(result);
-}
-
-findWordsWithLetter(["apple", "banana", "pear", "grape"], "a");
-
-
-
-
-console.log('-------');
-
-
-/*
-24. Push and Pop Operations
-    - Define a function `pushPopExample(arr, itemToPush)` that:
-      - pushes itemToPush to arr
-      - logs the updated array
-      - then pops the last element
-      - logs the popped element
-      - logs the final array
-*/
-
-console.log('Ex.24');
-
-function pushPopExample(arr, itemToPush) {
-  arr.push(itemToPush);
-  console.log(arr);
-
-  let poppedItem = arr.pop();
-  console.log(poppedItem);
-
-  console.log(arr);
-}
-
-pushPopExample([1, 2, 3], 4);
-
-
-
-console.log('-------');
-
-/*
-25. Push and Shift Operations
-    - Define a function `manageQueue(queue, newPerson)` that:
-      - push `newPerson` to the end of `queue`
-      - logs the updated queue
-      - shifts (removes) the first person in the queue
-      - logs the removed person
-      - logs the final queue
-*/
-
-
-console.log('Ex.25');
-
-function manageQueue(queue, newPerson) {
-  queue.push(newPerson);
-  console.log(queue);
-
-  let removedPerson = queue.shift();
-  console.log(removedPerson);
-
-  console.log(queue);
-}
-
-manageQueue(["Alice", "Bob", "Charlie"], "Diana");
-
-
-console.log('-------');
-/*
-26. To-Do List Application 
-  - Define a function `updateTodoList(todoList, startIndex, deleteCount, ...newTasks)`:
-   - Logs the current list of tasks.
-   - Removes `deleteCount` tasks starting at `startIndex`.
-   - Inserts any new tasks at the end of the array.
-   - Logs the updated list.
-*/
-
-console.log('Ex.26');
-
-function updateTodoList(todoList, startIndex, deleteCount, ...newTasks) {
-  console.log("Current list:", todoList);
-
-  todoList.splice(startIndex, deleteCount);
-  todoList.push(...newTasks);
-
-  console.log("Updated list:", todoList);
-}
-
-const todoList = ['Study JS', 'Eat breakfast', 'Walk dog'];
-updateTodoList(todoList, 1, 1, 'Read book', 'Call friend');
-
-
-console.log('-------');
-
-
+filterByIngredient('tomato', recipes);
+filterByMaxTime(15, recipes);

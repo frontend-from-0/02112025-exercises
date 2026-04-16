@@ -1,690 +1,343 @@
-console.log("Lesson 16 is running");
+/*
+===========================================================
+  SIMPLE CONTACT BOOK APPLICATION
+===========================================================
+In this project, you'll create a Contact Book to store and
+manage basic info: name, phone, and email.
+
+You'll practice:
+1. Arrays and objects
+2. Loops (for, for-of, findIndex, etc.)
+3. Conditionals (if-else)
+4. Basic CRUD (Create, Read, Update, Delete) functionality
+
+Below is a step-by-step guide, with sample code and 
+comments explaining what each section does. Run this file
+in Node.js or in your browser's console to see the output.
+*/
 
 /*
-1. Sum Array Elements with a For Loop
-   - Define a function `sumArray(numbers)` that uses a for loop
-     to sum all elements in an array of numbers.
-   - Log the final sum.
+-----------------------------------------------------------
+  STEP 1: Setup and Initial Data
+-----------------------------------------------------------
+1. Create an array named 'contacts' with a few initial 
+   sample contacts.
+2. Each contact is an object with 'name', 'phone', and 
+   'email' properties.
 */
+const contacts = [
+  {
+    name: 'John',
+    phone: '0123 234 23 34',
+    email: 'johndoe@gmail.com',
+  },
+  {
+    name: 'Guner',
+    phone: '0123 234 32 45',
+    email: 'gnrkls@gmail.com',
+  },
+];
 
-console.log('Ex.1 ');
-
-function sumArray(numbers) {
-  let sum = 0;
-  // index - i , j, l, m
-  for (let i = 0; i < numbers.length; i++) {
-    if (typeof numbers[i] === 'number') {
-      sum += numbers[i];
-    } else {
-      // maybe try to convert value to a number, otherwise warn user that the value is in incorrect format
-    }
-  }
-  console.log(sum);
-}
-
-sumArray([1, 3, '5', 7, -22, 22]);
-
-/* 
-1 - index 0 => let sum = 1;
-3 - index 1
-5 - index 2
-6 - index 3
--22 - index 4
-22 - index 5
-break
-*/
-
-console.log('-------');
+const emptyContactBook = [];
 
 /*
-2. Find Maximum Number in an Array
-   - Define a function `findMax(numbers)` that uses a for loop to iterate
-     through an array and find the largest value.
-   - Log the largest value.
+-----------------------------------------------------------
+  STEP 2: Display All Contacts
+-----------------------------------------------------------
+Function: displayAllContacts()
+- Loops over the 'contacts' array.
+- Logs a descriptive string for each contact.
+
+Example output:
+  Name: Alice, Phone: 123-456-7890, Email: alice@example.com
 */
-console.log('Ex.2 ');
 
-function findMax(numbers) {
-  let max = numbers[0];
-  for (let i = 1; i < numbers.length; i++) {
-    if (numbers[i] > max) {
-      max = numbers[i];
-    }
-  }
-  console.log('The maximum number of the array is: ', max);
-}
+function displayAllContacts(contactBook) {
+  console.log('Displaying all contacts...');
 
-// findMax ([1,2,3,4,5])
-// findMax ([100,2,3,4,5])
-findMax([100, 2, -53, 4, 50]);
-
-console.log('-------');
-/*
-3. Count Odd and Even Numbers
-   - Define a function `countOddEven(numbers)` that loops through an array
-     of numbers and counts how many are odd and how many are even.
-   - Log the counts in the format: "Odd: X, Even: Y"
-*/
-console.log('Ex. 3');
-
-function countOddEven(numbers) {
-  let odds = 0; //let odds;
-  let evens = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    if (typeof numbers[i] !== 'number') {
-      console.log('Error: please only provide numbers!');
-      return;
-    }
-
-    if (numbers[i] % 2 === 0) {
-      evens++;
-    } else {
-      odds++;
-    }
-  }
-  console.log('Even:', evens, 'Odd:', odds);
-}
-
-countOddEven([1, 2, 3, 4, 5, 6]);
-
-console.log('-------');
-
-/*
-4. Sum of Numbers in a Range (While Loop)
-   - Define a function `sumRange(start, end)` that uses a while loop
-     to sum all integers from `start` to `end` (inclusive).
-   - Log the final sum.
-*/
-console.log('Ex. 4');
-
-function sumRange(start, end) {
-  let sum = 0;
-
-  while (start <= end) {
-    sum += start;
-    start++;
+  if (contactBook.length < 1) {
+    console.log('No contacts to display.');
+    console.log('----------------');
+    return;
   }
 
-  console.log(sum);
-}
-
-sumRange(1, 4);
-
-
-console.log('-------');
-
-
-
-/*
-5. Reverse an Array
-   - Define a function `reverseArray(arr)` that reverses the elements
-     of an array manually using a for loop (without using .reverse()).
-   - Log the reversed array.
-*/
-
-console.log('Ex. 5');
-
-function reverseArray(arr) {
-  const reversedArray = [];
-  for (let i = arr.length - 1; i >= 0; i--) {
-    const currentElement = arr[i];
-    reversedArray.push(currentElement);
+  for (let i = 0; i < contactBook.length; i++) {
+    console.log(
+      `Name: ${contactBook[i].name}, Phone:${contactBook[i].phone} , Email: ${contactBook[i].email}`,
+    );
   }
-  console.log(reversedArray);
+  console.log('End of contacts.');
+  console.log('----------------');
 }
 
-reverseArray(['apple', 'banana', true]);
+displayAllContacts(contacts);
 
-/*
-6. Filter Out Negative Numbers
-   - Define a function `filterNegative(numbers)` that loops through
-     an array of numbers and creates a new array without any negative values.
-   - Log the new array.
-*/
-
-console.log('Ex. 6');
-
-function filterNegative(numbers) {
-  let result = [];
-
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] >= 0) {
-      result.push(numbers[i]);
+// Helper function findContact:
+function findContact(name, contactBook) {
+  for (let i = 0; i < contactBook.length; i++) {
+    if (contactBook[i].name.toLowerCase() === name.toLowerCase()) {
+      return contactBook[i];
     }
   }
 
-  console.log(result);
-}
-filterNegative([3, -1, 0, -7, 5]);
-
-
-
-
-console.log('-------');
-
-/*
-7. Double the Values (For-of Loop)
-   - Define a function `doubleValues(numbers)` that uses a for-of loop
-     to multiply each number by 2, storing results in a new array.
-   - Log the new array.
-*/
-console.log('Ex.7');
-function doubleValues(numbers) {
-  const result = [];
-  for (const number of numbers) {
-    result.push(number * 2);
-  }
-  console.log(result);
-}
-doubleValues([38, 25, 77, 81]);
-
-console.log('-------');
-
-/*
-8. Print Each Character of a String (For-of)
-   - Define a function `printCharacters(str)` that uses a for-of loop
-     to log each character in the string on a separate line.
-*/
-
-console.log('Ex.7');
-
-function printCharacters(str) {
-  for (const char of str) {
-    console.log(char);
-  }
+  return null;
 }
 
-printCharacters("Hello");
-
-
-
-console.log('-------');
-
 /*
-9. Sum All Values in an Object
-   - Define a function `sumObjectValues(obj)` that iterates over the
-     properties of an object (using a for-in loop) and sums all numeric values.
-   - Log the sum.
-   - Example: {a: 10, b: 20, c: 5} -> 35
+-----------------------------------------------------------
+  STEP 3: Add a New Contact
+-----------------------------------------------------------
+Function: addContact(name, phone, email)
+- Creates a new contact object and pushes it into 'contacts'.
+- Checks if a contact with the same name already 
+  exists before adding. If found, logs a warning and returns.
+- Logs "Contact added successfully." if everything is good.
 */
 
-console.log('Ex.9');
+function addContact(name, phone, email, contactBook) {
+  console.log('Adding contact with name...', name);
 
-function sumObjectValues(obj) {
-  let sum = 0;
+  console.log('Verifying if the contact exists');
 
-  for (let key in obj) {
-    if (typeof obj[key] === "number") {
-      sum += obj[key];
-    }
+  const maybeContact = findContact(name, contactBook);
+
+  if (maybeContact) {
+    console.warn(`Warning: contact with name ${name} already exists`);
+    console.log('----------------');
+    return;
   }
 
-  console.log(sum);
+  console.log('Contact is not found.');
+  const newContact = {
+    name: name,
+    phone: phone,
+    email: email,
+  };
+
+  //   const newContact = {name, phone,email}; - shorter syntax becuase name, phone and email values are variables and these variables have the same names as their keys.
+
+  contactBook.push(newContact);
+  console.log('Added contact with name', name);
+  console.log('----------------');
 }
+addContact('muhammed', '555-4497', 'muhammed@gmail.com', contacts);
+addContact('John', '555-4497', 'muhammed@gmail.com', contacts);
+addContact('john', '555-4497', 'muhammed@gmail.com', contacts);
 
-sumObjectValues({ a: 10, b: 20, c: 5 });
-
-console.log('-------');
-
-
+displayAllContacts(contacts);
 /*
-10. Print Keys of an Object (For-in)
-    - Define a function `printObjectKeys(obj)` that uses a for-in loop
-      to log each key of the object.
-    - Example: { name: "Alice", age: 25 } -> logs "name", then "age"
+-----------------------------------------------------------
+  STEP 4: View a Contact by Name
+-----------------------------------------------------------
+Function: viewContact(name)
+- Loops over 'contacts' to find one matching 'name'.
+- Logs the contact info if found.
+- Otherwise, logs: "No contact found with the name: <name>"
 */
-console.log('Ex.10');
+function viewContact(name, contactBook) {
+  console.log('Looking for contact with the name ' + name);
 
-function printObjectKeys(obj) {
-  for (let key in obj) {
-    console.log(key);
-  }
-}
-
-printObjectKeys({ name: 'yasar', age: 27, city: 'mersin' });
-
-/*
-11. Sum Array Using do-while Loop
-    - Define a function `sumWithDoWhile(numbers)` that uses a do-while loop
-      to sum all numbers in the array.
-    - Log the total.
-*/
-
-console.log('Ex.11');
-
-function sumWithDoWhile(numbers) {
-  let sum = 0;
-  let i = 0;
-
-  do {
-    sum += numbers[i];
-    i++;
-  } while (i < numbers.length);
-
-  console.log(sum);
-}
-
-sumWithDoWhile([3, 5, 7]);
-
-
-
-
-console.log('-------');
-
-
-/*
-12. Remove Duplicates from an Array
-    - Define a function `removeDuplicates(arr)` that loops through the array
-      and creates a new array without duplicate elements.
-    - Hint: you could check if the item is already in the new array before pushing.
-    - Log the new array without duplicates.
-*/
-
-console.log('Ex.12');
-
-function removeDuplicates(arr) {
-  let uniqueArr = [];
-
-  for (const item of arr) {
-    if (!uniqueArr.includes(item)) {
-      uniqueArr.push(item);
-    }
+  const maybeContact = findContact(name, contactBook);
+  if (maybeContact) {
+    console.log('Name: ' + maybeContact.name);
+    console.log('Phone: ' + maybeContact.phone);
+    console.log('Email: ' + maybeContact.email);
+    return;
   }
 
-  console.log(uniqueArr);
+  console.log('No contact found with the name: ' + name);
 }
-
-removeDuplicates([1, 2, 2, 3, 1, 4]);
-
-
-
-
-
-console.log('-------');
+viewContact('John', contacts);
+viewContact('john', contacts);
+viewContact('muhammed', contacts);
+viewContact('', contacts);
 
 /*
-13. Calculate Factorial (For Loop)
-    - Define a function `factorial(n)` that calculates n! (n factorial)
-      using a for loop.
-    - Log the result. 
-    - Example: factorial(5) -> 120
+-----------------------------------------------------------
+  STEP 5: Update a Contact
+-----------------------------------------------------------
+Function: updateContact(name, newPhone, newEmail)
+- Finds the contact by name and updates phone + email.
+- Logs "Contact updated successfully." if found.
+- Otherwise, logs: "No contact found with the name: <name>"
 */
 
-console.log('Ex.13');
-function factorial(n) {
-  let result = 1;
-
-  for (let i = 1; i <= n; i++) {
-    result *= i;
-  }
-
-  console.log(result);
-}
-
-factorial(5);
-
-
-
-console.log('-------');
-
-/*
-14. String -> Array -> String
-    - Define a function `reverseWords(sentence)` that splits the sentence 
-      into an array of words, reverses the array order, then joins it back into
-      a string. Use loops or built-in methods as you like.
-    - Log the reversed sentence.
-*/
-
-console.log('Ex.14');
-
-function reverseWords(sentence) {
-  let words = sentence.split(" ");
-  let reversedSentence = words.reverse().join(" ");
-  console.log(reversedSentence);
-}
-
-reverseWords("I love JavaScript");
-
-
-
-
-
-
-console.log('-------');
-
-
-
-
-/*
-15. Filter Words Longer Than X
-    - Define a function `filterLongWords(words, minLength)` that uses a for loop
-      to collect only the words that have a length >= minLength.
-    - Log the resulting array.
-*/
-
-console.log('Ex.15');
-
-function filterLongWords(words, minLength) {
-  let result = [];
-
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].length >= minLength) {
-      result.push(words[i]);
-    }
-  }
-
-  console.log(result);
-}
-
-filterLongWords(["cat", "elephant", "dog", "tiger"], 4);
-
-
-
-console.log('-------');
-
-
-
-/*
-16. Log Array Elements with Their Indices
-    - Define a function `logElementsWithIndex(arr)` that loops through the array
-      and logs "Index: i, Value: arr[i]" for each element.
-*/
-
-
-console.log('Ex.16');
-
-function logElementsWithIndex(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    console.log(`Index: ${i}, Value: ${arr[i]}`);
+function updateContact(name, newPhone, newEmail, contactBook) {
+  const maybeContact = findContact(name, contactBook);
+  if (maybeContact) {
+    maybeContact.phone = newPhone;
+    maybeContact.email = newEmail;
+    console.log('Contact updated successfully.');
+  } else {
+    console.log('No contact found with the name ', name);
   }
 }
+updateContact("Seda","5649373","seda@gmail.com",contacts);
+updateContact('John', '12345', 'aa@gmail.com', contacts);
+viewContact('John', contacts);
 
-logElementsWithIndex(["apple", "banana", "cherry"]);
-
-
-
-
-
-console.log('-------');
-
+displayAllContacts(contacts);
 /*
-17. Find the Smallest Number in an Array
-    - Define a function `findMin(numbers)` that loops through the array
-      to find and return the smallest number.
-    - Log the smallest number.
+-----------------------------------------------------------
+  STEP 6: Remove a Contact
+-----------------------------------------------------------
+Function: removeContact(name)
+- Finds the index of the contact with 'name' using 
+  findIndex() or a loop.
+- Splices it from the array if found.
+- Logs "Contact removed successfully." if found.
+- Otherwise, logs: "No contact found with the name: <name>"
 */
 
-console.log('Ex.17');
 
-function findMin(numbers) {
-  let min = numbers[0];
+function removeContact(name, contactBook) {
+  console.log('Trying to remove contact with name:', name);
 
-  for (let i = 1; i < numbers.length; i++) {
-    if (numbers[i] < min) {
-      min = numbers[i];
-    }
+  const index = contactBook.findIndex(
+    (contact) => contact.name.toLowerCase() === name.toLowerCase()
+  );
+
+  if (index !== -1) {
+    contactBook.splice(index, 1);
+    console.log('Contact removed successfully.');
+  } else {
+    console.log('No contact found with the name:', name);
   }
 
-  console.log(min);
+  console.log('----------------');
 }
 
-findMin([8, 3, 12, 5, 1]);
+removeContact('John', contacts);
+removeContact('muhammed', contacts);
+removeContact('Unknown', contacts);
 
-
-
-
-
-console.log('-------');
+displayAllContacts(contacts);
 
 /*
-18. Count Occurrences of a Word in an Array
-    - Define a function `countOccurrences(arr, word)` that loops through `arr`
-      to count how many times `word` appears.
-    - Log the count.
+-----------------------------------------------------------
+  STEP 7: Testing Our Functions
+-----------------------------------------------------------
+Below are some sample function calls to demonstrate the 
+Contact Book in action.
 */
 
-console.log('Ex.18');
+/*
+-----------------------------------------------------------
+  STEP 7: Testing Our Functions (Corrected)
+-----------------------------------------------------------
+*/
 
-function countOccurrences(arr, word) {
-  let count = 0;
+// Reset test data for isolated testing
+const testContacts = [
+  { name: 'Jihane', phone: '123456', email: 'jihane@test.com' },
+  { name: 'David', phone: '78910', email: 'david@test.com' },
+];
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === word) {
-      count++;
-    }
+// 1. Display initial contacts
+displayAllContacts(testContacts);
+
+// 2. Add new contacts
+addContact('Anna', '333', 'anna@test.com', testContacts);
+addContact('Jihane', '999', 'duplicate@test.com', testContacts); 
+
+// 3. View contacts
+viewContact('Jihane', testContacts);
+viewContact('anna', testContacts);
+viewContact('Unknown', testContacts);
+
+// 4. Update contacts
+updateContact('David', '10987', 'updated@test.com', testContacts);
+updateContact('Unknown', '000', 'no@test.com', testContacts);
+
+// 5. Remove contacts
+removeContact('Jihane', testContacts);
+removeContact('Unknown', testContacts);
+
+// 6. Display contacts after removal
+displayAllContacts(testContacts);
+
+// 7. Partial name search
+searchContactsByName('an', testContacts); 
+searchContactsByName('da', testContacts); 
+
+// 8. Sort contacts alphabetically
+sortContactsByName(testContacts);
+displayAllContacts(testContacts);
+
+// 9. Search by multiple fields
+searchContacts('anna', testContacts);
+searchContacts('10987', testContacts);
+searchContacts('@test.com', testContacts);
+
+/*
+-----------------------------------------------------------
+  OPTIONAL ENHANCEMENTS:
+-----------------------------------------------------------
+1. Partial Name Search:
+   - Instead of strict ===, use .includes() for the name check.
+
+2. Sort Contacts:
+   - Add a function to sort contacts alphabetically by name.
+3. Search by multiple fields:
+   - e.g., find a contact by phone number or email.
+*/
+
+function searchContactsByName(partialName, contactBook) {
+  console.log('Searching contacts with name containing:', partialName);
+
+  const results = contactBook.filter((contact) =>
+    contact.name.toLowerCase().includes(partialName.toLowerCase())
+  );
+
+  if (results.length === 0) {
+    console.log('No matching contacts found.');
+  } else {
+    results.forEach((contact) => {
+      console.log(
+        `Name: ${contact.name}, Phone: ${contact.phone}, Email: ${contact.email}`
+      );
+    });
   }
 
-  console.log(count);
 }
 
-countOccurrences(["apple", "banana", "apple", "orange", "apple"], "apple");
+searchContactsByName('ji', contacts);
+searchContactsByName('da', contacts);
 
+function sortContactsByName(contactBook) {
+  contactBook.sort((a, b) =>
+    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  );
 
+  console.log('Contacts sorted alphabetically.');
 
+}
 
+sortContactsByName(contacts);
+displayAllContacts(contacts);
 
-console.log('-------');
+function searchContacts(query, contactBook) {
+  console.log('Searching for:', query);
 
-/*
-19. Remove Falsy Values
-    - Define a function `removeFalsyValues(arr)` that loops through an array
-      and returns a new array without falsy values (false, 0, "", null, undefined, NaN).
-    - Log the new array.
-*/
+  const results = contactBook.filter((contact) =>
+    contact.name.toLowerCase().includes(query.toLowerCase()) ||
+    contact.phone.includes(query) ||
+    contact.email.toLowerCase().includes(query.toLowerCase())
+  );
 
-console.log('Ex.19');
-
-function removeFalsyValues(arr) {
-  let result = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      result.push(arr[i]);
-    }
+  if (results.length === 0) {
+    console.log('No matching contacts found.');
+  } else {
+    results.forEach((contact) => {
+      console.log(
+        `Name: ${contact.name}, Phone: ${contact.phone}, Email: ${contact.email}`
+      );
+    });
   }
 
-  console.log(result);
 }
 
-removeFalsyValues([0, "hello", false, 42, "", null, "world", undefined]);
-
-
-
-
-console.log('-------');
-
-/*
-20. Sum of All Digits in a String
-    - Define a function `sumDigits(str)` that loops through each character of `str`,
-      checks if it's a digit, and if so, adds it to a total sum.
-    - Log the final sum.
-    - Example: "abc123" -> 6
-*/
-
-console.log('Ex.20');
-
-function sumDigits(str) {
-  let sum = 0;
-
-  for (const char of str) {
-    if (char >= "0" && char <= "9") {
-      sum += Number(char);
-    }
-  }
-
-  console.log(sum);
-}
-
-sumDigits("abc123");
-
-
-
-console.log('-------');
-
-/*
-21. Average of Array Elements
-    - Define a function `averageArray(numbers)` that uses a loop
-      to calculate the average (sum / length).
-    - Log the average.
-*/
-
-
-
-console.log('Ex.21');
-
-function averageArray(numbers) {
-  let sum = 0;
-
-  for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
-  }
-
-  let average = sum / numbers.length;
-  console.log(average);
-}
-
-averageArray([10, 20, 30, 40]);
-
-
-
-
-
-console.log('-------');
-/*
-22. Flatten a 2D Array (Nested Loops)
-    - Define a function `flattenArray(twoDArray)` that takes an array of arrays
-      (e.g., [[1,2],[3,4]]) and uses nested loops to create a new one-dimensional array.
-    - Log the flattened array.
-*/
-
-
-console.log('Ex.22');
-function flattenArray(twoDArray) {
-  let result = [];
-
-  for (let i = 0; i < twoDArray.length; i++) {
-    for (let j = 0; j < twoDArray[i].length; j++) {
-      result.push(twoDArray[i][j]);
-    }
-  }
-
-  console.log(result);
-}
-
-flattenArray([[1, 2], [3, 4]]);
-
-
-console.log('-------');
-
-/*
-23. Find Words Containing a Letter
-    - Define a function `findWordsWithLetter(words, letter)` that loops through
-      an array of words and returns a new array of only the words that contain
-      the given letter.
-    - Log the filtered array.
-*/
-
-console.log('Ex.23');
-
-function findWordsWithLetter(words, letter) {
-  let result = [];
-
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].includes(letter)) {
-      result.push(words[i]);
-    }
-  }
-
-  console.log(result);
-}
-
-findWordsWithLetter(["apple", "banana", "pear", "grape"], "a");
-
-
-
-
-console.log('-------');
-
-
-/*
-24. Push and Pop Operations
-    - Define a function `pushPopExample(arr, itemToPush)` that:
-      - pushes itemToPush to arr
-      - logs the updated array
-      - then pops the last element
-      - logs the popped element
-      - logs the final array
-*/
-
-console.log('Ex.24');
-
-function pushPopExample(arr, itemToPush) {
-  arr.push(itemToPush);
-  console.log(arr);
-
-  let poppedItem = arr.pop();
-  console.log(poppedItem);
-
-  console.log(arr);
-}
-
-pushPopExample([1, 2, 3], 4);
-
-
-
-console.log('-------');
-
-/*
-25. Push and Shift Operations
-    - Define a function `manageQueue(queue, newPerson)` that:
-      - push `newPerson` to the end of `queue`
-      - logs the updated queue
-      - shifts (removes) the first person in the queue
-      - logs the removed person
-      - logs the final queue
-*/
-
-
-console.log('Ex.25');
-
-function manageQueue(queue, newPerson) {
-  queue.push(newPerson);
-  console.log(queue);
-
-  let removedPerson = queue.shift();
-  console.log(removedPerson);
-
-  console.log(queue);
-}
-
-manageQueue(["Alice", "Bob", "Charlie"], "Diana");
-
-
-console.log('-------');
-/*
-26. To-Do List Application 
-  - Define a function `updateTodoList(todoList, startIndex, deleteCount, ...newTasks)`:
-   - Logs the current list of tasks.
-   - Removes `deleteCount` tasks starting at `startIndex`.
-   - Inserts any new tasks at the end of the array.
-   - Logs the updated list.
-*/
-
-console.log('Ex.26');
-
-function updateTodoList(todoList, startIndex, deleteCount, ...newTasks) {
-  console.log("Current list:", todoList);
-
-  todoList.splice(startIndex, deleteCount);
-  todoList.push(...newTasks);
-
-  console.log("Updated list:", todoList);
-}
-
-const todoList = ['Study JS', 'Eat breakfast', 'Walk dog'];
-updateTodoList(todoList, 1, 1, 'Read book', 'Call friend');
-
-
-console.log('-------');
-
+searchContacts('jihane', contacts);
+searchContacts('123456', contacts);
+searchContacts('@gmail.com', contacts);
 
