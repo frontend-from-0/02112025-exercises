@@ -14,6 +14,10 @@
 
       <form class="booking">
         <section class="calendar">
+          <label for="name-text" id="name">Full name</label>
+          <input  class="name-text" type="text" id="name-text"/>   
+          <label for="email-text" id="e-mail">E-Mail</label>
+          <input class="email-text" type="text" id="email-text"/>
           <label for="date">Select a date</label>
           <input type="date" id="date" />
           <h2 id="timeslots-heading">Available Time Slots</h2>
@@ -24,10 +28,6 @@
             <button class="slot" type="button" aria-label="Select 14:30 time slot">14:30</button>
             <button class="slot" type="button" aria-label="Select 16:00 time slot">16:00</button>
           </fieldset>
-          <label for="name" id="name">Full name</label>
-          <input type="text" id="name-text"/>   
-          <label for="E-Mail" id="e-mail">E-Mail</label>
-          <input type="text" id="email-text"/>
         </section>
         <aside class="summary">
           <h2>Your Appointment</h2>
@@ -35,17 +35,16 @@
           <p>E-Mail Adress: <span id="entered-email">-</span></p>
           <p>Date: <span id="selected-date">-</span></p>
           <p>Time: <span id="selected-time">-</span></p>
-          <button id="confirm" type="submit" disabled>Confirm Booking</button>
-        </aside>
-
-        <div id="confirmation">
+          <button class="confirm" id="confirm" type="submit" disabled>Confirm Booking</button>
+        </aside>  
+      </form>
+    </div>
+    <div class="confirmation" id="confirmation">
           <div class="voucher-head">
              <h2>Confirmation Voucher</h2>
-             <div id="close-btn">&times;</div>
+             <div class="close-btn" id="close-btn">&times;</div>
           </div>
           <div id="customer-info"></div>
-        </div>
-      </form>
     </div>
 
     <script src="script.js"></script>

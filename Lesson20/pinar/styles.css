@@ -80,7 +80,7 @@ fieldset {
   margin: 1rem 0;
 }
 
-#confirm {
+.confirm {
   padding: 0.75rem 1rem;
   background-color: #0077cc;
   color: white;
@@ -89,15 +89,15 @@ fieldset {
   cursor: pointer;
 }
 
-#confirm:hover {
+.confirm:hover {
   background-color: #005fa3;
 }
 
-#confirm:disabled {
+.confirm:disabled {
   background-color: #868b8e;
 }
 
-#confirm:disabled:hover {
+.confirm:disabled:hover {
   background-color: #565859;
 }
 
@@ -116,14 +116,14 @@ fieldset {
   background-color: #005fa3;
 }
 
-#name-text,#email-text {
+.name-text,.email-text {
   padding: 0.5rem;
   font-size: 1rem;
   width: 100%;
   margin-bottom: 1.5rem;
 }
 
-#confirmation {
+.confirmation {
   display:none;
   flex-direction:column;
   position:absolute;
@@ -135,7 +135,7 @@ fieldset {
   left:35%;
   padding:5px 20px;
   min-height:fit-content;
-  width:400px;
+  width:400px; 
 }
 
 .voucher-head{
@@ -143,16 +143,24 @@ fieldset {
   justify-content:space-between;
 }
 
-#confirmation ul{
+.confirmation ul{
   list-style:none;
   padding:5px;
 }
 
-#close-btn{
+.close-btn{
   font-size:3rem;
   cursor:pointer;
 }
 
-#close-btn:hover{
+.close-btn:hover{
   transform:scale(1.2)
 }
+
+.opacity{
+ opacity:0.3;
+}
+
+ 
+
+

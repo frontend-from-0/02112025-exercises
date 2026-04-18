@@ -19,16 +19,25 @@ const timeSlotElements = document.getElementsByClassName('slot');
 const selectedDateElement = document.getElementById('selected-date');
 const selectedTimeElement = document.getElementById('selected-time');
 const confirmButton = document.getElementById('confirm');
-const fullNameInput = document.querySelector("#name-text");
-const emailInput = document.querySelector("#email-text"); 
-const enteredName = document.querySelector("#entered-name");
-const enteredEmail = document.querySelector("#entered-email");
+const fullNameInput = document.getElementById("name-text");
+const emailInput = document.getElementById("email-text"); 
+const enteredName = document.getElementById("entered-name");
+const enteredEmail = document.getElementById("entered-email");
 const data = { date: null, time: null, fullName: null, email: null };
 
 
 
 dateInput.addEventListener('change', () => {
-  if (dateInput.value) {
+
+  const selectedDate = new Date(dateInput.value);
+  if (dateInput.value && selectedDate < tomorrow) {
+    alert("Hata: En erken yarın için rezervasyon yapabilirsiniz!");
+    dateInput.value = "";
+    selectedDateElement.textContent = '-';
+    data.date = null;
+  }
+
+   else if (dateInput.value) {
     selectedDateElement.textContent = dateInput.value;
     data.date = dateInput.value;
   } else {
@@ -50,7 +59,7 @@ dateInput.addEventListener('change', () => {
 });
 
 fullNameInput.addEventListener('change', () => {
-  if (fullNameInput.value) {
+  if (fullNameInput.value.trim()) {
     enteredName.textContent = fullNameInput.value;
     data.fullName = fullNameInput.value;
   } else {
@@ -61,7 +70,7 @@ fullNameInput.addEventListener('change', () => {
 });
 
 emailInput.addEventListener('change', () => {
-  if (emailInput.value) {
+  if (emailInput.value.trim()) {
     enteredEmail.textContent = emailInput.value;
     data.email = emailInput.value;
   } else {
@@ -85,68 +94,63 @@ function allowSubmit() {
   }
 }
 
-const datePicker = document.querySelector('input[type="date"]');
 const today = new Date();
 const tomorrow = new Date();
+
+function setDate(){
 
 tomorrow.setDate(today.getDate() + 1);
 tomorrow.setHours(0, 0, 0, 0);
 
 const yyyy = tomorrow.getFullYear();
-const mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); // Aylar 0'dan başlar
+const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
 const dd = String(tomorrow.getDate()).padStart(2, '0');
 
 const formattedTomorrow = `${yyyy}-${mm}-${dd}`;
 
-if (datePicker) {
-    datePicker.setAttribute("min", formattedTomorrow);
+if (dateInput) {
+    dateInput.setAttribute("min", formattedTomorrow);
 }
-
-function selectDate(usersChoise){
-  
-  const selected = new Date(usersChoise);
-  if(selected < tomorrow){
-    console.log("Hata: En erken yarın için rezervasyon yapabilirsiniz!");
-    return null;
-  } else{ 
-    return selected;
-  }
 }
+document.addEventListener('DOMContentLoaded', ()=>{
+  setDate();
+});
 
-const bookingForm = document.getElementsByClassName("booking");
+
+const bookingForm = document.querySelector(".booking");
 const confirmationVoucher =document.querySelector("#confirmation");
-confirmButton.addEventListener('click',(e)=>{
-   e.preventDefault();
-   confirmationVoucher.style.display = "flex";
-   bookingForm.style.opacity = "0.4";
-})
+const bookingContainer = document.querySelector(".container");
 
-confirmButton.addEventListener('click',(e)=>{
+
+  bookingForm.addEventListener('submit',(e)=>{
   e.preventDefault();
-  const voucherFullName = document.querySelector("#entered-name").innerText;
-  const voucherDate = document.querySelector("#selected-date").innerText;
-  const voucherTime = document.querySelector("#selected-time").innerText;
-  const voucherEmail = document.querySelector("#entered-email").innerText;
- 
-
-  const list = document.createElement("ul");
+  confirmationVoucher.style.display="flex";
+  bookingContainer.classList.add("opacity");
+   
+   
+  const confirmationVoucherData = document.createElement("ul");
   const voucherArray =[
-    `Name: ${voucherFullName}`,
-    `Date: ${voucherDate}`,
-    `Time: ${voucherTime}`,
-    `E-Mail: ${voucherEmail}`
+    `Name: ${data.fullName}`,
+    `Date: ${data.date}`,
+    `Time: ${data.time}`,
+    `E-Mail: ${data.email}`
   ]
 
-  voucherArray.forEach(text=>{
+  voucherArray.forEach(bookingItem=>{
     const li =document.createElement("li");
-    li.innerText=text;
-    list.appendChild(li);
+    li.innerText=bookingItem;
+    confirmationVoucherData.appendChild(li);
   });
+
   const customerInfo = document.querySelector("#customer-info");
-  customerInfo.appendChild(list);
+  customerInfo.textContent = '';
+  customerInfo.appendChild(confirmationVoucherData);
 })
 
 const closeBtn = document.querySelector("#close-btn");
-closeBtn.addEventListener('click', (e)=>{
+ closeBtn.addEventListener('click', (e)=>{
   confirmationVoucher.style.display = "none";
+  bookingContainer.classList.remove("opacity");
+  
+
 })
