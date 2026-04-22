@@ -16,8 +16,10 @@
           type="email"
           placeholder="email@example.com"
           name="email"
+          autocomplete="email"
+          aria-describedby="emailError"
         />
-        <p id="emailError" class="input-error hidden"></p>
+        <p id="emailError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="phone">Phone</label>
@@ -26,23 +28,37 @@
           type="tel"
           placeholder="555 123 4567"
           name="phoneNumber"
+          autocomplete="tel"
+          aria-describedby="phoneError"
         />
-        <p id="phoneError" class="input-error hidden"></p>
+        <p id="phoneError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
-        <label for="firstname">First Name</label>
+        <label for="firstName">First Name</label>
         <input
           id="firstName"
           type="text"
           placeholder="Sophia"
           name="firstname"
+        autocomplete="given-name"
+        aria-describedby="firstNameError"
         />
-        <p id="firstNameError" class="input-error hidden"></p>
+        <p id="firstNameError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="lastname">Last Name</label>
-        <input id="lastname" type="text" placeholder="Clark" name="lastname" />
+        <input 
+        id="lastname" 
+        type="text" 
+        placeholder="Clark" 
+        name="lastname"
+        autocomplete="family-name" 
+        aria-describedby="lastNameError"
+        />
+        <p id="lastNameError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
+<fieldset>
+  <legend>Your Card Informations</legend>
 
       <div class="input-group">
         <label for="cardnumber">Card Number</label>
@@ -51,19 +67,30 @@
           type="text"
           placeholder="1234 5678 9101 1121"
           name="cardnumber"
+          autocomplete="cc-number"
         />
+        <p id="cardNumberError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="expDate">Expiration Date</label>
-        <input id="expDate" type="text" placeholder="MM/YY" name="expDate" />
+        <input 
+        id="expDate" 
+        type="text" 
+        placeholder="MM/YY" 
+        name="expDate"
+        autocomplete="cc-exp" 
+        />
+        <p id="expDateError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="cvv">CVV</label>
-        <input id="cvv" type="text" placeholder="123" name="cvv" />
+        <input id="cvv" type="text" placeholder="123" name="cvv" autocomplete="cc-csc" />
+        <p id="cvvError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
+      </fieldset>
       <button type="submit" class="btn-success">Place Order</button>
     </form>
-    <div class="hidden" id="success">
+    <div class="hidden" id="success" role="status" aria-live="polite">
       <p>Success!</p>
     </div>
     </main>

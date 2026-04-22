@@ -15,95 +15,115 @@ const namePattern = /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ' \-]*[a-zA-ZÀ-ÿ]$/;
 Trigger another validation, if no error -> show success message.
 */
 
-const emailInput = document.getElementById('email');
-const emailErrorParagraph = document.getElementById('emailError');
-const phoneInput = document.getElementById('phone');
-const phoneErrorParagraph = document.getElementById('phoneError');
-const firstNameInput = document.getElementById('firstName');
-const firstNameErrorParagraph = document.getElementById('firstNameError');
-const formElement = document.getElementById('checkoutForm');
-const successElement = document.getElementById('success');
+const emailInput = document.getElementById("email");
+const emailErrorParagraph = document.getElementById("emailError");
+const phoneInput = document.getElementById("phone");
+const phoneErrorParagraph = document.getElementById("phoneError");
+const firstNameInput = document.getElementById("firstName");
+const firstNameErrorParagraph = document.getElementById("firstNameError");
+const formElement = document.getElementById("checkoutForm");
+const successElement = document.getElementById("success");
 let formCorrect = true;
 
 function validateEmail(email) {
   if (email.length < 1) {
     emailErrorParagraph.textContent =
-      'An email address is required so we can contact you.';
-    emailErrorParagraph.classList.remove('hidden');
+      "An email address is required so we can contact you.";
+    emailInput.setAttribute("aria-invalid", "true");
+    emailErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
   } else if (!emailPattern.test(email)) {
     emailErrorParagraph.textContent =
-      'That doesn’t look like a valid email address (e.g. name@gmail.com).';
-    emailErrorParagraph.classList.remove('hidden');
+      "That doesn’t look like a valid email address (e.g. name@gmail.com).";
+    emailInput.setAttribute("aria-invalid", "true");
+    emailErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
   } else {
-    emailErrorParagraph.textContent = '';
-    emailErrorParagraph.classList.add('hidden');
+    emailErrorParagraph.textContent = "";
+    emailInput.setAttribute("aria-invalid", "false");
+    emailErrorParagraph.classList.add("hidden");
   }
 }
 
 function validatePhone(phone) {
   if (phone.length < 1) {
     phoneErrorParagraph.textContent =
-      'A phone number is required so we can contact you.';
-    phoneErrorParagraph.classList.remove('hidden');
+      "A phone number is required so we can contact you.";
+    phoneInput.setAttribute("aria-invalid", "true");
+    phoneErrorParagraph.classList.remove("hidden");
     formCorrect = false;
   } else if (!phonePattern.test(phone)) {
     phoneErrorParagraph.textContent =
-      'That doesn’t look like a valid phone number (e.g. +905554443322). Max 20 digits allowed.';
-    phoneErrorParagraph.classList.remove('hidden');
+      "That doesn’t look like a valid phone number (e.g. +905554443322). Max 20 digits allowed.";
+    phoneInput.setAttribute("aria-invalid", "true");
+    phoneErrorParagraph.classList.remove("hidden");
     formCorrect = false;
   } else {
-    phoneErrorParagraph.textContent = '';
-    phoneErrorParagraph.classList.add('hidden');
+    phoneErrorParagraph.textContent = "";
+    phoneInput.setAttribute("aria-invalid", "false");
+    phoneErrorParagraph.classList.add("hidden");
   }
 }
 
 function validateFirstName(firstName) {
   if (firstName.length < 1) {
-    firstNameErrorParagraph.textContent = 'First name is required.';
-    firstNameErrorParagraph.classList.remove('hidden');
+    firstNameErrorParagraph.textContent = "First name is required.";
+    firstNameInput.setAttribute("aria-invalid", "true");
+    firstNameErrorParagraph.classList.remove("hidden");
     formCorrect = false;
   } else if (firstName.length > 50) {
     firstNameErrorParagraph.textContent =
-      'First name can be 50 characters max.';
-    firstNameErrorParagraph.classList.remove('hidden');
+      "First name can be 50 characters max.";
+    firstNameInput.setAttribute("aria-invalid", "true");
+    firstNameErrorParagraph.classList.remove("hidden");
     formCorrect = false;
   } else if (!namePattern.test(firstName)) {
     firstNameErrorParagraph.textContent =
-      'Names can only contain letters and standard punctuation like hyphens or spaces.';
-    firstNameErrorParagraph.classList.remove('hidden');
+      "Names can only contain letters and standard punctuation like hyphens or spaces.";
+    firstNameInput.setAttribute("aria-invalid", "true");
+    firstNameErrorParagraph.classList.remove("hidden");
     formCorrect = false;
   } else {
-    firstNameErrorParagraph.textContent = '';
-    firstNameErrorParagraph.classList.add('hidden');
+    firstNameErrorParagraph.textContent = "";
+    firstNameInput.setAttribute("aria-invalid", "false");
+    firstNameErrorParagraph.classList.add("hidden");
   }
 }
 
-emailInput.addEventListener('change', () => {
+emailInput.addEventListener("change", () => {
   const emailValue = emailInput.value.trim();
   validateEmail(emailValue);
 });
 
-phoneInput.addEventListener('change', () => {
+phoneInput.addEventListener("change", () => {
   const phoneValue = phoneInput.value.trim();
   validatePhone(phoneValue);
 });
 
-firstNameInput.addEventListener('change', () => {
+firstNameInput.addEventListener("change", () => {
   const firstNameValue = firstNameInput.value.trim();
   validateFirstName(firstNameValue);
 });
 
-
-formElement.addEventListener('submit', (event) => {
+formElement.addEventListener("submit", (event) => {
   event.preventDefault();
-
+  
+  formCorrect = true; // hataları unutup sıfırlatmak için
   // TODO: Find error that prevents error message from showing up
-  validateEmail(emailValue);
-  validatePhone(phoneValue);
-  validateFirstName(firstNameValue);
+  const currentEmailValue = emailInput.value.trim();
+  const currentPhoneValue = phoneInput.value.trim();
+  const currentFirstNameValue = firstNameInput.value.trim();
+  validateEmail(currentEmailValue);
+  validatePhone(currentPhoneValue);
+  validateFirstName(currentFirstNameValue);
 
-  if (formCorrect){
-    successElement.classList.remove('hidden');
-    formElement.classList.add('hidden');
+  if (formCorrect) {
+    formElement.reset();
+    successElement.classList.remove("hidden");
+    successElement.focus();
+    formElement.classList.add("hidden");
+    console.log("Form başarıyla gönderildi!");
+  } else {
+    console.log("Formda hala hatalar var, gönderme işlemi durduruldu.");
   }
-})
+});
