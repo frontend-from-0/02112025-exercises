@@ -47,6 +47,7 @@ const cvvInput = document.getElementById('cvv');
 const cvvErrorParagraph = document.getElementById('cvvError');
 
 const formElement = document.getElementById('checkoutForm');
+const successElement = document.getElementById('success');
 
 let formCorrect = true;
 
