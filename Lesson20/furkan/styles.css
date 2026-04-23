@@ -1,7 +1,5 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 :root {
@@ -19,6 +17,8 @@
   --radius-sm: 8px;
 }
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'DM Sans', sans-serif;
   background: var(--gray-50);
   min-height: 100vh;
@@ -26,7 +26,6 @@ body {
   padding: 2rem 1rem;
 }
 h1 {
-  font-family: 'DM Sans', sans-serif;
   font-size: 2.4rem;
   font-weight: 400;
   color: var(--gray-900);
@@ -76,7 +75,6 @@ header {
 }
 
 .calendar {
-  font-family: 'DM Sans', sans-serif;
   font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.3px;
