@@ -107,7 +107,7 @@ firstNameInput.addEventListener("change", () => {
 
 formElement.addEventListener("submit", (event) => {
   event.preventDefault();
-  
+
   formCorrect = true; // hataları unutup sıfırlatmak için
   // TODO: Find error that prevents error message from showing up
   const currentEmailValue = emailInput.value.trim();
@@ -124,6 +124,10 @@ formElement.addEventListener("submit", (event) => {
     formElement.classList.add("hidden");
     console.log("Form başarıyla gönderildi!");
   } else {
+    const firstError = document.querySelector('[aria-invalid="true"]');
+    if (firstError) {
+      firstError.focus();
+    }
     console.log("Formda hala hatalar var, gönderme işlemi durduruldu.");
   }
 });
