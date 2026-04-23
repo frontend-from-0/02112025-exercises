@@ -185,6 +185,9 @@ fieldset {
 .hidden {
   display: none;
 }
+.error-color {
+  color: red;
+}
 
 .selected {
   background-color: var(--purple);
