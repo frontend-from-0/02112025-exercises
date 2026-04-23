@@ -20,7 +20,6 @@
 5. Style the confirmation element so it looks good. Make sure to add all information that you user filled in the form to it.
 */
 
-const dateInput = document.getElementById('date');
 const timeSlotElements = document.getElementsByClassName('slot');
 const userNameElement = document.getElementById('username');
 const emailElement = document.getElementById('email');
@@ -43,12 +42,17 @@ dateInput.addEventListener('change', () => {
   }
   allowSubmit();
 });
-
+// It was wrapped with the `min date` function and removed from global scope
+function setMinDate() {
 const today = new Date();
 today.setDate(today.getDate() + 1);
-
 const minDate = today.toISOString().split('T')[0];
 dateInput.min = minDate;
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const dateInput = document.getElementById('date');
+  setMinDate();
+});
 
 [...timeSlotElements].forEach((element) => {
   element.addEventListener('click', () => {
@@ -62,13 +66,14 @@ dateInput.min = minDate;
 });
 
 userNameElement.addEventListener('blur', () => {
-  if (userNameElement.value) {
+  if (userNameElement.value.trim()) {
     enteredUserName.textContent = userNameElement.value;
     data.username = userNameElement.value;
   } else {
     enteredUserName.textContent = '-';
     data.username = null;
   }
+  allowSubmit();
 });
 
 emailElement.addEventListener('blur', () => {
@@ -77,12 +82,13 @@ emailElement.addEventListener('blur', () => {
   if (value && emailRegex.test(value)) {
     enteredEmail.textContent = value;
     data.email = value;
-    errorMsg.style.display = 'none';
+    errorMsg.classList.add = 'hidden';
   } else {
     enteredEmail.textContent = '-';
     data.email = null;
-    errorMsg.style.display = 'block';
+    errorMsg.classList.remove = 'hidden';
   }
+  allowSubmit();
 });
 function deselectTimeSlots() {
   [...timeSlotElements].forEach((element) =>
@@ -90,8 +96,9 @@ function deselectTimeSlots() {
   );
 }
 
+// Called the username & email with allowSubmit function
 function allowSubmit() {
-  if (data.date && data.time) {
+  if (data.date && data.time && data.username && data.email) {
     confirmButton.removeAttribute('disabled');
   } else {
     confirmButton.setAttribute('disabled', true);
