@@ -11,12 +11,14 @@
       <h1>Checkout</h1>
       <form novalidate id="checkoutForm" method="post">
         <div class="input-group">
-          <label for="firstname">First Name</label>
+          <label for="firstName">First Name</label>
           <input
             id="firstName"
             type="text"
             placeholder="Sophia"
             name="firstname"
+            aria-describedby="firstNameError"
+            required
           />
           <p id="firstNameError" class="input-error hidden"></p>
         </div>
@@ -27,6 +29,8 @@
             type="text"
             placeholder="Clark"
             name="lastname"
+            aria-describedby="lastNameError"
+            required
           />
           <p id="lastnameError" class="input-error hidden"></p>
         </div>
@@ -38,6 +42,8 @@
             type="email"
             placeholder="email@example.com"
             name="email"
+            aria-describedby="emailError"
+            required
           />
           <p id="emailError" class="input-error hidden"></p>
         </div>
@@ -48,6 +54,8 @@
             type="tel"
             placeholder="555 123 4567"
             name="phoneNumber"
+            aria-describedby="phoneError"
+            required
           />
           <p id="phoneError" class="input-error hidden"></p>
         </div>
@@ -59,12 +67,15 @@
             type="text"
             placeholder="1234 5678 9101 1121"
             name="cardnumber"
+            aria-describedby="cardNumberError"
+            required
           />
           <p id="cardnumberError" class="input-error hidden"></p>
         </div>
         <div class="input-group">
           <label for="expDate">Expiration Date</label>
-          <input id="expDate" type="text" placeholder="MM/YY" name="expDate" />
+          <input id="expDate" type="text" placeholder="MM/YY" name="expDate" aria-describedby="expDateError"
+            required/>
           <p id="expDateError" class="input-error hidden"></p>
         </div>
         <div class="input-group">
@@ -75,6 +86,8 @@
             placeholder="123"
             name="cvv"
             maxlength="4"
+            aria-describedby="cvvError"
+            required
           />
           <p id="cvvError" class="input-error hidden"></p>
         </div>
