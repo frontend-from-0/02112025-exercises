@@ -9,10 +9,11 @@
   <body>
     <main>
       <h1>Checkout</h1>
-      <form novalidate id="checkoutForm" method="post">
+      <form class="mw-form" novalidate id="checkoutForm" method="post">
         <div class="input-group">
           <label for="firstName">First Name</label>
           <input
+            class="form-input"
             id="firstName"
             type="text"
             placeholder="Sophia"
@@ -25,6 +26,7 @@
         <div class="input-group">
           <label for="lastname">Last Name</label>
           <input
+            class="form-input"
             id="lastname"
             type="text"
             placeholder="Clark"
@@ -38,6 +40,7 @@
         <div class="input-group">
           <label for="email">Email</label>
           <input
+            class="form-input"
             id="email"
             type="email"
             placeholder="email@example.com"
@@ -50,6 +53,7 @@
         <div class="input-group">
           <label for="phone">Phone</label>
           <input
+            class="form-input"
             id="phone"
             type="tel"
             placeholder="555 123 4567"
@@ -63,6 +67,7 @@
         <div class="input-group">
           <label for="cardnumber">Card Number</label>
           <input
+            class="form-input"
             id="cardnumber"
             type="text"
             placeholder="1234 5678 9101 1121"
@@ -74,13 +79,14 @@
         </div>
         <div class="input-group">
           <label for="expDate">Expiration Date</label>
-          <input id="expDate" type="text" placeholder="MM/YY" name="expDate" aria-describedby="expDateError"
+          <input class="form-input" id="expDate" type="text" placeholder="MM/YY" name="expDate" aria-describedby="expDateError"
             required/>
           <p id="expDateError" class="input-error hidden"></p>
         </div>
         <div class="input-group">
           <label for="cvv">CVV</label>
           <input
+            class="form-input"
             id="cvv"
             type="text"
             placeholder="123"
