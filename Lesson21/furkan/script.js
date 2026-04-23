@@ -50,134 +50,83 @@ const formElement = document.getElementById('checkoutForm');
 
 let formCorrect = true;
 
-function showError(paragraph, message) {
+function showError(input, paragraph, message) {
   paragraph.textContent = message;
   paragraph.classList.remove('hidden');
-
-  const inputId = paragraph.id.replace('Error', '').toLowerCase();
-  const linkedInput = document.querySelector(
-    `[aria-describedy="${paragraph.id}"]`,
-  );
-  if (linkedInput) linkedInput.setAttribute('aria-invalid', 'true');
+  input.setAttribute('aria-invalid', 'true');
 }
 
-function clearError(paragraph) {
+function clearError(input, paragraph) {
   paragraph.textContent = '';
   paragraph.classList.add('hidden');
-  const linkedInput = document.querySelector(
-    `[aria-describedby="${paragraph.id}"]`,
-  );
-  if (linkedInput) linkedInput.setAttribute('aria-invalid', 'false');
+  input.setAttribute('aria-invalid', 'false');
 }
 //------------------------------------------------
 
 function validateEmail(email) {
+  email = email.trim();
   if (email.length < 1) {
-    emailErrorParagraph.textContent =
-      'An email address is required so we can contact you.';
-    emailErrorParagraph.classList.remove('hidden');
+    showError(emailInput, emailErrorParagraph, 'An email address is required...');
+    return false;
   } else if (!emailPattern.test(email)) {
-    emailErrorParagraph.textContent =
-      'That doesn’t look like a valid email address (e.g. name@gmail.com).';
-    emailErrorParagraph.classList.remove('hidden');
+    showError(emailInput, emailErrorParagraph, 'That doesn\'t look like a valid email...');
+    return false;
   } else {
-    emailErrorParagraph.textContent = '';
-    emailErrorParagraph.classList.add('hidden');
+    clearError(emailInput, emailErrorParagraph);
+    return true;
   }
 }
 
 function validatePhone(phone) {
+  phone = phone.trim();
   if (phone.length < 1) {
-    phoneErrorParagraph.textContent =
-      'A phone number is required so we can contact you.';
-    phoneErrorParagraph.classList.remove('hidden');
-    formCorrect = false;
+    showError(phoneInput, phoneErrorParagraph, 'A phone number is required...');
+    return false;
   } else if (!phonePattern.test(phone)) {
-    phoneErrorParagraph.textContent =
-      'That doesn’t look like a valid phone number (e.g. +905554443322). Max 20 digits allowed.';
-    phoneErrorParagraph.classList.remove('hidden');
-    formCorrect = false;
-  } else {
-    phoneErrorParagraph.textContent = '';
-    phoneErrorParagraph.classList.add('hidden');
-  }
-}
-
-function validateFirstName(firstName) {
-  if (firstName.length < 3) {
-    firstNameErrorParagraph.textContent =
-      'First name must have more than 2 characters.';
-    firstNameErrorParagraph.classList.remove('hidden');
-    formCorrect = false;
-  } else if (firstName.length > 50) {
-    firstNameErrorParagraph.textContent =
-      'First name can be 50 characters max.';
-    firstNameErrorParagraph.classList.remove('hidden');
-    formCorrect = false;
-  } else if (!namePattern.test(firstName)) {
-    firstNameErrorParagraph.textContent =
-      'Names can only contain letters and standard punctuation like hyphens or spaces.';
-    firstNameErrorParagraph.classList.remove('hidden');
-    formCorrect = false;
-  } else {
-    firstNameErrorParagraph.textContent = '';
-    firstNameErrorParagraph.classList.add('hidden');
-  }
-}
-
-function validateLastName(lastName) {
-  if (lastName.length < 2) {
-    showError(
-      lastNameErrorParagraph,
-      'Last name must have more than 2 characters.',
-    );
-    return false;
-  } else if (lastName.length > 50) {
-    showError(
-      lastNameErrorParagraph,
-      'The last name can be a maximum of 50 characters.',
-    );
-    return false;
-  } else if (!namePattern.test(lastName)) {
-    showError(
-      lastNameErrorParagraph,
-      'The surname may only contain letters and standard punctuation marks such as hyphens/spaces.',
-    );
+    showError(phoneInput, phoneErrorParagraph, 'That doesn\'t look like a valid phone number...');
     return false;
   }
-  clearError(lastNameErrorParagraph);
+  clearError(phoneInput, phoneErrorParagraph);
   return true;
 }
+
+function validateName(input, value, errorParagraph, fieldName) {
+  value = value.trim();
+  if (value.length < 2) {
+    showError(input, errorParagraph, `${fieldName} must have more than 2 characters.`);
+    return false;
+  } else if (value.length > 50) {
+    showError(input, errorParagraph, `${fieldName} can be 50 characters max.`);
+    return false;
+  } else if (!namePattern.test(value)) {
+    showError(input, errorParagraph, `${fieldName} can only contain letters...`);
+    return false;
+  }
+  clearError(input, errorParagraph);
+  return true;
+}
+
 
 function validateCardNumber(cardNumber) {
+  cardNumber = cardNumber.trim();
   if (cardNumber.length < 1) {
-    showError(cardNumberErrorParagraph, 'Card number is required.');
-    return false;
-  } else if (cardNumber.replace(/\s/g, '').length < 16) {
-    showError(cardNumberErrorParagraph, 'Card number must be 16 digits long.');
-    return false;
-  } else if (!cardNumberPattern.test(cardNumber)) {
-    showError(
-      cardNumberErrorParagraph,
-      'The card number must be 16 digits long. (e.g., 1234 5678 9101 1121)',
-    );
+    showError(cardNumberInput, cardNumberErrorParagraph, 'Card number is required.');
     return false;
   }
-  clearError(cardNumberErrorParagraph);
+  clearError(cardNumberInput, cardNumberErrorParagraph);
+  return true;
+}
+function validateExpDate(expDate) {
+  expDate = expDate.trim();
+  if (expDate.length < 1) {
+    showError(expDateInput, expDateErrorParagraph, 'Date number is required.');
+    return false;
+  }
+  clearError(expDateInput, expDateErrorParagraph);
   return true;
 }
 
-function validateExpDate(expDate) {
-  if (expDate.length < 1) {
-    showError(expDateErrorParagraph, 'Expiration date is required.');
-    return false;
-  } else if (!expDatePattern.test(expDate)) {
-    showError(
-      expDateErrorParagraph,
-      'The date must be in MM/YY format. (e.g., 04/26)',
-    );
-    return false;
-  }
+
 
   const [month, year] = expDate.split('/').map(Number);
   const now = new Date();
@@ -194,6 +143,7 @@ function validateExpDate(expDate) {
 }
 
 function validateCVV(cvv) {
+  cvv = cvv.trim();
   if (cvv.length < 1) {
     showError(cvvErrorParagraph, 'CVV number is required.');
     return false;
@@ -223,44 +173,27 @@ phoneInput.addEventListener('input', () => {
   phoneInput.value = val.replace(/^(\d{3})(\d{3})(\d{4})$/, '$1 $2 $3');
 });
 
-//Change listeners..
+//Change and Blur Listeners
+function addValidationListener (input, eventType, validateFunction) {
+  input.addEventListener(eventType, () => {
+    validateFunction(input.value);
+  });
+}
+addValidationListener(emailInput, 'change', validateEmail);
+addValidationListener(phoneInput, 'change', validatePhone);
+addValidationListener(cardNumberInput, 'blur', validateCardNumber);
+addValidationListener(expDateInput, 'blur', validateExpDate);
+addValidationListener(cvvInput, 'blur', validateCVV);
 
-emailInput.addEventListener('change', () => {
-  const emailValue = emailInput.value.trim();
-  validateEmail(emailValue);
-});
+addValidationListener(firstNameInput, 'change', (value) =>
+  validateName(firstNameInput, value, firstNameErrorParagraph, 'First name')
+);
 
-phoneInput.addEventListener('change', () => {
-  const phoneValue = phoneInput.value.trim();
-  validatePhone(phoneValue);
-});
+addValidationListener(lastNameInput, 'change', (value) =>
+  validateName(lastNameInput, value, lastNameErrorParagraph, 'Last name')
+);
 
-firstNameInput.addEventListener('change', () => {
-  const firstNameValue = firstNameInput.value.trim();
-  validateFirstName(firstNameValue);
-});
 
-lastNameInput.addEventListener('change', () => {
-  const lastNameValue = lastNameInput.value.trim();
-  validateLastName(lastNameValue);
-});
-
-//Blur listeners..
-
-cardNumberInput.addEventListener('blur', () => {
-  const cardNumberValue = cardNumberInput.value.trim();
-  validateCardNumber(cardNumberValue);
-});
-
-expDateInput.addEventListener('blur', () => {
-  const expDateValue = expDateInput.value.trim();
-  validateExpDate(expDateValue);
-});
-
-cvvInput.addEventListener('blur', () => {
-  const cvvValue = cvvInput.value.trim();
-  validateCVV(cvvValue);
-});
 
 //Submit listeners..
 
@@ -271,22 +204,22 @@ formElement.addEventListener('submit', (event) => {
 
   // I found where the problem was. We dont have emailValue, phoneValue and firsNameValue variable. We must be identify new variable.
 
-  const emailValue = emailInput.value.trim();
-  const phoneValue = phoneInput.value.trim();
-  const firstNameValue = firstNameInput.value.trim();
-  const lastNameValue = lastNameInput.value.trim();
-  const cardNumberValue = cardNumberInput.value.trim();
-  const expDateValue = expDateInput.value.trim();
-  const cvvValue = cvvInput.value.trim();
+  const emailValue = emailInput.value;
+  const phoneValue = phoneInput.value;
+  const firstNameValue = firstNameInput.value;
+  const lastNameValue = lastNameInput.value;
+  const cardNumberValue = cardNumberInput.value;
+  const expDateValue = expDateInput.value;
+  const cvvValue = cvvInput.value;
 
   const allValid = [
-    validateEmail(emailValue),
-    validatePhone(phoneValue),
-    validateFirstName(firstNameValue),
-    validateLastName(lastNameValue),
-    validateCardNumber(cardNumberValue),
-    validateExpDate(expDateValue),
-    validateCVV(cvvValue),
+    validateEmail(emailInput.value),
+    validatePhone(phoneInput.value),
+    validateName(firstNameInput, firstNameInput.value, firstNameErrorParagraph, 'First name'),
+    validateName(lastNameInput, lastNameInput.value, lastNameErrorParagraph, 'Last name'),
+    validateCardNumber(cardNumberInput.value),
+    validateExpDate(expDateInput.value),
+    validateCVV(cvvInput.value),
   ].every(Boolean);
 
   if (formCorrect) {
