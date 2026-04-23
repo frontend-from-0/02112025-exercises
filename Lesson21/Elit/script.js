@@ -1,7 +1,9 @@
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const phonePattern = /^\+?\d(?:\s?\d){9,19}$/;
-
 const namePattern = /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ' \-]*[a-zA-ZÀ-ÿ]$/;
+
+const cardNumberPattern = /^\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}$/;
+const expirationDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
 /*
 1. Select elements (inputs, error elements, form)
 
@@ -21,6 +23,13 @@ const phoneInput = document.getElementById("phone");
 const phoneErrorParagraph = document.getElementById("phoneError");
 const firstNameInput = document.getElementById("firstName");
 const firstNameErrorParagraph = document.getElementById("firstNameError");
+const lastNameInput = document.getElementById("lastName");
+const lastNameErrorParagraph = document.getElementById("lastNameError");
+const cardNumberInput = document.getElementById("cardNumber");
+const cardNumberErrorParagraph = document.getElementById("cardNumberError");
+const expirationDateInput = document.getElementById("expDate");
+const expirationDateErrorParagraph = document.getElementById("expDateError");
+
 const formElement = document.getElementById("checkoutForm");
 const successElement = document.getElementById("success");
 let formCorrect = true;
@@ -90,6 +99,79 @@ function validateFirstName(firstName) {
   }
 }
 
+function validateLastName(lastName) {
+  if (lastName.length < 1) {
+    lastNameErrorParagraph.textContent = "Last name is required.";
+    lastNameInput.setAttribute("aria-invalid", "true");
+    lastNameErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (lastName.length > 50) {
+    lastNameErrorParagraph.textContent = "Last name can be 50 characters max.";
+    lastNameInput.setAttribute("aria-invalid", "true");
+    lastNameErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (!namePattern.test(lastName)) {
+    lastNameErrorParagraph.textContent =
+      "Names can only contain letters and standard punctuation like hyphens or spaces.";
+    lastNameInput.setAttribute("aria-invalid", "true");
+    lastNameErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else {
+    lastNameErrorParagraph.textContent = "";
+    lastNameInput.setAttribute("aria-invalid", "false");
+    lastNameErrorParagraph.classList.add("hidden");
+  }
+}
+function validateCardNumber(cardNumber) {
+  if (cardNumber.length < 1) {
+    cardNumberErrorParagraph.textContent = "Card number is required.";
+    cardNumberInput.setAttribute("aria-invalid", "true");
+    cardNumberErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (cardNumber.length < 16 || cardNumber.length > 16) {
+    cardNumberErrorParagraph.textContent =
+      "Card number must be 16 digits long.";
+    cardNumberInput.setAttribute("aria-invalid", "true");
+    cardNumberErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (!cardNumberPattern.test(cardNumber)) {
+    cardNumberErrorParagraph.textContent =
+      "Ensure your card number contains only numbers and is 16 digits long. (e.g., 1234 5678 1234 5678).";
+    cardNumberInput.setAttribute("aria-invalid", "true");
+    cardNumberErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else {
+    cardNumberErrorParagraph.textContent = "";
+    cardNumberInput.setAttribute("aria-invalid", "false");
+    cardNumberErrorParagraph.classList.add("hidden");
+  }
+}
+
+function validateExpirationDate(expirationDate) {
+  if (expirationDate.length < 1) {
+    expirationDateErrorParagraph.textContent = "Expiration Date is required.";
+    expirationDateInput.setAttribute("aria-invalid", "true");
+    expirationDateErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (cardNumber.length < 16 || cardNumber.length > 16) {
+    cardNumberErrorParagraph.textContent =
+      "Card number must be 16 digits long.";
+    cardNumberInput.setAttribute("aria-invalid", "true");
+    cardNumberErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (!cardNumberPattern.test(cardNumber)) {
+    cardNumberErrorParagraph.textContent =
+      "Ensure your card number contains only numbers and is 16 digits long. (e.g., 1234 5678 1234 5678).";
+    cardNumberInput.setAttribute("aria-invalid", "true");
+    cardNumberErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else {
+    cardNumberErrorParagraph.textContent = "";
+    cardNumberInput.setAttribute("aria-invalid", "false");
+    cardNumberErrorParagraph.classList.add("hidden");
+  }
+}
+
 emailInput.addEventListener("change", () => {
   const emailValue = emailInput.value.trim();
   validateEmail(emailValue);
@@ -105,17 +187,31 @@ firstNameInput.addEventListener("change", () => {
   validateFirstName(firstNameValue);
 });
 
+lastNameInput.addEventListener("change", () => {
+  const lastNameValue = lastNameInput.value.trim();
+  validateLastName(lastNameValue);
+});
+
+cardNumberInput.addEventListener("change", () => {
+  const cardNumberValue = cardNumberInput.value.trim();
+  validateCardNumber(cardNumberValue);
+});
+
 formElement.addEventListener("submit", (event) => {
   event.preventDefault();
 
   formCorrect = true; // hataları unutup sıfırlatmak için
-  // TODO: Find error that prevents error message from showing up
+
   const currentEmailValue = emailInput.value.trim();
   const currentPhoneValue = phoneInput.value.trim();
   const currentFirstNameValue = firstNameInput.value.trim();
+  const currentLastNameValue = lastNameInput.value.trim();
+  const currentCardNumberValue = cardNumberInput.value.trim();
   validateEmail(currentEmailValue);
   validatePhone(currentPhoneValue);
   validateFirstName(currentFirstNameValue);
+  validateLastName(currentLastNameValue);
+  validateCardNumber(currentCardNumberValue);
 
   if (formCorrect) {
     formElement.reset();

@@ -32,6 +32,7 @@
             name="email"
             autocomplete="email"
             aria-describedby="emailError"
+            required
           />
           <p
             id="emailError"
@@ -49,6 +50,7 @@
             name="phoneNumber"
             autocomplete="tel"
             aria-describedby="phoneError"
+            required
           />
           <p
             id="phoneError"
@@ -66,6 +68,7 @@
             name="firstname"
             autocomplete="given-name"
             aria-describedby="firstNameError"
+            required
           />
           <p
             id="firstNameError"
@@ -75,14 +78,15 @@
           ></p>
         </div>
         <div class="input-group">
-          <label for="lastname">Last Name</label>
+          <label for="lastName">Last Name</label>
           <input
-            id="lastname"
+            id="lastName"
             type="text"
             placeholder="Clark"
-            name="lastname"
+            name="lastName"
             autocomplete="family-name"
             aria-describedby="lastNameError"
+            required
           />
           <p
             id="lastNameError"
@@ -100,7 +104,6 @@
               <div class="visa-master-card">
                 <img
                   src="assets/visa-logo.svg"
-                  id="card-icon"
                   class="visa-card-icon"
                   alt=""
                   aria-hidden="true"
@@ -108,7 +111,6 @@
                 />
                 <img
                   src="assets/master-logo.svg"
-                  id="card-icon"
                   class="master-card-icon"
                   alt=""
                   aria-hidden="true"
@@ -116,11 +118,13 @@
                 />
               </div>
               <input
-                id="cardnumber"
+                id="cardNumber"
                 type="text"
                 placeholder="1234 5678 9101 1121"
                 name="cardnumber"
                 autocomplete="cc-number"
+                required
+                maxlength="19"
               />
             </div>
             <p
@@ -138,6 +142,7 @@
               placeholder="MM/YY"
               name="expDate"
               autocomplete="cc-exp"
+              required
             />
             <p
               id="expDateError"
@@ -154,6 +159,7 @@
               placeholder="123"
               name="cvv"
               autocomplete="cc-csc"
+              required
             />
             <p
               id="cvvError"
@@ -170,11 +176,25 @@
         id="success"
         role="status"
         aria-live="polite"
-        tab-index="-1"
+        tabindex="-1"
       >
-        <p>Success!</p>
+        <div class="success-msg">
+          <img
+            src="assets/heart.svg"
+            id="heart-icon"
+            class="heart-icon"
+            alt=""
+            aria-hidden="true"
+            width="200"
+          />
+          <h2>Payment Successful! ✨</h2>
+          <p class="success-subtitle">
+            Thanks for shopping with us!<br />Check your inbox for the
+            confirmation email.
+          </p>
+        </div>
       </div>
     </main>
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

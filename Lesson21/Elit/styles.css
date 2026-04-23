@@ -79,27 +79,28 @@ legend {
 .card-input-container {
   position: relative;
   width: 100%;
-  display:flex;
+  display: flex;
 }
-.master-card-icon, .visa-card-icon {
+.master-card-icon,
+.visa-card-icon {
   position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 35px; 
-    z-index: 2; 
-    pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .master-card-icon {
-    right: 12px;
+  right: 12px;
 }
 .visa-card-icon {
-    right: 52px; 
+  right: 52px;
 }
 
-input#cardnumber {
-    width: 100% !important; 
-    padding-right: 100px;  
+input#cardNumber {
+  width: 100% !important;
+  padding-right: 100px;
 }
 
 .btn-success {
@@ -130,4 +131,27 @@ input#cardnumber {
 }
 .hidden {
   display: none;
+}
+.success-msg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: rgb(128, 28, 168);
+  text-align: center;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  padding: 24px;
+}
+h2 {
+  font-size: 1.8rem;
+}
+.success-subtitle {
+  color: rgb(147, 146, 146);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 18px;
 }
