@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  margin: auto;
 }
 
 body {
@@ -25,7 +24,7 @@ h1 {
   text-align: center;
 }
 
-form {
+.mw-form {
   max-width: 448px;
 }
 
@@ -36,7 +35,7 @@ form {
   margin: 24px 0;
 }
 
-input {
+.form-input {
   background: #1f6b50;
   color: #ffffff;
   border: none;
@@ -44,7 +43,7 @@ input {
   padding: 16px;
   width: 100%;
 }
-input::placeholder {
+.form-input::placeholder {
   color: #ffffff;
   opacity: 0.6;
 }
