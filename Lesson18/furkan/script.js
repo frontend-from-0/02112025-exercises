@@ -166,11 +166,14 @@ Add the following methods to the `Library` class:
 
 class Book {
   constructor(title, author, isbn) {
-    if (typeof title !== 'string' || title.length < 3) {
+    if (typeof title !== 'string' || title.trim().length < 3) {
       throw new Error('Title must be at least 3 characters.');
     }
-    if (typeof author !== 'string' || author.length < 3) {
+    if (typeof author !== 'string' || author.trim().length < 3) {
       throw new Error('Author must be at least 3 characters.');
+    }
+    if (typeof isbn !== 'string' || isbn.trim().length === 0) {
+      throw new Error('Isbn number must be a valid string.');
     }
 
     this.title = title;
@@ -186,8 +189,11 @@ class Book {
 
 class Member {
   constructor(name, memberId) {
-    if (typeof name !== 'string' || name.length < 3) {
+    if (typeof name !== 'string' || name.trim().length < 3) {
       throw new Error('Member name must be at least 3 characters.');
+    }
+    if (typeof memberId !== 'string' || memberId.trim().length < 3) {
+      throw new Error('The Member Id must be at least 3 characters.');
     }
 
     this.name = name;
@@ -389,4 +395,16 @@ library.returnBook('M1', 'ISBN-001', '2026-01-11');
 
 library.returnBook('M2', 'ISBN-002', '2025-03-01');
 
+library.viewAvailableBooks();
+
+// 1) Remove the current and unborrowed book → it should be successful
+library.removeBook('ISBN-003');
+
+// 2) Remove the same book again → it should be 'not found'
+library.removeBook('ISBN-003');
+
+// 3) Remove the unborrowed book → it should be 'borrowed'
+library.removeBook('ISBN-001');
+
+// 4) Check the remaining books
 library.viewAvailableBooks();
