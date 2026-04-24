@@ -18,7 +18,10 @@ body {
 
 main {
   max-width: 960px;
-  margin: 96px auto;
+  margin: 0 auto;
+}
+.logo {
+  margin-top: 24px;
 }
 h1 {
   font-size: 2rem;
@@ -62,6 +65,7 @@ input:focus {
   color: rgb(222, 109, 11);
   font-size: 14px;
   font-weight: 600;
+  padding-left: 16px;
 }
 fieldset {
   border: 2px solid rgb(206, 206, 206);
@@ -115,6 +119,7 @@ input#cardNumber {
   background-color: rgb(128, 28, 168);
   box-shadow: 0 0 0 4px rgba(128, 28, 168, 0.1);
   transition: all 0.3s ease;
+  margin-bottom: 24px;
 }
 
 .btn-success:focus {

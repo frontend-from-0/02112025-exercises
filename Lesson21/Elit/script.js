@@ -4,6 +4,7 @@ const namePattern = /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ' \-]*[a-zA-ZÀ-ÿ]$/;
 
 const cardNumberPattern = /^\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}$/;
 const expirationDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+const cvvPattern = /^\d{3}$/;
 /*
 1. Select elements (inputs, error elements, form)
 
@@ -29,6 +30,8 @@ const cardNumberInput = document.getElementById("cardNumber");
 const cardNumberErrorParagraph = document.getElementById("cardNumberError");
 const expirationDateInput = document.getElementById("expDate");
 const expirationDateErrorParagraph = document.getElementById("expDateError");
+const cvvInput = document.getElementById("cvv");
+const cvvErrorParagraph = document.getElementById("cvvError");
 
 const formElement = document.getElementById("checkoutForm");
 const successElement = document.getElementById("success");
@@ -123,12 +126,13 @@ function validateLastName(lastName) {
   }
 }
 function validateCardNumber(cardNumber) {
-  if (cardNumber.length < 1) {
+  const cleanCardNumber = cardNumber.replace(/\D/g, "");
+  if (cleanCardNumber.length < 1) {
     cardNumberErrorParagraph.textContent = "Card number is required.";
     cardNumberInput.setAttribute("aria-invalid", "true");
     cardNumberErrorParagraph.classList.remove("hidden");
     formCorrect = false;
-  } else if (cardNumber.length < 16 || cardNumber.length > 16) {
+  } else if (cleanCardNumber.length !== 16) {
     cardNumberErrorParagraph.textContent =
       "Card number must be 16 digits long.";
     cardNumberInput.setAttribute("aria-invalid", "true");
@@ -153,22 +157,55 @@ function validateExpirationDate(expirationDate) {
     expirationDateInput.setAttribute("aria-invalid", "true");
     expirationDateErrorParagraph.classList.remove("hidden");
     formCorrect = false;
-  } else if (cardNumber.length < 16 || cardNumber.length > 16) {
-    cardNumberErrorParagraph.textContent =
-      "Card number must be 16 digits long.";
-    cardNumberInput.setAttribute("aria-invalid", "true");
-    cardNumberErrorParagraph.classList.remove("hidden");
+  } else if (!expirationDatePattern.test(expirationDate)) {
+    expirationDateErrorParagraph.textContent =
+      "Please enter a valid date (MM/YY).";
+    expirationDateInput.setAttribute("aria-invalid", "true");
+    expirationDateErrorParagraph.classList.remove("hidden");
     formCorrect = false;
-  } else if (!cardNumberPattern.test(cardNumber)) {
-    cardNumberErrorParagraph.textContent =
-      "Ensure your card number contains only numbers and is 16 digits long. (e.g., 1234 5678 1234 5678).";
-    cardNumberInput.setAttribute("aria-invalid", "true");
-    cardNumberErrorParagraph.classList.remove("hidden");
+    return;
+  }
+
+  const now = new Date();
+  const currentYear = now.getFullYear() % 100; // 2026/100 kalan=26 gibi
+  const currentMonth = now.getMonth() + 1; // ocak 0.ay şubat 1.ay diye
+
+  const parts = expirationDate.split("/");
+  const expMonth = parseInt(parts[0], 10);
+  const expYear = parseInt(parts[1], 10);
+
+  if (
+    expYear < currentYear ||
+    (expYear === currentYear && expMonth < currentMonth)
+  ) {
+    expirationDateErrorParagraph.textContent =
+      "This card is no longer valid as the expiration date has passed.";
+    expirationDateInput.setAttribute("aria-invalid", "true");
+    expirationDateErrorParagraph.classList.remove("hidden");
     formCorrect = false;
   } else {
-    cardNumberErrorParagraph.textContent = "";
-    cardNumberInput.setAttribute("aria-invalid", "false");
-    cardNumberErrorParagraph.classList.add("hidden");
+    expirationDateErrorParagraph.textContent = "";
+    expirationDateInput.setAttribute("aria-invalid", "false");
+    expirationDateErrorParagraph.classList.add("hidden");
+  }
+}
+
+function ValidateCvvNumber(cvv) {
+  if (cvv.length < 1) {
+    cvvErrorParagraph.textContent = "CVV number is required.";
+    cvvInput.setAttribute("aria-invalid", "true");
+    cvvErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else if (!cvvPattern.test(cvv)) {
+    cvvErrorParagraph.textContent =
+      "Ensure your CVV number contains only numbers and is 3 digits long. (e.g., 123).";
+    cvvInput.setAttribute("aria-invalid", "true");
+    cvvErrorParagraph.classList.remove("hidden");
+    formCorrect = false;
+  } else {
+    cvvErrorParagraph.textContent = "";
+    cvvInput.setAttribute("aria-invalid", "false");
+    cvvErrorParagraph.classList.add("hidden");
   }
 }
 
@@ -192,9 +229,43 @@ lastNameInput.addEventListener("change", () => {
   validateLastName(lastNameValue);
 });
 
+cardNumberInput.addEventListener("input", (e) => {
+  if (e.inputType === "deleteContentBackward") return;
+  let cleanValue = e.target.value.replace(/\D/g, "");
+  let groups = cleanValue.match(/.{1,4}/g);
+  if (groups) {
+    e.target.value = groups.join(" ");
+  }
+});
+
 cardNumberInput.addEventListener("change", () => {
   const cardNumberValue = cardNumberInput.value.trim();
   validateCardNumber(cardNumberValue);
+});
+
+expirationDateInput.addEventListener("input", (e) => {
+  if (e.inputType === "deleteContentBackward") {
+    return;
+  }
+  let expirationDateValue = e.target.value.replace(/\D/g, "");
+  if (expirationDateValue.length >= 2) {
+    e.target.value =
+      expirationDateValue.substring(0, 2).trim() +
+      "/" +
+      expirationDateValue.substring(2, 4).trim();
+  } else {
+    e.target.value = expirationDateValue;
+  }
+});
+
+expirationDateInput.addEventListener("change", () => {
+  const expirationDateValue = expirationDateInput.value.trim();
+  validateExpirationDate(expirationDateValue);
+});
+
+cvvInput.addEventListener("change", () => {
+  const cvvValue = cvvInput.value.trim();
+  ValidateCvvNumber(cvvValue);
 });
 
 formElement.addEventListener("submit", (event) => {
@@ -207,23 +278,28 @@ formElement.addEventListener("submit", (event) => {
   const currentFirstNameValue = firstNameInput.value.trim();
   const currentLastNameValue = lastNameInput.value.trim();
   const currentCardNumberValue = cardNumberInput.value.trim();
+  const currentExpirationDateValue = expirationDateInput.value.trim();
+  const currentCvvValue = cvvInput.value.trim();
+
   validateEmail(currentEmailValue);
   validatePhone(currentPhoneValue);
   validateFirstName(currentFirstNameValue);
   validateLastName(currentLastNameValue);
   validateCardNumber(currentCardNumberValue);
+  validateExpirationDate(currentExpirationDateValue);
+  ValidateCvvNumber(currentCvvValue);
 
   if (formCorrect) {
     formElement.reset();
     successElement.classList.remove("hidden");
     successElement.focus();
     formElement.classList.add("hidden");
-    console.log("Form başarıyla gönderildi!");
+    console.log("Form submitted successfully!");
   } else {
     const firstError = document.querySelector('[aria-invalid="true"]');
     if (firstError) {
       firstError.focus();
     }
-    console.log("Formda hala hatalar var, gönderme işlemi durduruldu.");
+    console.log("Submission failed: Validation errors found.");
   }
 });
