@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  color: rgb(30, 29, 29);
+  font-family: "Quicksand", sans-serif;
+  background-image: url(assets/bg__lg.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.logo {
+  margin-top: 24px;
+}
+h1 {
+  font-size: 2rem;
+}
+.description {
+  color: rgb(147, 146, 146);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+form {
+  max-width: 448px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 24px 0;
+}
+label {
+  font-weight: 700;
+  color: rgb(128, 28, 168);
+  padding-left: 10px;
+}
+input {
+  background: #ffffff;
+  border: 2px solid rgb(206, 206, 206);
+  border-radius: 12px;
+  padding: 16px;
+  color: rgb(30, 29, 29);
+  font-weight: 600;
+  transition: border-color 0.3s ease;
+}
+input:focus {
+  outline: none;
+  border-color: rgb(128, 28, 168);
+  box-shadow: 0 0 0 4px rgba(128, 28, 168, 0.1);
+}
+.input-error {
+  color: rgb(222, 109, 11);
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 16px;
+}
+fieldset {
+  border: 2px solid rgb(206, 206, 206);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+legend {
+  font-weight: 700;
+  color: rgb(128, 28, 168);
+  font-size: 1.1rem;
+  padding: 0 10px;
+}
+.card-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.master-card-icon,
+.visa-card-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.master-card-icon {
+  right: 12px;
+}
+.visa-card-icon {
+  right: 52px;
+}
+
+input#cardNumber {
+  width: 100% !important;
+  padding-right: 100px;
+}
+
+.btn-success {
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  display: block;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: white;
+  background-color: rgb(128, 28, 168);
+  box-shadow: 0 0 0 4px rgba(128, 28, 168, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.btn-success:focus {
+  outline: none;
+  border-color: rgb(128, 28, 168);
+  box-shadow: 0 0 0 4px rgba(128, 28, 168, 0.1);
+}
+
+.btn-success:hover {
+  outline: none;
+  border-color: rgb(128, 28, 168);
+  box-shadow: 0 0 0 6px rgba(128, 28, 168, 0.2);
+  transform: scale(0.95);
+}
+.hidden {
+  display: none;
+}
+.success-msg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: rgb(128, 28, 168);
+  text-align: center;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  padding: 24px;
+}
+h2 {
+  font-size: 1.8rem;
+}
+.success-subtitle {
+  color: rgb(147, 146, 146);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 18px;
+}
