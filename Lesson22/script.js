@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
   Object.keys(cart).forEach((item) => {
     const addBtn = document.getElementById(`${item}_add`);
     if (addBtn) addBtn.onclick = () => changeQuantity(item, 1);
-
     const removeBtn = document.getElementById(`${item}_remove`);
     if (removeBtn)
       removeBtn.onclick = () => {
