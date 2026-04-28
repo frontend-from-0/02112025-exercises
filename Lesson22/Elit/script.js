@@ -25,21 +25,21 @@ const clearCartBtn = document.getElementById("clear_cart");
 //   }
 // ];
 
-const products = {
+let products = {
   apples: {
-    quantity: 1,
+    quantity: 0,
     price: 1,
   },
   bananas: {
-    quantity: 1,
+    quantity: 0,
     price: 1,
   },
   bread: {
-    quantity: 1,
+    quantity: 0,
     price: 1,
   },
   eggs: {
-    quantity: 1,
+    quantity: 0,
     price: 1,
   },
 };
@@ -47,7 +47,13 @@ const products = {
 let total = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
+  const savedCart = localStorage.getItem("cart");
+  if (savedCart) {
+    products = JSON.parse(savedCart);
+  }
+
   calculateTotal();
+
   Object.keys(products).forEach((productName) => {
     const addProductBtn = document.getElementById(`${productName}_add`);
     const removeProductBtn = document.getElementById(`${productName}_remove`);
@@ -57,6 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const decrementButton = document.getElementById(`${productName}_decrement`);
 
     productQuantity.textContent = products[productName].quantity;
+    if (products[productName].quantity > 0) {
+      productCartItem.classList.remove("hidden");
+    } else {
+      productCartItem.classList.add("hidden");
+    }
 
     addProductBtn.addEventListener("click", () =>
       addProduct(productName, productQuantity, productCartItem),
@@ -83,11 +94,16 @@ function calculateTotal() {
   });
 }
 
+function saveCartToLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(products));
+}
+
 function removeProduct(productName, productCartItem) {
   products[productName].quantity = 0;
   productCartItem.classList.add("hidden");
 
   calculateTotal();
+  saveCartToLocalStorage();
 }
 
 function addProduct(productName, productQuantitySpan, productCartItem) {
@@ -98,12 +114,14 @@ function addProduct(productName, productQuantitySpan, productCartItem) {
   productQuantitySpan.textContent = products[productName].quantity;
 
   calculateTotal();
+  saveCartToLocalStorage();
 }
 
 function incrementProduct(productName, productQuantitySpan, productCartItem) {
   products[productName].quantity += 1;
   productQuantitySpan.textContent = products[productName].quantity;
   calculateTotal();
+  saveCartToLocalStorage();
 }
 
 function decrementProduct(productName, productQuantitySpan, productCartItem) {
@@ -116,6 +134,7 @@ function decrementProduct(productName, productQuantitySpan, productCartItem) {
   }
 
   calculateTotal();
+  saveCartToLocalStorage();
 }
 
 clearCartBtn.addEventListener("click", () => {
@@ -129,4 +148,5 @@ clearCartBtn.addEventListener("click", () => {
     productCartItem.classList.add("hidden");
   });
   calculateTotal();
+  saveCartToLocalStorage();
 });
