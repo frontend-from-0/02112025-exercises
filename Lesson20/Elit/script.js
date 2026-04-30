@@ -109,7 +109,7 @@ dateInput.addEventListener("change", () => {
   });
 });
 
-nameInput.addEventListener("input", () => {
+nameInput.addEventListener("change", () => {
 const isValid = validateName(nameInput.value);
 
   if (isValid) {
