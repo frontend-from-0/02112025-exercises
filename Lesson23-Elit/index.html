@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LESSON23 ASSIGNMENT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="./md.css"
+      media="(min-width:768px) and (max-width:1023.98px)"
+    />
+    <link rel="stylesheet" href="./lg.css" media="(min-width:1024px)" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar_top">
+        <a class="brand_logo" href="#">PRACTICAL ASSIGNMENT</a>
+        <div class="navbar">
+          <ul class="navbar_links">
+            <li><a href="#">Home</a></li>
+            <li><a href="./services.html">What We Do?</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+          <button
+            class="burger_icon"
+            id="burger_icon"
+            aria-label="Open navigation menu"
+          >
+            <img
+              src="./assets/burger_icon.svg"
+              alt=""
+              width="30"
+              height="30"
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+        <div id="burger_menu" class="nav_burger hidden">
+          <div class="nav_burger_top">
+            <button
+              class="close_icon_wrapper"
+              id="close_icon"
+              aria-label="close navigation menu"
+            >
+              <img
+                src="./assets/xmark_icon.svg"
+                alt=""
+                width="30"
+                height="30"
+                aria-hidden="true"
+              />
+            </button>
+            <div class="burger_brand_logo">
+              <a class="link_logo" href="/">PRACTICAL ASSIGNMENT</a>
+            </div>
+          </div>
+          <div class="nav_burger_container">
+            <div class="burger_menu_content">
+              <div class="decorative_line"></div>
+              <ul class="burger_nav_links">
+                <li class="white_text burger_link"><a href="#">Home</a></li>
+                <li class="burger_link">
+                  <a href="./services.html">What We Do?</a>
+                </li>
+                <li class="burger_link">
+                  <a href="./contacts.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div class="horizontal_decorative_line"></div>
+            <div class="burger_menu_content">
+              <div class="decorative_line"></div>
+              <div class="contact_info">
+                <div class="contact_info_group">
+                  <span class="contact_types">Adress.</span>
+                  <p>
+                    Clarity Arts Unit 7<br />
+                    New York Industrial Estate<br />
+                    Harrogate<br />
+                    North Yorkshire<br />
+                    HG3 4LA
+                  </p>
+                </div>
+                <div class="contact_info_group">
+                  <span class="contact_types">Contact.</span>
+                  <p>
+                    01423 781 100<br />
+                    enquiriess@clarityarts.com
+                  </p>
+                </div>
+                <div class="contact_info_group">
+                  <span class="contact_types">Social.</span>
+                  <div class="social_contact_types">
+                    <a
+                      class="social_link"
+                      href="https://x.com/clarityarts"
+                      target="_blank"
+                      >Twitter</a
+                    >
+                    <div class="social_seperator"></div>
+                    <a
+                      class="social_link"
+                      href="https://www.instagram.com/clarity_arts/"
+                      target="_blank"
+                      >Instagram</a
+                    >
+                    <div class="social_seperator"></div>
+                    <a
+                      class="social_link"
+                      href="https://www.facebook.com/clarityarts"
+                      target="_blank"
+                      >Facebook</a
+                    >
+                    <div class="social_seperator"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <h1>POST CARDS</h1>
+      <div id="posts_container" class="posts_grid"></div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+  <footer></footer>
+</html>
