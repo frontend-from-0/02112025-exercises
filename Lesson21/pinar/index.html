@@ -16,8 +16,9 @@
           type="email"
           placeholder="email@example.com"
           name="email"
+          aria-describedby="emailError"
         />
-        <p id="emailError" class="input-error hidden"></p>
+        <p id="emailError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="phone">Phone</label>
@@ -26,8 +27,9 @@
           type="tel"
           placeholder="555 123 4567"
           name="phoneNumber"
+          aria-describedby="phoneError"
         />
-        <p id="phoneError" class="input-error hidden"></p>
+        <p id="phoneError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="firstname">First Name</label>
@@ -36,13 +38,14 @@
           type="text"
           placeholder="Sophia"
           name="firstname"
+          aria-describedby="firstNameError"
         />
-        <p id="firstNameError" class="input-error hidden"></p>
+        <p id="firstNameError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="lastname">Last Name</label>
-        <input id="lastname" type="text" placeholder="Clark" name="lastname" />
-        <p id="lastNameError" class="input-error hidden"></p>
+        <input id="lastname" type="text" placeholder="Clark" name="lastname" aria-describedby="lastNameError"/>
+        <p id="lastNameError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
 
       <div class="input-group">
@@ -52,18 +55,19 @@
           type="text"
           placeholder="1234 5678 9101 1121"
           name="cardnumber"
+          aria-describedby="cardNumberError"
         />
-        <p id="cardNumberError" class="input-error hidden"></p>
+        <p id="cardNumberError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="expDate">Expiration Date</label>
-        <input id="expDate" type="text" placeholder="MM/YY" name="expDate" />
-        <p id="expDateError" class="input-error hidden"></p>
+        <input id="expDate" type="text" placeholder="MM/YY" name="expDate" aria-describedby="expDateError"/>
+        <p id="expDateError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <div class="input-group">
         <label for="cvv">CVV</label>
-        <input id="cvv" type="text" placeholder="123" name="cvv" />
-        <p id="cvvError" class="input-error hidden"></p>
+        <input id="cvv" type="text" placeholder="123" name="cvv" aria-describedby="cvvError" />
+        <p id="cvvError" class="input-error hidden" role="alert" aria-live="polite"></p>
       </div>
       <button type="submit" class="btn-success">Place Order</button>
     </form>

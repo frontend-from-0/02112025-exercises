@@ -42,6 +42,7 @@ input {
 .btn-success {
   border: none;
   border-radius: 8px;
+  cursor:pointer;
   padding: 12px;
   display: block;
   width: 100%;
@@ -50,15 +51,11 @@ input {
   background-color: rgb(84, 82, 82);
 }
 
-.btn-success:hover{
- cursor:pointer;
-}
-
 .hidden {
   display: none;
 }
 
-.btn-success-confirm{
+.btn-confirm{
   border: none;
   border-radius: 8px;
   padding: 12px;
@@ -68,5 +65,5 @@ input {
  cursor:pointer;
  box-shadow:0px 0px 3px 3px white;
  color:#fff;
- background-color: rgb(17, 162, 17);
+ background-color: rgb(17, 162, 17) !important;
 }

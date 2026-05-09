@@ -4,18 +4,6 @@ const namePattern = /^[a-zA-ZçÇğĞıİöÖşŞüÜ][a-zA-ZçÇğĞıİöÖş�
 const cardPattern = /^[0-9]{13,19}$/;
 const cvvPattern = /^[0-9]{3}$/;
 const expPattern = /^(0[1-9]|1[0-2])\d{2}$/;
-/*
-1. Select elements (inputs, error elements, form)
-
-2. Add event listeners (submit, blur)
-
-3. [blur events] Get the value and use if statement to compare value to patter or rules
-3a. - value is correct -> move on to the next field
-3b. - value is not correct -> show error message (add text to the corresponding error element and remove class hidden)
-
-4. [form submit event] Define variable that keeps information about if the form is correct on now.
-Trigger another validation, if no error -> show success message.
-*/
 
 const emailInput = document.getElementById('email');
 const emailErrorParagraph = document.getElementById('emailError');
@@ -34,123 +22,107 @@ const expiryDateErrorParagraph = document.getElementById('expDateError');
 const formElement = document.getElementById('checkoutForm');
 const successElement = document.getElementById('success');
 const successButton = document.querySelector('.btn-success');
-let formCorrect = true;
-let emailCorrection = true;
-let phoneCorrection = true;
-let nameCorrection = true;
-let lastNameCorrection = true;
-let cardNumberCorrection = true;
-let expCorrection = true;
-let cvvCorrection = true;
+
+function showErrorElement(element,message){
+  element.textContent = message;
+  element.classList.remove('hidden');
+}
+
+function clearError(element){
+  element.textContent = " ";
+  element.classList.add('hidden');
+}
 
 function validateEmail(email) {
-  if (email.length < 1) {
-    emailErrorParagraph.textContent =
-      'An email address is required so we can contact you.';
-    emailErrorParagraph.classList.remove('hidden');
+  const emailVal = emailInput.value.trim();
+  if (emailVal.length < 1) {
+    showError(emailErrorParagraph,'An email address is required so we can contact you.'); 
     emailCorrection = false;
   } else if (!emailPattern.test(email)) {
-    emailErrorParagraph.textContent =
-      'That doesn’t look like a valid email address (e.g. name@gmail.com).';
-    emailErrorParagraph.classList.remove('hidden');
+    showError(emailErrorParagraph,'That doesn’t look like a valid email address (e.g. name@gmail.com).'); 
     emailCorrection = false;
   } else {
-    emailErrorParagraph.textContent = '';
-    emailErrorParagraph.classList.add('hidden');
-    
-  }
+    clearError(emailErrorParagraph); 
+    emailCorrection = true;
+  } 
+  return emailCorrection;
 }
 
 function validatePhone(phone) {
-  if (phone.length < 1) {
-    phoneErrorParagraph.textContent =
-      'A phone number is required so we can contact you.';
-    phoneErrorParagraph.classList.remove('hidden');
+  const phoneVal = phoneInput.value.trim();
+  if (phoneVal.length < 1) {
+    showError(phoneErrorParagraph,'A phone number is required so we can contact you.');   
     phoneCorrection = false;
   } else if (!phonePattern.test(phone)) {
-    phoneErrorParagraph.textContent =
-      'That doesn’t look like a valid phone number (e.g. +905554443322). Max 20 digits allowed.';
-    phoneErrorParagraph.classList.remove('hidden');
+    showError(phoneErrorParagraph,'That doesn’t look like a valid phone number (e.g. +905554443322). Max 20 digits allowed.');
     phoneCorrection = false;
   } else {
-    phoneErrorParagraph.textContent = '';
-    phoneErrorParagraph.classList.add('hidden');
-  }
+  clearError(phoneErrorParagraph); 
+  phoneCorrection = true;
+}
+return phoneCorrection;
 }
 
 function validateFirstName(firstName) {
-  if (firstName.length < 1) {
-    firstNameErrorParagraph.textContent = 'First name is required.';
-    firstNameErrorParagraph.classList.remove('hidden');
+  const firstNameVal = firstNameInput.value.trim();
+  if (firstNameVal.length < 1) {
+    showError(firstNameErrorParagraph, 'First name is required.');
    nameCorrection = false;
   } else if (firstName.length > 50) {
-    firstNameErrorParagraph.textContent =
-      'First name can be 50 characters max.';
-    firstNameErrorParagraph.classList.remove('hidden');
+    showError(firstNameErrorParagraph, 'First name can be 50 characters max.');
     nameCorrection = false;
   } else if (!namePattern.test(firstName)) {
-    firstNameErrorParagraph.textContent =
-      'Names can only contain letters and standard punctuation like hyphens or spaces.';
-    firstNameErrorParagraph.classList.remove('hidden');
+    showError(firstNameErrorParagraph, 'Names can only contain letters and standard punctuation like hyphens or spaces.');
     nameCorrection = false;
   } else {
-    firstNameErrorParagraph.textContent = '';
-    firstNameErrorParagraph.classList.add('hidden');
-    
+    clearError(firstNameErrorParagraph);
+    nameCorrection = true;
   }
+  return nameCorrection;
 }
 
 function validateLastName(lastName) {
-  if (lastName.length < 1) {
-    lastNameErrorParagraph.textContent = 'Last name is required.';
-    lastNameErrorParagraph.classList.remove('hidden');
+  const lastNameVal = lastNameInput.value.trim();
+  if (lastNameVal.length < 1) {
+    showError(lastNameErrorParagraph, 'Last name is required.');
     lastNameCorrection = false;
   } else if (lastName.length > 50) {
-    lastNameErrorParagraph.textContent =
-      'Last name can be 50 characters max.';
-    lastNameErrorParagraph.classList.remove('hidden');
+    showError(lastNameErrorParagraph, 'Last name can be 50 characters max.');
     lastNameCorrection = false;
   } else if (!namePattern.test(lastName)) {
-    lastNameErrorParagraph.textContent =
-      'Names can only contain letters and standard punctuation like hyphens or spaces.';
-    lastNameErrorParagraph.classList.remove('hidden');
+    showError(lastNameErrorParagraph, 'Names can only contain letters and standard punctuation like hyphens or spaces.');
     lastNameCorrection = false;
   } else {
-    lastNameErrorParagraph.textContent = '';
-    lastNameErrorParagraph.classList.add('hidden');
-   
+    clearError(lastNameErrorParagraph);
+    lastNameCorrection = true;
   }
+  return lastNameCorrection;
 }
 
 function validateCardNumber(cardNumber) {
-  if (cardNumber.length < 1) {
-    cardNumberErrorParagraph.textContent = 'Card number is required.';
-    cardNumberErrorParagraph.classList.remove('hidden');
+  const cardVal = cardNumberInput.value.trim();
+  if (cardVal.length < 1) {
+    showError(cardNumberErrorParagraph,'Card number is required.');
     cardNumberCorrection = false;
   } else if (cardNumber.length < 13) {
-    cardNumberErrorParagraph.textContent =
-      'Card number can be 13 characters min.';
-    cardNumberErrorParagraph.classList.remove('hidden');
+    showError(cardNumberErrorParagraph, 'Card number can be 13 characters min.');
     cardNumberCorrection = false;
   } else if (cardNumber.length > 19) {
-    cardNumberErrorParagraph.textContent =
-      'Card number can be 19 characters max.';
-    cardNumberErrorParagraph.classList.remove('hidden');
+    showError(cardNumberErrorParagraph, 'Card number can be 19 characters max.');
    cardNumberCorrection = false;
   } else if (!cardPattern.test(cardNumber)) {
-    cardNumberErrorParagraph.textContent =
-      'Please enter numbers only.';
-    cardNumberErrorParagraph.classList.remove('hidden');
+   showError(cardNumberErrorParagraph, 'Please enter numbers only.');
    cardNumberCorrection = false;
   } else {
-    cardNumberErrorParagraph.textContent = '';
-    cardNumberErrorParagraph.classList.add('hidden');
-   
+    clearError(cardNumberErrorParagraph);
+    cardNumberCorrection = true;
   }
+  return cardNumberCorrection;
 }
 
 function validateExpDateNumber(expDate) {
-  const numericValue = expDate.replace(/\D/g, '');
+   const expVal = expDate.trim();
+  const numericValue = expVal.replace(/\D/g, '');
 
   if (numericValue.length >= 2) {
     const mm = numericValue.slice(0, 2);
@@ -159,117 +131,90 @@ function validateExpDateNumber(expDate) {
   } 
 
   if (numericValue.length < 1) {
-    expiryDateErrorParagraph.textContent = 'Expiry date is required.';
-    expiryDateErrorParagraph.classList.remove('hidden');
+    showError(expiryDateErrorParagraph, 'Expiry date is required.');
    expCorrection = false;
   } else if (numericValue.length > 4) {
-    expiryDateErrorParagraph.textContent =
-      'Expiry date can be 4 characters max.';
-    expiryDateErrorParagraph.classList.remove('hidden');
+   showError(expiryDateErrorParagraph, 'Expiry date can be 4 characters max.');
     expCorrection = false;
   } else if (!expPattern.test(numericValue)) {
-    expiryDateErrorParagraph.textContent =
-      'Please enter valid month (01-12) and year.';
-    expiryDateErrorParagraph.classList.remove('hidden');
+    showError(expiryDateErrorParagraph, 'Please enter valid month (01-12) and year.');
     expCorrection= false;
   } else {
-    expiryDateErrorParagraph.textContent = '';
-    expiryDateErrorParagraph.classList.add('hidden');
-    
+    clearError(expiryDateErrorParagraph);
+    expCorrection = true;
   }
+  return expCorrection;
 }
 
 function validateCvvNumber(cvvNumber) {
-  if (cvvNumber.length < 1) {
-    cvvNumberErrorParagraph.textContent = 'CVV number is required.';
-    cvvNumberErrorParagraph.classList.remove('hidden');
+  const cvvVal = cvvNumberInput.value.trim();
+  if (cvvVal.length < 1) {
+   showError(cvvNumberErrorParagraph,'CVV number is required.');
     cvvCorrection = false;
   } else if (cvvNumber.length > 3) {
-    cvvNumberErrorParagraph.textContent =
-      'CVV number can be 3 characters max.';
-    cvvNumberErrorParagraph.classList.remove('hidden');
+   showError(cvvNumberErrorParagraph, 'CVV number can be 3 characters max.');
     cvvCorrection = false;
   } else if (!cvvPattern.test(cvvNumber)) {
-    cvvNumberErrorParagraph.textContent =
-      'Please enter numbers only.';
-    cvvNumberErrorParagraph.classList.remove('hidden');
+   showError(cvvNumberErrorParagraph, 'Please enter numbers only.');
     cvvCorrection = false;
   } else {
-    cvvNumberErrorParagraph.textContent = '';
-    cvvNumberErrorParagraph.classList.add('hidden');
-   
+    clearError(cvvNumberErrorParagraph);
+    cvvCorrection = true;
   }
+  return cvvCorrection;
 }
 
 emailInput.addEventListener('change', () => {
-  const emailValue = emailInput.value.trim();
-  validateEmail(emailValue);
+  validateEmail(emailInput.value);
 });
 
 phoneInput.addEventListener('change', () => {
-  const phoneValue = phoneInput.value.trim();
-  validatePhone(phoneValue);
+  validatePhone(phoneInput.value);
 });
 
 firstNameInput.addEventListener('change', () => {
-  const firstNameValue = firstNameInput.value.trim();
-  validateFirstName(firstNameValue);
+  validateFirstName(firstNameInput.value);
 });
 
 lastNameInput.addEventListener('change', () => {
-  const lastNameValue = lastNameInput.value.trim();
-  validateLastName(lastNameValue);
+  validateLastName(lastNameInput.value);
 });
 
-cardNumberInput.addEventListener('input', () => {
-  const cardNumberValue = cardNumberInput.value.trim();
-  validateCardNumber(cardNumberValue);
+cardNumberInput.addEventListener('change', () => {
+  validateCardNumber(cardNumberInput.value);
 });
 
-cvvNumberInput.addEventListener('input', () => {
-  const cvvNumberValue = cvvNumberInput.value.trim();
-  validateCvvNumber(cvvNumberValue);
+cvvNumberInput.addEventListener('change', () => {
+  validateCvvNumber(cvvNumberInput.value);
 });
 
-expiryDateInput.addEventListener('input', () => {
-  const expiryDateValue = expiryDateInput.value.trim();
-  validateExpDateNumber(expiryDateValue);
+expiryDateInput.addEventListener('change', () => {
+  validateExpDateNumber(expiryDateInput.value);
 });
-
-
-
-formElement.addEventListener('change', ()=>{
-  if (nameCorrection&&emailCorrection&&lastNameCorrection&&phoneCorrection&&cardNumberCorrection&&cvvCorrection&&expCorrection){
-   formCorrect;
-   successButton.classList.remove('btn-success');
-   successButton.classList.add('btn-success-confirm');
-  }
-  })
 
 formElement.addEventListener('submit', (event) => {
   event.preventDefault();
+  const isEmailValid = validateEmail(emailInput.value) ;
+  const isPhoneValid = validatePhone(phoneInput.value); 
+  const isFirstNameValid = validateFirstName(firstNameInput.value);
+  const isLastNameValid = validateLastName(lastNameInput.value); 
+  const isCardNumValid = validateCardNumber(cardNumberInput.value);  
+  const isCvvValid = validateCvvNumber(cvvNumberInput.value); 
+  const isExpValid = validateExpDateNumber(expiryDateInput.value);
+  const successButton = document.querySelector('.btn-success');
   
-  const emailVal = emailInput.value.trim();
-  const phoneVal = phoneInput.value.trim();
-  const firstNameVal = firstNameInput.value.trim();
-  const lastNameVal = lastNameInput.value.trim();
-  const cardVal = cardNumberInput.value.trim();
-  const cvvVal = cvvNumberInput.value.trim();
-  const expVal = expiryDateInput.value.trim();
-
-  validateEmail(emailVal);
-  validatePhone(phoneVal);
-  validateFirstName(firstNameVal);
-  validateLastName(lastNameVal);
-  validateCardNumber(cardVal);
-  validateCvvNumber(cvvVal);
-  validateExpDateNumber(expVal);
-
-  if (formCorrect){
+  if (isEmailValid&&isPhoneValid&&isFirstNameValid&&isLastNameValid&&isCardNumValid&&isCvvValid&&isExpValid){
     successElement.classList.remove('hidden');
     formElement.classList.add('hidden');
+    successButton.classList.remove('btn-success');
+    successButton.classList.add('btn-confirm');
+    successButton.style.backgroundColor = "green";
+    console.log("Form başarıyla gönderildi! 🎉");
+  } else {
+    console.log("Formda hatalar var, lütfen kontrol et. ❌");
   }
-})
+  }
+)
 
 
 
