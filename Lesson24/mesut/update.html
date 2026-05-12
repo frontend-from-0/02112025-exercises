@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Update User</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Update User</h1>
+      <a href="./index.html" class="button">← Back</a>
+    </header>
+
+    <main>
+      <form id="updateForm">
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" required aria-label="First Name" />
+
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" required aria-label="Last Name" />
+
+        <button type="submit" class="button button--success">
+          Update User
+        </button>
+      </form>
+    </main>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <p id="modalMessage"></p>
+        <button id="modalClose" class="button button--success">OK</button>
+      </div>
+    </div>
+
+    <script src="./js/ui.js"></script>
+    <script src="./js/update.js"></script>
+  </body>
+</html>
