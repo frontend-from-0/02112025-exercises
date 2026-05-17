@@ -3,9 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create a user</title>
+  <title>Create User</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css" />
 </head>
 <body>
+  <div id="messageDiv" class="hidden" role="status" 
+     aria-live="polite">
+      <button class="btn-close">X</button>
+      <p id="message">
+      </p>
+  </div> 
+  <div class="formDiv">
+  <form>
+    <label for="firstName">First Name:</label>
+     <input id="firstName" type="text" name="firstName" required>
+    <p class="validError hidden"></p> 
+    <label for="lastName">Last Name:</label>
+     <input id="lastName" type="text" name="lastName" required>
+    <p class="validError hidden"></p> 
+    <label for="age">Age:</label>
+     <input id="age" type="text" name="age" required>
+    <p class="validError hidden"></p> 
+  </form>
+  <div class=" buttonDiv">
+  <button class="button" id="createUserButton">Create User</button>
+  <a class="button button--cancel" href="../index.html">Cancel</a>
+  </div>
+  </div>
   
+  <script src="./create.js"></script>
 </body>
 </html>

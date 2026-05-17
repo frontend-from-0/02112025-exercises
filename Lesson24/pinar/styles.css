@@ -77,15 +77,6 @@ ul {
   background-color:rgb(255, 165, 0);
 }
 
-.button--success {
-  background-color: #4CAF50;
-}
-
-.button--success:hover {
-  background-color: #45a049;
-}
-
-
 .button--danger {
   background-color: #7a0916;
 }
@@ -129,7 +120,7 @@ ul {
   margin:50px 50px;
   gap:10px;
   width:370px;
-  height:450px;
+  max-height:fit-content;
   margin:150px auto;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -165,5 +156,9 @@ input{
 }
 
 .button--cancel:hover{
+  color:red;
+}
+
+.validError{
   color:red;
 }
