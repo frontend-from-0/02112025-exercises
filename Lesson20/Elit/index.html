@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Appointment Booking</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Book an Appointment</h1>
+      </header>
+
+      <form class="booking">
+        <div>
+          <section class="user-info">
+            <h2 id="user-heading">User Information</h2>
+            <div class="user-detail">
+              <label for="name">Your Name:</label>
+              <input
+                type="text"
+                id="name"
+                class="name-input"
+                name="name"
+                aria-describedby="nameError"
+                required
+              />
+               <p id="nameError" class="input-error hidden"></p>
+            </div>
+            <div class="user-detail">
+              <label for="mail_address">Your Email Adress:</label>
+              <input
+                type="email"
+                id="mail_address"
+                class="mail-input"
+                name="mailAddress"
+                placeholder="email@example.com"
+                required
+              />
+               <p id="emailError" class="input-error hidden"></p>
+            </div>
+          </section>
+        </div>
+        <div class="user-preferences">
+          <section class="calendar">
+            <label for="date">Select a date</label>
+            <input type="date" id="date" />
+            <h2 id="timeslots-heading">Available Time Slots</h2>
+            <fieldset class="timeslots" aria-labelledby="timeslots-heading">
+              <legend class="hidden">Choose a time slot</legend>
+              <input
+                type="radio"
+                id="slot1"
+                class="slot-input"
+                name="time-slot"
+                value="10:30"
+              />
+              <label for="slot1" class="slot-label">10:30</label>
+              <input
+                type="radio"
+                id="slot2"
+                class="slot-input"
+                name="time-slot"
+                value="13:00"
+              />
+              <label for="slot2" class="slot-label">13:00</label>
+              <input
+                type="radio"
+                id="slot3"
+                class="slot-input"
+                name="time-slot"
+                value="14:30"
+              />
+              <label for="slot3" class="slot-label">14:30</label>
+              <input
+                type="radio"
+                id="slot4"
+                class="slot-input"
+                name="time-slot"
+                value="16:00"
+              />
+              <label for="slot4" class="slot-label">16:00</label>
+            </fieldset>
+          </section>
+
+          <aside class="summary">
+            <h2>Your Appointment</h2>
+            <p>Name: <span id="selected-name">-</span></p>
+            <p>Email: <span id="selected-email">-</span></p>
+            <p>Date: <span id="selected-date">-</span></p>
+            <p>Time: <span id="selected-time">-</span></p>
+            <button id="confirm" type="submit" disabled>Confirm Booking</button>
+            <p id="status-message"></p>
+          </aside>
+        </div>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
