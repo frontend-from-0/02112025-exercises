@@ -166,6 +166,8 @@ console.log('exp4', olderPersons);
 
 // Exercise 5:
 // Given an array of sentences, filter out the sentences that have more than 10 words.
+// Exercise 5:
+// Given an array of sentences, keep the sentences that have more than 10 words.
 const sentencesExercise5 = [
   'The quick brown fox jumps over the lazy dog.',
   'I love to code and solve problems.',
@@ -193,6 +195,9 @@ console.log('ex5:', shortSentences);
 
 // Exercise 6:
 // Given an array of products, filter out the products that are out of stock (where the quantity is 0).
+
+// Exercise 6:
+// Given an array of products, keep the products that are out of stock (where the quantity is 0).
 const productsExercise6 = [
   {
     name: 'Laptop',
@@ -266,6 +271,13 @@ console.log('ex7:', notDivisibleBy3);
 
 // Exercise 8:
 // Given an array of strings, filter out the strings that have more than 5 characters.
+
+// Exercise 7:
+// Given an array of numbers, keep the numbers that are divisible by 3.
+const numbersExercise7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// Exercise 8:
+// Given an array of strings, keep the strings that have more than 5 characters.
 const wordsExercise8 = [
   'apple',
   'banana',
@@ -284,6 +296,9 @@ console.log('ex8:', shortWords);
 // Exercise 9:
 // Given an array of objects representing students, filter out the students who have a grade lower than C.
 const positiveGrades = ['A', 'A++', 'A+', 'A-', 'A--', 'B', 'B++', 'B+', 'B-', 'B--', 'C++', 'C+', 'C'];
+
+// Exercise 9:
+// Given an array of objects representing students, keep the students who have a grade lower than C.
 const studentsExercise9 = [
   {
     id: 1,
@@ -352,6 +367,9 @@ console.log('ex9:', successfulStudents);
 
 // Exercise 10:
 // Given an array of user objects, filter out the users who have a name starting with the letter "J".
+
+// Exercise 10:
+// Given an array of user objects, keep the users who have a name starting with the letter "J".
 const usersExercise10 = [
   {
     id: 1,

@@ -196,6 +196,9 @@ console.log("6 başladı");
 const numbersExercise6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const stringNumbers = numbersExercise6.map(number => number.toString());
 console.log('Ex.6', stringNumbers);
+// Exercise 6:
+// Given an array of numbers, convert each number to a string representation using .map().
+const numbersExercise6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // Exercise 7:
 // Given an array of sentences, split each sentence into an array of words using .map().
@@ -352,6 +355,7 @@ const books = booksExercise9.map((book) => {
 console.log('Ex.9', books);
 
 
+];
 
 // Exercise 10:
 // Given an array of prices, add a currency symbol to each price using .map().
