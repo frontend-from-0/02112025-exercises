@@ -44,4 +44,5 @@ const sortedWords = [...words].sort((a,b) => a.length - b.length);
 console.log("ex5.", words, sortedWords);
 
 
+console.log("deneme");
 
