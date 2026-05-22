@@ -1,3 +1,171 @@
+// Exercise 1:
+// Given an array of numbers, keep only the even numbers.
+const numbersExercise1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// odd - tek sayi
+// even - cift sayi
+
+const evenNumbers = numbersExercise1.filter((even) => even % 2 === 0);
+console.log('ex1:', evenNumbers);
+
+// Exercise 2:
+// Given an array of strings, keep the strings that contain the letter "a".
+const wordsExercise2 = [
+  'Apple',
+  'banana',
+  'car',
+  'dog',
+  'elephant',
+  'flower',
+  'guitAr',
+  'house',
+  'island',
+  'jungle',
+];
+const filteredWords = wordsExercise2.filter((word) =>
+  word.toUpperCase().includes('A'),
+);
+// a !== A
+// console.log('a'.toUpperCase().charCodeAt(0), 'A'.charCodeAt(0));
+console.log('ex 2:', filteredWords);
+
+// Exercise 3:
+// Given an array of objects representing books, filter out the books with a price less than $10.
+const booksExercise9 = [
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    genre: 'Fiction',
+    price: 12.99,
+  },
+  {
+    title: '1984',
+    author: 'George Orwell',
+    genre: 'Fiction',
+    price: 10.99,
+  },
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    genre: 'Fiction',
+    price: 9.99,
+  },
+  {
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    genre: 'Fiction',
+    price: 7.99,
+  },
+  {
+    title: 'To the Lighthouse',
+    author: 'Virginia Woolf',
+    genre: 'Fiction',
+    price: 14.99,
+  },
+  {
+    title: 'Brave New World',
+    author: 'Aldous Huxley',
+    genre: 'Fiction',
+    price: 11.99,
+  },
+  {
+    title: 'The Catcher in the Rye',
+    author: 'J.D. Salinger',
+    genre: 'Fiction',
+    price: 8.99,
+  },
+  {
+    title: 'Moby-Dick',
+    author: 'Herman Melville',
+    genre: 'Fiction',
+    price: 13.99,
+  },
+  {
+    title: 'The Hobbit',
+    author: 'J.R.R. Tolkien',
+    genre: 'Fantasy',
+    price: 10.99,
+  },
+  {
+    title: "Harry Potter and the Sorcerer's Stone",
+    author: 'J.K. Rowling',
+    genre: 'Fantasy',
+    price: 9.99,
+  },
+];
+
+const expensiveBooks = booksExercise9.filter((books) => books.price > 10);
+console.log('ex3:', expensiveBooks);
+
+// Exercise 4:
+// Given an array of user objects, filter out the users who are below 25 years old.
+const usersExercise4 = [
+  {
+    id: 1,
+    name: 'John',
+    age: 25,
+    email: 'john@example.com',
+  },
+  {
+    id: 2,
+    name: 'Alice',
+    age: 32,
+    email: 'alice@example.com',
+  },
+  {
+    id: 3,
+    name: 'Bob',
+    age: 28,
+    email: 'bob@example.com',
+  },
+  {
+    id: 4,
+    name: 'Emily',
+    age: 21,
+    email: 'emily@example.com',
+  },
+  {
+    id: 5,
+    name: 'Michael',
+    age: 35,
+    email: 'michael@example.com',
+  },
+  {
+    id: 6,
+    name: 'Sara',
+    age: 29,
+    email: 'sara@example.com',
+  },
+  {
+    id: 7,
+    name: 'David',
+    age: 42,
+    email: 'david@example.com',
+  },
+  {
+    id: 8,
+    name: 'Olivia',
+    age: 31,
+    email: 'olivia@example.com',
+  },
+  {
+    id: 9,
+    name: 'Daniel',
+    age: 27,
+    email: 'daniel@example.com',
+  },
+  {
+    id: 10,
+    name: 'Sophia',
+    age: 23,
+    email: 'sophia@example.com',
+  },
+];
+const olderPersons = usersExercise4.filter((person)=> person.age>=25
+);
+console.log('exp4', olderPersons);
+
+// Exercise 5:
+// Given an array of sentences, filter out the sentences that have more than 10 words.
 // Exercise 5:
 // Given an array of sentences, keep the sentences that have more than 10 words.
 const sentencesExercise5 = [
@@ -22,6 +190,11 @@ const sentencesExercise5 = [
   'The aroma of freshly brewed coffee permeated the air, enticing passersby to indulge in a cup of warmth.',
   'The butterfly gracefully fluttered its wings, showcasing vibrant colors in a delicate dance.',
 ];
+const shortSentences = sentencesExercise5.filter(sentence => sentence.split(' ').length <= 10);
+console.log('ex5:', shortSentences);
+
+// Exercise 6:
+// Given an array of products, filter out the products that are out of stock (where the quantity is 0).
 
 // Exercise 6:
 // Given an array of products, keep the products that are out of stock (where the quantity is 0).
@@ -87,6 +260,17 @@ const productsExercise6 = [
     quantity: 14,
   },
 ];
+const inStockProducts = productsExercise6.filter(product => product.quantity > 0);
+console.log('ex6:', inStockProducts);
+
+// Exercise 7:
+// Given an array of numbers, filter out the numbers that are divisible by 3.
+const numbersExercise7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const notDivisibleBy3 = numbersExercise7.filter(number => number % 3 !== 0);
+console.log('ex7:', notDivisibleBy3);
+
+// Exercise 8:
+// Given an array of strings, filter out the strings that have more than 5 characters.
 
 // Exercise 7:
 // Given an array of numbers, keep the numbers that are divisible by 3.
@@ -106,6 +290,12 @@ const wordsExercise8 = [
   'island',
   'jungle',
 ];
+const shortWords = wordsExercise8.filter(word => word.length <= 5);
+console.log('ex8:', shortWords);
+
+// Exercise 9:
+// Given an array of objects representing students, filter out the students who have a grade lower than C.
+const positiveGrades = ['A', 'A++', 'A+', 'A-', 'A--', 'B', 'B++', 'B+', 'B-', 'B--', 'C++', 'C+', 'C'];
 
 // Exercise 9:
 // Given an array of objects representing students, keep the students who have a grade lower than C.
@@ -172,6 +362,11 @@ const studentsExercise9 = [
   },
 ];
 
+const successfulStudents = studentsExercise9.filter(student => positiveGrades.includes(student.grade));
+console.log('ex9:', successfulStudents);
+
+// Exercise 10:
+// Given an array of user objects, filter out the users who have a name starting with the letter "J".
 
 // Exercise 10:
 // Given an array of user objects, keep the users who have a name starting with the letter "J".
@@ -237,3 +432,5 @@ const usersExercise10 = [
     email: 'sophia@example.com',
   },
 ];
+const usersWithJ = usersExercise10.filter(user => user.name.startsWith('J'));
+console.log('ex10:', usersWithJ);

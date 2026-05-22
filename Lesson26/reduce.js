@@ -9,6 +9,23 @@
 - initialValue: An optional initial value for the accumulator. If not provided, the first element of the array is used as the initial value and the iteration starts from the second element.
 */
 
+
+// Exercise 1:
+// Calculate the sum of all numbers in the given array.
+const numbersEx1 = [1, 2, 3, 4, 5];
+
+const sum = numbersEx1.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+console.log('Result ex1', sum);
+
+
+// Exercise 2:
+// Find the maximum value in the given array. (Hint: Use -Infinity to compare values to)
+const numbersEx2 = [8, 3, 11, 6, 4];
+const maxValue = numbersEx2.reduce((max, current) => {
+  return current > max ? current : max;
+}, -Infinity);
+console.log('Result ex2', maxValue);
 // Exercise 2:
 // Find the maximum value in the given array. (Hint: Use -Infinity to compare values to)
 const numbersEx2 = [8, 3, 11, 6, 4];
@@ -17,6 +34,21 @@ const numbersEx2 = [8, 3, 11, 6, 4];
 // Count the occurrences of each element in the given array and return an object with the counts.
 const elements = ['a', 'b', 'a', 'c', 'b', 'a'];
 
+// Eğer harf object içinde zaten varsa değerini 1 artır
+
+const elementCounts = elements.reduce((accumulator, currentValue) => {
+  if (accumulator[currentValue]) {
+    accumulator[currentValue]++;
+  } 
+   // Eğer ilk kez geliyorsa değeri 1 olarak ekle
+
+  else {
+    accumulator[currentValue] = 1;
+  }
+
+  // Güncellenmiş object'i geri döndür
+  return accumulator;
+}, {}); // Başlangıç değeri boş object, buradan accumulator'ın object olduğunu anladım.
 const elementCounts = elements.reduce((accumulator, currentValue) => {
   if (accumulator[currentValue]) {
     accumulator[currentValue]++;
@@ -33,6 +65,25 @@ console.log(elementCounts); // Output: { a: 3, b: 2, c: 1 }
 // Calculate the average of all numbers in the given array.
 const numbersEx4 = [10, 20, 30, 40, 50];
 
+const total = numbersEx4.reduce( (sum, number) => sum + number,0);
+
+const average = total / numbers.length;
+
+console.log(average);
+
+// Exercise 5: Explain the code below
+// Count the number of unique elements in the array.
+const numbersEx5 = [1, 2, 3, 2, 4, 3, 5];// bunu kullanmıyoruz bu kodda.
+const numbers = [1, 2, 3, 2, 4, 3, 5];
+
+const uniqueCount = numbers.reduce((accumulator, currentValue) => {
+    // Eğer sayı accumulator array'inde yoksa ekle
+  if (!accumulator.includes(currentValue)) {
+    accumulator.push(currentValue);
+  }
+   // Güncellenmiş array'i geri döndür
+  return accumulator;
+}, []).length;// Başlangıç değeri acummulator boş array
 
 // Exercise 5: Explain the code below
 // Count the number of unique elements in the array.
