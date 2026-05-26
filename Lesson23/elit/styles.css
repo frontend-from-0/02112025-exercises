@@ -211,7 +211,7 @@ li:hover {
 .social_link:hover {
   transform: scale(1.1);
 }
-.social_linkn:focus {
+.social_link:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.4);
 }
