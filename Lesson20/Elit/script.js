@@ -60,7 +60,7 @@ return false;
 }
 
 function validateEmail(email){
-  if(email.length<1){
+  if(email.trim().length < 1){
     emailErrorParagraph.textContent = 'An email address is required so we can contact you.';
     emailErrorParagraph.classList.remove('hidden');
     emailInput.classList.add('input-invalid');
