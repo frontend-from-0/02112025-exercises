@@ -1,0 +1,35 @@
+.navbar_links {
+  display: flex;
+}
+.nav_burger {
+  display: none;
+}
+.burger_icon {
+  display: none;
+}
+h1 {
+  font-size: 2rem;
+  letter-spacing: 10px;
+}
+.post_card:hover {
+  transform: scale(1.05);
+}
+.posts_container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.posts_grid {
+  background-color: var(--dark-color);
+  padding: 60px 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  row-gap: 30px;
+  column-gap: 30px;
+}
+.post_title {
+  font-size: 1.3rem;
+}
+.post_body {
+  font-size: 1.1rem;
+}
