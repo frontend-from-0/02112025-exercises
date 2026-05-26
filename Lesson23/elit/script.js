@@ -10,7 +10,7 @@ console.log("Burger Menu:", burgerMenu);
 
 burgerIcon.addEventListener("click", () => {
   const isHidden = burgerMenu.classList.toggle("hidden");
-  burgerIcon.setAttribute("Aria-expanded", !isHidden);
+  burgerIcon.setAttribute("aria-expanded", !isHidden);
 });
 
 closeIcon.addEventListener("click", () => {
