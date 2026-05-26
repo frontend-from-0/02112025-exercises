@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       incrementProduct(productName),
     );
     decrementButton.addEventListener('click', () =>
-      decrementProduct(productName),
+      addProduct(productName),
     );
   });
   clearCartBtn.addEventListener('click', clearCart);
@@ -90,7 +90,6 @@ function removeProduct(productName) {
 
   updateProductUI(productName);
   calculateTotal();
-  saveToLocalStorage();
 }
 
 function addProduct(productName) {
@@ -98,16 +97,13 @@ function addProduct(productName) {
 
   updateProductUI(productName);
   calculateTotal();
-  saveToLocalStorage();
 }
 
-// TODO: clearCart functionality, decrement & increment buttons functionality
 function incrementProduct(productName) {
   products[productName].quantity += 1;
 
   updateProductUI(productName);
   calculateTotal();
-  saveToLocalStorage();
 }
 function decrementProduct(productName) {
   if (products[productName].quantity > 0) {
@@ -116,7 +112,6 @@ function decrementProduct(productName) {
 
   updateProductUI(productName);
   calculateTotal();
-  saveToLocalStorage();
 }
 
 function clearCart() {
@@ -125,5 +120,4 @@ function clearCart() {
     updateProductUI(productName);
   });
   calculateTotal();
-  saveToLocalStorage();
 }
