@@ -1,29 +1,6 @@
 const totalPrice = document.getElementById("total_price");
 const clearCartBtn = document.getElementById("clear_cart");
 
-// products['apples']
-// const products = [
-//   {
-//     name: 'apples',
-//     quantity: 1,
-//     price: 1,
-//   },
-//   {
-//     name: 'bananas',
-//     quantity: 10,
-//     price: 1,
-//   },
-//   {
-//     name: 'bread',
-//     quantity: 10,
-//     price: 1,
-//   },
-//   {
-//     name: 'eggs',
-//     quantity: 1,
-//     price: 1,
-//   }
-// ];
 
 let products = {
   apples: {
