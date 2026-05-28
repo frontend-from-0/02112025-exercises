@@ -7,14 +7,29 @@
   <body>
     <nav>
       <button id="fetchUsersButton" class="button">Fetch Users</button>
-      <a href="./pages/create.html" id="createUserButton" class="button">Create User</a>
+      <a href="./pages/create.html" id="createUserButton" class="button"
+        >Create User</a
+      >
     </nav>
 
-    <!-- 
-    TODO: what aria attributes do you need to add to the notification div?
-    <div class="hidden">
-      <p id="message"></p>
-    </div> -->
+    <div
+      id="success_notification"
+      class="hidden notification success"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p id="success_message"></p>
+    </div>
+    <div
+      id="error_notification"
+      class="hidden notification error"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p id="error_message"></p>
+    </div>
 
     <main class="container" id="container">
       <!--
