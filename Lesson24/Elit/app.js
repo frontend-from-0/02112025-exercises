@@ -88,8 +88,8 @@ function deleteUser(userId, cardElement) {
       cardElement.remove();
 
       setTimeout(() => {
-        notificationDiv.classList.add("hidden");
-      }, 4000);
+        successNotificationDiv.classList.add("hidden");
+      }, 3000);
     })
 
     .catch((error) => {

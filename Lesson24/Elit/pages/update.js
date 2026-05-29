@@ -85,7 +85,7 @@ updateForm.addEventListener("submit", (e) => {
 
       setTimeout(() => {
         window.location.href = "../index.html";
-      }, 5000);
+      }, 4000);
     })
     .catch((error) => {
       console.log("Error updating user:", error);
