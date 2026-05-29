@@ -47,36 +47,36 @@ const personE17 = {
   },
 };
 const {
-  name,
-  age,
-  address: { city },
+  name2,
+  age2,
+  address: { city2 },
 } = personE17;
 
-console.log(name);
-console.log(age);
-console.log(city);
+console.log(name2);
+console.log(age2);
+console.log(city2);
 // 6. Default Parameters + Arrow function
 // Convert Named Function to Arrow Function with Default Parameters
-function greet(name, greeting) {
-  return `${greeting}, ${name}!`;
+function greet(name2, greeting) {
+  return `${greeting}, ${name2}!`;
 }
-const greet = (name = "Guest", greeting = "Hello") => {
+const greet2 = (name2= "Guest", greeting = "Hello") => {
   return `${greeting}, ${name}!`;
 };
 
-console.log(greet());
-console.log(greet("John", "Hi"));
+console.log(greet2());
+console.log(greet2("John", "Hi"));
 // 7. Default Parameters
 // Add Default Parameters to an Existing Arrow Function, Default tax rate 0.1, default discount is 0.
 const calculateTotal = (price, taxRate, discount) => {
   return price + price * taxRate - discount;
 };
-const calculateTotal = (price, taxRate = 0.1, discount = 0) => {
+const calculateTotal2 = (price, taxRate = 0.1, discount = 0) => {
   return price + price * taxRate - discount;
 };
 
-console.log(calculateTotal(100));
-console.log(calculateTotal(100, 0.2, 10));
+console.log(calculateTotal2(100));
+console.log(calculateTotal2(100, 0.2, 10));
 // Optional Chaining
 // Optional chaining allows you to safely access deeply nested properties.
 
@@ -115,9 +115,9 @@ const userEx10 = {
     getName: () => "Alice",
   },
 };
-const userName = userEx10.profile?.getName?.();
+const userName2 = userEx10.profile?.getName?.();
 
-console.log(userName);
+console.log(userName2);
 // 11. Rewrite the code using the nullish coalescing operator to assign a default value to storedData only if userInput is null or undefined.
 let userInput;
 let storedData = userInput ? userInput : "Default Value";
