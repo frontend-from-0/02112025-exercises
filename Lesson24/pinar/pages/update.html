@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update User</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css" />
+</head>
+<body>
+  <div class="messageDiv" class="hidden" role="status" 
+     aria-live="polite">
+      <button class="btn-close">X</button>
+      <p id="message">
+      </p>
+  </div> 
+  <div class="formDiv">
+  <form>
+    <label for="firstName">First Name:</label>
+     <input class="form-input" id="firstName" type="text" name="firstName" aria-describedby="firstNameError" required>
+    <p id="firstNameError" class="validError hidden"></p> 
+    <label for="lastName">Last Name:</label>
+     <input class="form-input" id="lastName" type="text" name="lastName" aria-describedby="lastNameError" required>
+    <p id="lastNameError" class="validError hidden"></p> 
+    <label for="age">Age:</label>
+     <input class="form-input" id="age" type="text" name="age" aria-describedby="ageError" required>
+    <p id="ageError" class="validError hidden"></p> 
+  </form>
+  <div class=" buttonDiv">
+  <button class="button button--update">Update User</button>
+  <a class="button button--cancel" href="../index.html">Cancel</a>
+  </div>
+  </div>
+  
+  <script src="./update.js"></script>
+</body>
+</html>
