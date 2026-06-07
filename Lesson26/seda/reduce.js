@@ -26,9 +26,7 @@ const maxValue = numbersEx2.reduce((max, current) => {
   return current > max ? current : max;
 }, -Infinity);
 console.log('Result ex2', maxValue);
-// Exercise 2:
-// Find the maximum value in the given array. (Hint: Use -Infinity to compare values to)
-const numbersEx2 = [8, 3, 11, 6, 4];
+
 
 // Exercise 3: Explain the code
 // Count the occurrences of each element in the given array and return an object with the counts.
@@ -49,16 +47,9 @@ const elementCounts = elements.reduce((accumulator, currentValue) => {
   // Güncellenmiş object'i geri döndür
   return accumulator;
 }, {}); // Başlangıç değeri boş object, buradan accumulator'ın object olduğunu anladım.
-const elementCounts = elements.reduce((accumulator, currentValue) => {
-  if (accumulator[currentValue]) {
-    accumulator[currentValue]++;
-  } else {
-    accumulator[currentValue] = 1;
-  }
-  return accumulator;
-}, {});
 
-console.log(elementCounts); // Output: { a: 3, b: 2, c: 1 }
+
+console.log('Ex3 ',elementCounts); // Output: { a: 3, b: 2, c: 1 }
 
 
 // Exercise 4:
@@ -67,9 +58,9 @@ const numbersEx4 = [10, 20, 30, 40, 50];
 
 const total = numbersEx4.reduce( (sum, number) => sum + number,0);
 
-const average = total / numbers.length;
+const average = total / numbersEx4.length;
 
-console.log(average);
+console.log('Ex4 avarage',average);
 
 // Exercise 5: Explain the code below
 // Count the number of unique elements in the array.
@@ -85,23 +76,12 @@ const uniqueCount = numbers.reduce((accumulator, currentValue) => {
   return accumulator;
 }, []).length;// Başlangıç değeri acummulator boş array
 
-// Exercise 5: Explain the code below
-// Count the number of unique elements in the array.
-const numbersEx5 = [1, 2, 3, 2, 4, 3, 5];
-const numbers = [1, 2, 3, 2, 4, 3, 5];
 
-const uniqueCount = numbers.reduce((accumulator, currentValue) => {
-  if (!accumulator.includes(currentValue)) {
-    accumulator.push(currentValue);
-  }
-  return accumulator;
-}, []).length;
-
-console.log(uniqueCount); // Output: 5
+console.log('Ex5:', uniqueCount); // Output: 5
 
 
 
 
 
 
-
+ 

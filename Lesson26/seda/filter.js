@@ -93,7 +93,7 @@ const booksExercise9 = [
   },
 ];
 
-const expensiveBooks = booksExercise9.filter((books) => books.price > 10);
+const expensiveBooks = booksExercise9.filter((book) => book.price > 10);
 console.log('ex3:', expensiveBooks);
 
 // Exercise 4:
@@ -269,12 +269,6 @@ const numbersExercise7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const notDivisibleBy3 = numbersExercise7.filter(number => number % 3 !== 0);
 console.log('ex7:', notDivisibleBy3);
 
-// Exercise 8:
-// Given an array of strings, filter out the strings that have more than 5 characters.
-
-// Exercise 7:
-// Given an array of numbers, keep the numbers that are divisible by 3.
-const numbersExercise7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // Exercise 8:
 // Given an array of strings, keep the strings that have more than 5 characters.
