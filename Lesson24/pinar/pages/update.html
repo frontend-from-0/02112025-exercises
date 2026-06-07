@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="../styles.css" />
 </head>
 <body>
-  <div id="messageDiv" class="hidden" role="status" 
+  <div class="messageDiv" class="hidden" role="status" 
      aria-live="polite">
       <button class="btn-close">X</button>
       <p id="message">
@@ -15,18 +15,15 @@
   </div> 
   <div class="formDiv">
   <form>
-    <label for="id"> User Id:</label>
-    <input id="id" type="text" name="id" required>
-    <p class="validError hidden"></p>
     <label for="firstName">First Name:</label>
-     <input id="firstName" type="text" name="firstName" required>
-    <p class="validError hidden"></p> 
+     <input class="form-input" id="firstName" type="text" name="firstName" aria-describedby="firstNameError" required>
+    <p id="firstNameError" class="validError hidden"></p> 
     <label for="lastName">Last Name:</label>
-     <input id="lastName" type="text" name="lastName" required>
-    <p class="validError hidden"></p> 
+     <input class="form-input" id="lastName" type="text" name="lastName" aria-describedby="lastNameError" required>
+    <p id="lastNameError" class="validError hidden"></p> 
     <label for="age">Age:</label>
-     <input id="age" type="text" name="age" required>
-    <p class="validError hidden"></p> 
+     <input class="form-input" id="age" type="text" name="age" aria-describedby="ageError" required>
+    <p id="ageError" class="validError hidden"></p> 
   </form>
   <div class=" buttonDiv">
   <button class="button button--update">Update User</button>

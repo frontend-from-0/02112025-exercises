@@ -2,13 +2,17 @@ const paramsString = window.location.search;
 const searchParams = new URLSearchParams(paramsString);
 const userId = searchParams.get(`userId`);
 
-const userIdInput = document.getElementById('id');
 const userFirstNameInput = document.getElementById('firstName');
 const userLastNameInput = document.getElementById('lastName');
 const userAgeInput = document.getElementById('age');
 
 const userUpdateButton = document.querySelector('.button--update');
 const closeButton = document.querySelector('.btn-close');
+
+const messageDiv = document.querySelector('.messageDiv');
+const messageParagraph = document.getElementById("message");
+const validationErrorMessage = document.querySelectorAll('.validError');
+
 
 if(userId){
 fetch(`https://dummyjson.com/users/${userId}`)
@@ -34,53 +38,30 @@ fetch(`https://dummyjson.com/users/${userId}`)
 function updateUser(event){
   if (event) event.preventDefault();
  const updatedUser = {
-  id: userIdInput.value,
-  firstName: userFirstNameInput.value,
+  firstName: userFirstNameInput.value.trim(),
   lastName: userLastNameInput.value,
   age: userAgeInput.value,
 
  };
- const idPattern = /^[0-9]+$/;
  const firsNamePattern = /^[A-Za-zÇĞİıÖŞüçğiöşü\s]{2,30}$/;
  const lastNamePattern = /^[A-Za-zÇĞİıÖŞüçğiöşü]{2,30}$/;
  const agePattern = /^(1[0-1][0-9]|120|[1-9]?[0-9])$/;
 
- const messageDiv = document.getElementById("messageDiv");
- const messageParagraph = document.getElementById("message");
- const validationErrorMessage = document.querySelectorAll('.validError');
-
+ 
  validationErrorMessage.forEach(p => {
     p.classList.add('hidden');
     p.textContent = "";
 });
 
-if(!idPattern.test(userIdInput.value)){
- const validErrorElement = userIdInput.nextElementSibling;
-  validErrorElement.classList.remove('hidden');
-  validErrorElement.textContent = ("Please enter avalid id number consisting only numbers.");
- return;
-}
 
-if(!firsNamePattern.test(userFirstNameInput.value)){
-  const validErrorElement = userFirstNameInput.nextElementSibling;
-   validErrorElement.classList.remove('hidden');
-   validErrorElement.textContent = ("Please enter a valid name consisting min 2 characters and letters.");
-  return;
-}
+const isFirstNameValid = validateInput(userFirstNameInput, firsNamePattern, "Please enter a valid name consisting min 2 characters and letters.");
+if (!isFirstNameValid) return;
 
-if(!lastNamePattern.test(userLastNameInput.value)){
-  const validErrorElement = userLastNameInput.nextElementSibling;
-  validErrorElement.classList.remove('hidden');
-  validErrorElement.textContent = ("Please enter a valid name consisting min 2 characters and letters.");
-  return;
-}
+const isLastNameValid = validateInput(userLastNameInput, lastNamePattern, "Please enter a valid name consisting min 2 characters and letters.");
+if (!isLastNameValid) return;
 
-if(!agePattern.test(userAgeInput.value)){
-  const validErrorElement = userAgeInput.nextElementSibling;
-  validErrorElement.classList.remove('hidden');
-  validErrorElement.textContent = ("Please enter an age between 1 and 120.");
-  return;
-}
+const isAgeValid = validateInput(userAgeInput, agePattern, "Please enter an age between 1 and 120.");
+if (!isAgeValid) return;
 
  fetch(`https://dummyjson.com/users/${userId}`, {
   method: 'PUT',
@@ -101,6 +82,19 @@ if(!agePattern.test(userAgeInput.value)){
   messageParagraph.textContent = `Something went wrong. ${error.message}`;
 })
 }
+
+function validateInput(inputElement, pattern, errorMessage) {
+  const value = inputElement.value.trim();
+  const errorElement = inputElement.nextElementSibling;
+  
+  if (!pattern.test(value)) {
+    errorElement.classList.remove('hidden');
+    errorElement.textContent = errorMessage;
+    return false;
+  }
+  return true;
+}
+
   userUpdateButton.addEventListener('click', updateUser);
   closeButton.addEventListener('click',()=>{
   messageDiv.classList.add('hidden');

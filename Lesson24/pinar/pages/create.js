@@ -3,8 +3,12 @@ const userFirstNameInput = document.getElementById('firstName');
 const userLastNameInput = document.getElementById('lastName');
 const userAgeInput = document.getElementById('age');
 
-const createUserButton = document.getElementById('createUserButton');
+const createUserButton = document.querySelector('.button--create');
 const closeButton = document.querySelector('.btn-close');
+
+const messageDiv = document.getElementById("messageDiv");
+const messageParagraph = document.getElementById("message");
+const validationErrorMessage = document.querySelectorAll('.validError');
 
 
 function createUser(event){
@@ -15,7 +19,7 @@ function createUser(event){
 
   const newUser = {
   id:nextId,  
-  firstName: userFirstNameInput.value,
+  firstName: userFirstNameInput.value.trim(),
   lastName: userLastNameInput.value,
   age: userAgeInput.value,
   }
@@ -24,56 +28,57 @@ function createUser(event){
  const lastNamePattern = /^[A-Za-zÇĞİıÖŞüçğiöşü]{2,30}$/;
  const agePattern = /^(1[0-1][0-9]|120|[1-9]?[0-9])$/;
 
- const messageDiv = document.getElementById("messageDiv");
- const messageParagraph = document.getElementById("message");
- const validationErrorMessage = document.querySelectorAll('.validError');
+ 
 
  validationErrorMessage.forEach(p => {
     p.classList.add('hidden');
     p.textContent = "";
 });
 
-if(!firsNamePattern.test(userFirstNameInput.value)){
-  const validErrorElement = userFirstNameInput.nextElementSibling;
-   validErrorElement.classList.remove('hidden');
-   validErrorElement.textContent = ("Please enter a valid name consisting min 2 characters and letters.");
-  return;
-}
+const isFirstNameValid = validateInput(userFirstNameInput, firsNamePattern, "Please enter a valid name...");
+if (!isFirstNameValid) return;
 
-if(!lastNamePattern.test(userLastNameInput.value)){
-  const validErrorElement = userLastNameInput.nextElementSibling;
-  validErrorElement.classList.remove('hidden');
-  validErrorElement.textContent = ("Please enter a valid name consisting min 2 characters and letters.");
-  return;
-}
+const isLastNameValid = validateInput(userLastNameInput, lastNamePattern, "Please enter a valid name...");
+if (!isLastNameValid) return;
 
-if(!agePattern.test(userAgeInput.value)){
-  const validErrorElement = userAgeInput.nextElementSibling;
-  validErrorElement.classList.remove('hidden');
-  validErrorElement.textContent = ("Please enter an age between 1 and 120.");
-  return;
-}
+const isAgeValid = validateInput(userAgeInput, agePattern, "Please enter an age between 1 and 120.");
+if (!isAgeValid) return;
+
 
 fetch('https://dummyjson.com/users/add', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(newUser)
 })
-.then(res => {
+.then((res) => {
   if(!res.ok) throw new Error(`An error occurred. Status: ${res.status}`)
     return res.json();
 })
 .then((data)=>{
   messageDiv.classList.remove('hidden');
-  messageParagraph.textContent = `The user with ${data.firstName} ${data.lastName} has been successfully created wit ID number ${nextId}.`;
+  messageParagraph.textContent = `The user with ${data.firstName} ${data.lastName} has been successfully created whit ID number ${nextId}.`;
   existingNewUsers.push(newUser);
   localStorage.setItem('new_users_list', JSON.stringify(existingNewUsers));
 })
-.catch(error=>{
+.catch((error)=>{
   messageDiv.classList.remove('hidden');
   messageParagraph.textContent = `Something went wrong. ${error.message}`;
 })
 }
+
+  function validateInput(inputElement, pattern, errorMessage) {
+  const value = inputElement.value.trim();
+  const errorElement = inputElement.nextElementSibling;
+  
+  if (!pattern.test(value)) {
+    errorElement.classList.remove('hidden');
+    errorElement.textContent = errorMessage;
+    return false;
+  }
+  return true;
+}
+
+
   createUserButton.addEventListener('click', createUser);
   closeButton.addEventListener('click',()=>{
   messageDiv.classList.add('hidden');
