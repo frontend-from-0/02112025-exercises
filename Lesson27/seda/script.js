@@ -1,11 +1,14 @@
+console.log("=== DIKKAT: DOĞRU DOSYA ÇALIŞTI ===");
+
 // 1. Array Destructuring
 // Given the following array, use array destructuring to assign the values of x, y, and z to their respective variables: 
 const coordinates = [10, 20, 30];
 const [x, y, z] = coordinates;
 
-console.log(x);
-console.log(y);
-console.log(z);
+console.log(x); // 10
+console.log(y); // 20
+console.log(z); // 30   
+
 
 
 // 2. Object Destructuring
@@ -14,22 +17,23 @@ const personE14 = {
   name: 'John Doe',
   age: 25,
 };
-  const {nameNew, ageNew} = personE14;
 
-console.log(nameNew);
-console.log(ageNew);
+const { name, age } = personE14;
+
+console.log(name); // John Doe
+console.log(age);  // 25
+
 
 
 
 // 3. Array Destructuring with Default Values
 // Given the following array, use array destructuring with default values to assign the values of a, b, and c, with default values of 1, 2, and 3 respectively:
 let numbers = [4, undefined, true];
+const [a = 1, b = 2, c = 3] = numbers;
 
-let[a = 1, b = 2, c = 3] = numbers;
-
-console.log(a);
-console.log(b);
-console.log(c);
+console.log(a); // 4
+console.log(b); // 2
+console.log(c); // true (default değeri kullanılmaz çünkü array'de zaten bir değer var) 
 
 
 
@@ -38,9 +42,11 @@ console.log(c);
 const personE16 = {
   name: 'Jane Doe',
 };
- const {name: fullName} = personE16;
+const { name: fullName } = personE16;
 
-console.log(fullName);
+console.log(fullName); // Jane Doe    
+
+
 
 // 5. Nested Object Destructuring
 // Given the following nested object, use object destructuring to assign the values of name, age, and city to their respective variables:
@@ -51,19 +57,24 @@ const personE17 = {
     city: 'New York',
   },
 };
-const {name, age, address: {city}} = personE17;
-console.log(name); 
-console.log(age);
-console.log(city);
+const { name: personName, age: personAge, address: { city } } = personE17;
+
+console.log(personName); // John Doe
+console.log(personAge);  // 25
+console.log(city);       // New York  
 
 // 6. Default Parameters + Arrow function
 // Convert Named Function to Arrow Function with Default Parameters
 function greet (name, greeting) {
   return `${greeting}, ${name}!`;
 }
-const greetArrow = (name, greeting) => {
+
+const greetArrow = (name = "Guest", greeting = "Hello") => {
   return `${greeting}, ${name}!`;
-}   
+};
+
+console.log(greetArrow()); // Çıktı: Hello, Guest! (Boş bıraksak bile hata vermez)
+console.log(greetArrow("Seda", "Günaydın")); // Çıktı: Günaydın, Seda!
 
 
 // 7. Default Parameters
@@ -71,9 +82,13 @@ const greetArrow = (name, greeting) => {
 const calculateTotal = (price, taxRate, discount) => {
   return price + (price * taxRate) - discount;
 };
+
 const calculateTotalWithDefaults = (price, taxRate = 0.1, discount = 0) => {
   return price + (price * taxRate) - discount;
 };
+
+console.log(calculateTotalWithDefaults(100)); // Çıktı: 110 (100 + 10 - 0)
+console.log(calculateTotalWithDefaults(100, 0.2, 5)); // Çıktı: 115 (100 + 20 - 5)  
 
 
 // Optional Chaining
@@ -89,10 +104,11 @@ const userEx8 = {
     }
   }
 };
-const userName = userEx8.profile?.name;
-const userCity = userEx8.profile?.address?.city;  
-console.log(userName);
-console.log(userCity);
+const userName = userEx8?.profile?.name;
+const userCity = userEx8?.profile?.address?.city;
+
+console.log('Ex 8:', userName, userCity); // Output: Alice Wonderland
+
 
 // 9. Handle Missing Properties
 // Update the code to use optional chaining to safely access userCountry and provide a default value of 'Unknown' if the property is missing.
@@ -102,8 +118,9 @@ const userEx9 = {
     name: 'Alice'
   }
 };
-const userCountry = userEx9.profile?.country ?? 'Unknown';
-console.log(userCountry); // Unknown
+const userCountry = userEx9?.profile?.address?.country ?? 'Unknown';
+
+console.log('Ex 9:', userCountry); // Output: Unknown
 
 // 10. Optional Chaining with Function Calls
 // Update the code to safely call the getName function using optional chaining, considering that profile or getName might be missing.
@@ -112,34 +129,28 @@ const userEx10 = {
   profile: {
     getName: () => 'Alice'
   }
-};  
-const userNameEx10 = userEx10.profile?.getName?.();
-console.log(userNameEx10); // Alice
+};
+const userNameEx10 = userEx10?.profile?.getName?.();
+
+console.log('Ex 10:', userNameEx10); // Output: Alice 
 
 // 11. Rewrite the code using the nullish coalescing operator to assign a default value to storedData only if userInput is null or undefined.
 let userInput;
 let storedData = userInput ? userInput : 'Default Value';
 
-console.log(storedData); // Default Value
-
-let userInputEx11= null;
-let storedDataEx11 = userInputEx11 ?? 'Default Value';  
-console.log(storedDataEx11); // Default Value
-
-
+console.log('Ex 11:',storedData); // Default Value
 
 
 // 12. Rewrite the code using the nullish coalescing operator to display number of users even if it is 0.
 let userCount = 0;
 let displayCount = userCount || 'No users';
 
-console.log(displayCount); // No users
+
+console.log('Ex 12 V1:', displayCount); // No users
 
 let userCountEx12 = 0;
 let displayCountEx12 = userCountEx12 ?? 'No users';
-console.log(displayCountEx12); // 0 
-
-
+console.log('Ex 12 V2:',displayCountEx12); // 0 
 
 
 // 13. Rewrite the code using the nullish coalescing operator to assign a default value of 3000 to timeout if config.timeout is null or undefined.
@@ -150,10 +161,11 @@ const config = {
 
 const timeout = config.timeout !== undefined && config.timeout !== null ? config.timeout : 3000;
 
-console.log(timeout); // 3000
+console.log('Ex 13 V1:',timeout); // 3000
+
 
 const configEx13 = {
   timeout: null
 };  
 const timeoutEx13 = configEx13.timeout ?? 3000;
-console.log(timeoutEx13); // 3000 
+console.log('Ex 13 V2:',timeoutEx13); // 3000 
