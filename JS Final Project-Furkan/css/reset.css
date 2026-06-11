@@ -1,0 +1,23 @@
+/*Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+input {
+  font: inherit;
+  border: none;
+}
+ul {
+  list-style: none;
+}

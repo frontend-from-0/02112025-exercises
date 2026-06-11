@@ -1,0 +1,25 @@
+/*Layout CSS */
+
+.left-panel {
+  grid-area: sidebar;
+}
+.right-section {
+  grid-area: main;
+}
+header {
+  grid-area: header;
+}
+footer {
+  grid-area: footer;
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header header'
+    'sidebar main'
+    'footer footer';
+}

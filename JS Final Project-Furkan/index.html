@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" data-theme="medical-trust">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/component.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <link rel="icon" type="image/svg+xml" href="./assets/logo-2.svg" />
+
+    <title>NutriTrack — Calorie Calculator</title>
+  </head>
+
+  <body>
+    <div role="main" class="container">
+      <header>
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          class="sr-only"
+          id="live-region"
+        ></div>
+        <nav class="nav-bar">
+          <button
+            aria-label="Arama butonunu aç"
+            class="hamburger-btn"
+            type="button"
+          >
+            ≡
+          </button>
+
+          <div class="nav-logo">
+            <img src="./assets/logo-3.svg" alt="NutriTrack logo" />
+          </div>
+
+          <ul>
+            <li class="nav-list-item"><a href="./index.html">Home</a></li>
+            <li class="nav-list-item">Recorded Meals</li>
+          </ul>
+        </nav>
+        <div class="header-stats">
+          <div class="daily-goal">
+            <label for="daily-goal">Daily Goal</label>
+            <input type="number" id="daily-goal" placeholder="2000" min="0" />
+            <span>kcal</span>
+          </div>
+          <div class="dashboard">
+            <span>Total: <span id="total-calories">0</span> kcal</span>
+            <span>Remaining: <span id="remaining-calories">0</span> kcal</span>
+            <div
+              class="progress-bar"
+              role="progressbar"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-label="Daily calorie progress"
+            >
+              <div id="progress-fill"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <aside class="left-panel">
+        <h2>Search</h2>
+        <search>
+          <form>
+            <label for="product">Find the products</label>
+            <input
+              placeholder="Please enter a product name."
+              type="search"
+              id="product"
+              name="product"
+            />
+            <button type="submit">Ara</button>
+          </form>
+        </search>
+      </aside>
+      <section class="right-section">
+        <div id="meals-section">
+          <section id="breakfast">
+            <h3>Breakfast</h3>
+            <ul id="breakfast-list"></ul>
+            <button type="button" class="save-meal-btn" data-meal="breakfast">
+              Save Breakfast
+            </button>
+          </section>
+          <section id="lunch">
+            <h3>Lunch</h3>
+            <ul id="lunch-list"></ul>
+            <button type="button" class="save-meal-btn" data-meal="lunch">
+              Save Lunch
+            </button>
+          </section>
+          <section id="dinner">
+            <h3>Dinner</h3>
+            <ul id="dinner-list"></ul>
+            <button type="button" class="save-meal-btn" data-meal="dinner">
+              Save Dinner
+            </button>
+          </section>
+        </div>
+        <div id="product-panel" class="right-panel"></div>
+      </section>
+    </div>
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <div class="modal-header">
+          <h2 id="modal-title">Recorded Meals</h2>
+          <button type="button" id="modal-close" aria-label="Close modal">
+            ✕
+          </button>
+        </div>
+        <div id="modal-content" class="modal-content">
+          <!-- kayıtlar buraya gelecek -->
+        </div>
+      </div>
+    </div>
+    <footer><p>© 2025 Calorie Calculator</p></footer>
+    <script src="./js/config.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/calculator.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
