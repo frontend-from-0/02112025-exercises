@@ -71,8 +71,11 @@ function deleteUser(userId) {
       if (!response.ok) {
         throw new Error('Delete failed.');
       }
+
+      card.remove();
+      
       notification.classList.remove('hidden');
-      message.textContent = 'User deleted successfully';
+      message.textContent = 'User ${userId} deleted successfully';
     })
     .catch((error) => {
       console.error(error);
