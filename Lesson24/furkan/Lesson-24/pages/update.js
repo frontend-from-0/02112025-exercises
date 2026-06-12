@@ -26,19 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
         return res.json();
       })
       .then((user) => {
-        console.log(user);
-        firstNameInput.value = user.firstName;
-        lastNameInput.value = user.lastName;
-        emailInput.value = user.email;
-        profileInfo.innerHTML = `
-      <p>Gender: ${user.gender}</p>
-      <p>Id: ${user.id}</p>
-      <p>Age: ${user.age}</p>
-      <p>Birthday: ${user.birthDate}</p>
-      <p>Company: ${user.company?.name}</p>
-      <p>Password: ${user.password}</p>
-      <p>Role: ${user.role}</p>
-      `;
+        profileInfo.textContent = '';
+          const details = [
+          `Gender: ${user.gender}`,
+          `Id: ${user.id}`,
+          `Age: ${user.age}`,
+          `Birthday: ${user.birthDate}`,
+          `Company: ${user.company?.name}`,
+          `Password: ${user.password}`,
+          `Role: ${user.role}`,];
+
+        details.forEach(detail => {
+          const p = document.createElement('p');
+          p.textContent = detail;
+          profileInfo.appendChild(p);
+        });
       })
       .catch((error) => {
         console.error(error);
