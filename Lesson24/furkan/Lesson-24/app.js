@@ -76,11 +76,17 @@ function deleteUser(userId) {
       
       notification.classList.remove('hidden');
       message.textContent = 'User ${userId} deleted successfully';
+      setTimeout(() => {
+  notification.classList.add('hidden');
+}, 3000);
     })
     .catch((error) => {
       console.error(error);
       notification.classList.remove('hidden');
       message.textContent = 'An error occured.';
+      setTimeout(() => {
+  notification.classList.add('hidden');
+}, 3000);
     });
 }
 
