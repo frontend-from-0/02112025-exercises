@@ -23,6 +23,12 @@ const sentencesExercise5 = [
   'The butterfly gracefully fluttered its wings, showcasing vibrant colors in a delicate dance.',
 ];
 
+const sentences = sentencesExercise5.filter((word) => {
+  return word.split(' ').length > 10;
+});
+
+console.log('Ex.5', sentences);
+
 // Exercise 6:
 // Given an array of products, keep the products that are out of stock (where the quantity is 0).
 const productsExercise6 = [
@@ -88,9 +94,18 @@ const productsExercise6 = [
   },
 ];
 
+const productFilter = productsExercise6.filter(
+  (product) => product.quantity > 0,
+);
+console.log('Ex.6', productFilter);
+
 // Exercise 7:
 // Given an array of numbers, keep the numbers that are divisible by 3.
 const numbersExercise7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const tripleNumber = numbersExercise7.filter((triple) => triple % 3 === 0);
+
+console.log('Ex.7', tripleNumber);
 
 // Exercise 8:
 // Given an array of strings, keep the strings that have more than 5 characters.
@@ -106,6 +121,10 @@ const wordsExercise8 = [
   'island',
   'jungle',
 ];
+
+const longWords = wordsExercise8.filter((word) => word.length > 5);
+
+console.log('Ex.8', longWords);
 
 // Exercise 9:
 // Given an array of objects representing students, keep the students who have a grade lower than C.
@@ -172,6 +191,10 @@ const studentsExercise9 = [
   },
 ];
 
+const lowGradeStudents = studentsExercise9.filter((student) =>
+  ['D', 'D+'].includes(student.grade),
+);
+console.log('Ex.9', lowGradeStudents);
 
 // Exercise 10:
 // Given an array of user objects, keep the users who have a name starting with the letter "J".
@@ -237,3 +260,7 @@ const usersExercise10 = [
     email: 'sophia@example.com',
   },
 ];
+
+const nameFilter = usersExercise10.filter((user) => user.name.startsWith('J'));
+
+console.log('Ex.10', nameFilter);
