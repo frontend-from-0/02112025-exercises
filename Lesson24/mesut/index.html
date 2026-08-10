@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>User Management</h1>
+      <a href="create.html" class="button button--success">Create User</a>
+    </header>
+
+    <main>
+      <button id="fetchUsersButton" class="button">Fetch Users</button>
+      <div id="container" class="container"></div>
+    </main>
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <p id="modalMessage"></p>
+        <button id="modalClose" class="button button--success">OK</button>
+      </div>
+    </div>
+
+    <div id="confirmModal" class="modal hidden">
+      <div class="modal-content">
+        <p>Are you sure you want to delete this user?</p>
+        <div class="modal-actions">
+          <button id="confirmYes" class="button button--danger">Yes</button>
+          <button id="confirmNo" class="button">No</button>
+        </div>
+      </div>
+    </div>
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <p id="showModal"></p>
+        <button id="modalClose" class="button button--success">OK</button>
+      </div>
+    </div>
+
+    <script src="./js/ui.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
