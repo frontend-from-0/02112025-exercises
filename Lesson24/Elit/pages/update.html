@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update User</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="../index.html" class="button">Back to Users</a>
+    </nav>
+
+    <div
+      id="success_notification"
+      class="hidden notification success"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p id="success_message"></p>
+    </div>
+    <div
+      id="error_notification"
+      class="hidden notification error"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p id="error_message"></p>
+    </div>
+    <main class="container">
+      <div class="card">
+        <h2 class="card-title">Update User Information</h2>
+        <form id="updateUserForm">
+          <div class="form_subtitles">
+            <label for="firstName" class="user_labels">First Name:</label>
+            <input type="text" id="firstName" class="user_inputs" />
+          </div>
+
+          <div class="form_subtitles">
+            <label for="lastName" class="user_labels">Last Name:</label>
+            <input type="text" id="lastName" class="user_inputs" />
+          </div>
+
+          <div class="form_subtitles">
+            <label for="age" class="user_labels">Age:</label>
+            <input type="number" id="age" class="user_inputs" />
+          </div>
+          <button type="submit" class="button button--success button--submit">
+            Update
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script src="./update.js"></script>
+  </body>
+</html>
