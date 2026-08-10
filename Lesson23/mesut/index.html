@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Into to HTTP requests</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <meta name="description" content="Into to HTTP requests" />
+  </head>
+  <body>
+    <button id="fetchDataBtn">Fetch Posts</button>
+    <button id="clearDataBtn">Clear Posts</button>
+
+<div id="confirmModal" class="modal hidden">
+  <div class="modal-content">
+    <p>Do you want to clean all data on screen?</p>
+    <div class="modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
+    <p id="errorMsg"></p>
+    <div id="postsContainer"></div>
+
+    <!-- <script src="./secrets.js"></script> -->
+    <script src="./script.js"></script>
+  </body>
+</html>
