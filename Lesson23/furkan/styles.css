@@ -1,0 +1,45 @@
+div {
+  border: 1px solid gray;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.card {
+  width: 300px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card p {
+  margin: 0.5rem 0;
+}
+
+h1 {
+  font-family: 'Billabong', 'Brush Script MT', cursive;
+  font-weight: 500;
+  font-size: 3rem;
+  text-align: center;
+  text-shadow: 2px 2px 4px #686565;
+}
+.fetch-btn {
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #686565;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  margin: 2rem auto;
+}
