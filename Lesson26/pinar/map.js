@@ -166,7 +166,7 @@ const booksExercise9 = [
 ];
 
 const titlesAndAuthors = booksExercise9.map((book)=>{
-  return book.title +  book.author;
+  return book.title + " " + book.author;
 })
 
 

@@ -103,11 +103,11 @@ console.log("Exc. 6 result:", noStockList);
 // Given an array of numbers, keep the numbers that are divisible by 3.
 const numbersExercise7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const divisibleNumbers = numbersExercise7.filter((number)=>{
+const divisibleByThree = numbersExercise7.filter((number)=>{
   return number%3 === 0;
 })
 
-console.log("Exc. 7 result:", divisibleNumbers);
+console.log("Exc. 7 result:", divisibleByThree);
 
 // Exercise 8:
 // Given an array of strings, keep the strings that have more than 5 characters.
@@ -124,11 +124,11 @@ const wordsExercise8 = [
   'jungle',
 ];
 
-const fiveCharStrings = wordsExercise8.filter((string)=>{
+const StringsLongerThanFiveChars = wordsExercise8.filter((string)=>{
   return string.length >5;
 })
 
-console.log("Exc. 8 result:", fiveCharStrings);
+console.log("Exc. 8 result:", StringsLongerThanFiveChars);
 
 // Exercise 9:
 // Given an array of objects representing students, keep the students who have a grade lower than C.
